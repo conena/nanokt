@@ -83,11 +83,11 @@ inline var View.focus: Boolean
 inline val View.inputActive get() = context.inputMethodManager.isActive(this)
 
 /**
- * @param show `true` to show the soft input method for the current view. `false` to hide it if it
+ * @param visible `true` to show the soft input method for the current view. `false` to hide it if it
  * is currently active for the current view.
  */
-inline fun View.showSoftInputMethod(show: Boolean = true) {
-    if (show) {
+inline fun View.setSoftInputVisibility(visible: Boolean = true) {
+    if (visible) {
         context.inputMethodManager.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
     } else if (context.inputMethodManager.isActive(this)) {
         context.inputMethodManager.hideSoftInputFromWindow(windowToken, 0)
