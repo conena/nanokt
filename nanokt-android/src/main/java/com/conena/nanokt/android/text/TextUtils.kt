@@ -16,6 +16,16 @@ import androidx.annotation.CheckResult
 inline fun CharSequence.toEditable(): Editable = Editable.Factory.getInstance().newEditable(this)
 
 /**
+ * Check if the receiver is a valid filename on Android and Linux systems using ext2/ext3/ext4 or F2FS.
+ * More precisely, this method checks if the receiver is not empty,
+ * does not contain a reserved character ('/' or 'NUL') and is not larger than 255 bytes (UTF-8).
+ * @return True if the name is valid, false otherwise.
+ */
+fun String.isValidFileName(): Boolean {
+    return this != "" && !contains('/') && !contains('\u0000') && encodeToByteArray().size <= 255
+}
+
+/**
  * Interprets the receiver as HTML string and returns displayable styled text.
  * @param imageGetter Any <img> tags in the HTML will use this [Html.ImageGetter]
  * to request a representation of the image.
