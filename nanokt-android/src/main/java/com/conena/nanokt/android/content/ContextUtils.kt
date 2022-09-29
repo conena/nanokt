@@ -119,6 +119,7 @@ inline fun Context.openAppNotificationChannelSettings(channelId: String): Result
  * @param text The text to display
  * @param duration Either [Toast.LENGTH_SHORT] or [Toast.LENGTH_LONG].
  */
+@MainThread
 inline fun Context.toast(text: String, duration: Int) = Toast.makeText(this, text, duration).show()
 
 /**
@@ -127,6 +128,7 @@ inline fun Context.toast(text: String, duration: Int) = Toast.makeText(this, tex
  * @param duration Either [Toast.LENGTH_SHORT] or [Toast.LENGTH_LONG].
  * @throws Resources.NotFoundException If the resource can't be found.
  */
+@MainThread
 @Throws(Resources.NotFoundException::class)
 inline fun Context.toast(@StringRes text: Int, duration: Int) = Toast.makeText(this, text, duration).show()
 
@@ -134,12 +136,14 @@ inline fun Context.toast(@StringRes text: Int, duration: Int) = Toast.makeText(t
  * Show a standard android toast with the given [text] for a short period of time.
  * @param text The text to display
  */
+@MainThread
 inline fun Context.toastShort(text: String) = toast(text = text, duration = Toast.LENGTH_SHORT)
 
 /**
  * Show a standard android toast with the given [text] for a longer period of time.
  * @param text The text to display
  */
+@MainThread
 inline fun Context.toastLong(text: String) = toast(text = text, duration = Toast.LENGTH_LONG)
 
 /**
@@ -147,6 +151,7 @@ inline fun Context.toastLong(text: String) = toast(text = text, duration = Toast
  * @param text The text to display
  * @throws Resources.NotFoundException If the resource can't be found
  */
+@MainThread
 @Throws(Resources.NotFoundException::class)
 inline fun Context.toastShort(@StringRes text: Int) = toast(text = text, duration = Toast.LENGTH_SHORT)
 
@@ -155,6 +160,7 @@ inline fun Context.toastShort(@StringRes text: Int) = toast(text = text, duratio
  * @param text The text to display
  * @throws Resources.NotFoundException If the resource can't be found
  */
+@MainThread
 @Throws(Resources.NotFoundException::class)
 inline fun Context.toastLong(@StringRes text: Int) = toast(text = text, duration = Toast.LENGTH_LONG)
 
