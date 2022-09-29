@@ -40,7 +40,7 @@ inline fun View.setGone() {
  * @param otherwise The visibility applied if [condition] is `false`. If `null` is passed the
  * visibility is not touched if [condition] is `false`.
  */
-inline fun View.visibleIf(condition: Boolean, otherwise: Int? = View.GONE) {
+inline fun View.setVisibleIf(condition: Boolean, otherwise: Int? = View.GONE) {
     visibility = if (condition) View.VISIBLE else otherwise ?: return
 }
 
