@@ -24,9 +24,9 @@ object NanoKtThreadUtilsCompanion {
  * Invokes [block] on the main thread.
  */
 @ExperimentalNanoKtAndroidApi
-inline fun runOnMainThread(@MainThread noinline block: () -> Unit) {
+inline fun runOnMainThread(@MainThread block: Runnable) {
     if (Looper.myLooper() == Looper.getMainLooper()) {
-        block.invoke()
+        block.run()
     } else {
         NanoKtThreadUtilsCompanion.mainHandler.post(block)
     }
@@ -39,7 +39,7 @@ inline fun runOnMainThread(@MainThread noinline block: () -> Unit) {
 inline fun runOnMainThread(
     delay: Long,
     unit: TimeUnit = TimeUnit.MILLISECONDS,
-    @MainThread noinline block: () -> Unit
+    @MainThread block: Runnable
 ) {
     NanoKtThreadUtilsCompanion.mainHandler.postDelayed(block, unit.toMillis(delay))
 }
