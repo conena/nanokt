@@ -8,8 +8,6 @@ class NumberExtensionsKtTest {
 
     @Test
     fun `zeroAsNull - Int`() {
-        val nullValue: Int? = null
-        assertNull(nullValue.zeroAsNull())
         assertNull(0.zeroAsNull())
         assertEquals(1, 1.zeroAsNull())
         assertEquals(-1, (-1).zeroAsNull())
@@ -26,8 +24,6 @@ class NumberExtensionsKtTest {
 
     @Test
     fun `negativeAsNull - Int`() {
-        val nullValue: Int? = null
-        assertNull(nullValue.negativeAsNull())
         assertEquals(0, 0.negativeAsNull())
         assertEquals(1, 1.negativeAsNull())
         assertNull((-1).negativeAsNull())
@@ -35,8 +31,6 @@ class NumberExtensionsKtTest {
 
     @Test
     fun `negativeAsZero - Int`() {
-        val nullValue: Int? = null
-        assertNull(nullValue.negativeAsZero())
         assertEquals(0, 0.negativeAsZero())
         assertEquals(1, 1.negativeAsZero())
         assertEquals(0, (-1).negativeAsZero())
@@ -44,8 +38,6 @@ class NumberExtensionsKtTest {
 
     @Test
     fun `positiveAsNull - Int`() {
-        val nullValue: Int? = null
-        assertNull(nullValue.positiveAsNull())
         assertEquals(0, 0.positiveAsNull())
         assertNull(1.positiveAsNull())
         assertEquals(-1, (-1).positiveAsNull())
@@ -53,8 +45,6 @@ class NumberExtensionsKtTest {
 
     @Test
     fun `positiveAsZero - Int`() {
-        val nullValue: Int? = null
-        assertNull(nullValue.positiveAsZero())
         assertEquals(0, 0.positiveAsZero())
         assertEquals(0, 1.positiveAsZero())
         assertEquals(-1, (-1).positiveAsZero())
@@ -89,8 +79,6 @@ class NumberExtensionsKtTest {
 
     @Test
     fun `zeroAsNull - Long`() {
-        val nullValue: Long? = null
-        assertNull(nullValue.zeroAsNull())
         assertNull(0L.zeroAsNull())
         assertEquals(1L, 1L.zeroAsNull())
         assertEquals(-1L, (-1L).zeroAsNull())
@@ -107,8 +95,6 @@ class NumberExtensionsKtTest {
 
     @Test
     fun `negativeAsNull - Long`() {
-        val nullValue: Long? = null
-        assertNull(nullValue.negativeAsNull())
         assertEquals(0L, 0L.negativeAsNull())
         assertEquals(1L, 1L.negativeAsNull())
         assertNull((-1L).negativeAsNull())
@@ -116,8 +102,6 @@ class NumberExtensionsKtTest {
 
     @Test
     fun `negativeAsZero - Long`() {
-        val nullValue: Long? = null
-        assertNull(nullValue.negativeAsZero())
         assertEquals(0L, 0L.negativeAsZero())
         assertEquals(1L, 1L.negativeAsZero())
         assertEquals(0L, (-1L).negativeAsZero())
@@ -125,8 +109,6 @@ class NumberExtensionsKtTest {
 
     @Test
     fun `positiveAsNull - Long`() {
-        val nullValue: Long? = null
-        assertNull(nullValue.positiveAsNull())
         assertEquals(0L, 0L.positiveAsNull())
         assertNull(1L.positiveAsNull())
         assertEquals(-1L, (-1L).positiveAsNull())
@@ -134,8 +116,6 @@ class NumberExtensionsKtTest {
 
     @Test
     fun `positiveAsZero - Long`() {
-        val nullValue: Long? = null
-        assertNull(nullValue.positiveAsZero())
         assertEquals(0L, 0L.positiveAsZero())
         assertEquals(0L, 1L.positiveAsZero())
         assertEquals(-1L, (-1L).positiveAsZero())

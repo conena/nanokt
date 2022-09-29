@@ -14,9 +14,9 @@ import java.util.regex.PatternSyntaxException
  * @return The compiled pattern or `null` if the string is not a valid [Pattern]
  * @throws IllegalArgumentException If unsupported bit values are set in [flags]
  */
-inline fun String?.toPatternOrNull(flags: Int = 0): Pattern? {
+inline fun String.toPatternOrNull(flags: Int = 0): Pattern? {
     return try {
-        Pattern.compile(this ?: return null, flags)
+        Pattern.compile(this, flags)
     } catch (e: PatternSyntaxException){
         null
     }

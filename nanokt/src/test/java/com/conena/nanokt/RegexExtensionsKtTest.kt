@@ -19,11 +19,6 @@ class RegexExtensionsKtTest {
     }
 
     @Test
-    fun `toPatternOrNull - null`() {
-        assertNull(null.toPatternOrNull())
-    }
-
-    @Test
     fun `toPatternOrNull - Invalid flag`() {
         assertThrows(IllegalArgumentException::class.java) {
             "^test\$".toPatternOrNull(flags = -1)

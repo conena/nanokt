@@ -9,7 +9,6 @@ class TextExtensionsKtTest {
     @Test
     fun emptyAsNull() {
         assertNull("".emptyAsNull())
-        assertNull(null.emptyAsNull())
         assertEquals("  ", "  ".emptyAsNull())
         assertEquals("Test", "Test".emptyAsNull())
     }
@@ -18,7 +17,6 @@ class TextExtensionsKtTest {
     fun blankAsNull() {
         assertNull("".blankAsNull())
         assertNull("  ".blankAsNull())
-        assertNull(null.blankAsNull())
         assertEquals("Test", "Test".blankAsNull())
     }
 

@@ -23,12 +23,6 @@ class CollectionExtensionsKtTest {
     }
 
     @Test
-    fun `emptyAsNull - return null as null`() {
-        val list1: List<Any>? = null
-        assertNull(list1.emptyAsNull())
-    }
-
-    @Test
     fun listOfInstanceOf() {
         val list1 = listOfInstanceOf<String>("String", 1L, 1, 1.0, 0 .. 1, "String2")
         assertEquals(2, list1.size)

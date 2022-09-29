@@ -515,7 +515,7 @@ inline fun Context.isPermissionGranted(
  * wrapper for the application context.
  */
 @CheckResult
-inline fun Context?.asApplicationOrNull(): Application? {
+inline fun Context.asApplicationOrNull(): Application? {
     return when (this) {
         is Application -> this
         is ContextWrapper -> baseContext as? Application
@@ -528,7 +528,7 @@ inline fun Context?.asApplicationOrNull(): Application? {
  * wrapper for an activity context.
  */
 @CheckResult
-inline fun Context?.asActivityOrNull(): Activity? {
+inline fun Context.asActivityOrNull(): Activity? {
     return when (this) {
         is Activity -> this
         is ContextWrapper -> baseContext as? Activity

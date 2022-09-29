@@ -5,7 +5,7 @@ package com.conena.nanokt
 /**
  * @return `null` if the collection is empty or `null`. Otherwise the collection is returned.
  */
-inline fun <T> Collection<T>?.emptyAsNull(): Collection<T>? = if (isNullOrEmpty()) null else this
+inline fun <T> Collection<T>.emptyAsNull(): Collection<T>? = ifEmpty { null }
 
 /**
  * @return A list of all entries in [elements] that are of type [T].

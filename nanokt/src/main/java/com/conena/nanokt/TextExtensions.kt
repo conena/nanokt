@@ -6,14 +6,14 @@ import java.net.URLDecoder
 import java.net.URLEncoder
 
 /**
- * @return `null` if the current CharSequence is `null` or empty. Otherwise the CharSequence is returned.
+ * @return `null` if the current CharSequence is empty. Otherwise the CharSequence is returned.
  */
-inline fun CharSequence?.emptyAsNull() = if (isNullOrEmpty()) null else this
+inline fun CharSequence.emptyAsNull() = ifEmpty { null }
 
 /**
- * @return `null` if the current CharSequence is `null` or blank. Otherwise the CharSequence is returned.
+ * @return `null` if the current CharSequence is blank. Otherwise the CharSequence is returned.
  */
-inline fun CharSequence?.blankAsNull() = if (isNullOrBlank()) null else this
+inline fun CharSequence.blankAsNull() = ifBlank { null }
 
 /**
  * @return A new [StringBuilder] with the current CharSequence.

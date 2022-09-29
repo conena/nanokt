@@ -16,12 +16,12 @@ import com.conena.nanokt.android.ExperimentalNanoKtAndroidApi
  * @param T The type of the value.
  * @param key The key or `null`.
  * @return The value associated with the given key.
- * Returns `null` if called on a `null` reference, no value is associated with the given key,
+ * Returns `null` if no value is associated with the given key,
  * a `null` value is associated with the given key or the value is not from type [T].
  */
 @CheckResult
-inline fun <reified T> Bundle?.getOrNull(key: String?): T? {
-    return this?.get(key) as? T?
+inline fun <reified T> Bundle.getOrNull(key: String?): T? {
+    return this.get(key) as? T?
 }
 
 /**
@@ -42,13 +42,13 @@ inline fun <reified T> Bundle?.get(key: String?, defaultValue: T): T {
  * @param T The type of the value.
  * @param key The key or `null`.
  * @return The value associated with the given key.
- * Returns `null` if called on a `null` reference, no value is associated with the given key,
+ * Returns `null` if no value is associated with the given key,
  * a `null` value is associated with the given key or the value is not from type [T].
  */
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
 @CheckResult
-inline fun <reified T> BaseBundle?.getOrNull(key: String?): T? {
-    return this?.get(key) as? T?
+inline fun <reified T> BaseBundle.getOrNull(key: String?): T? {
+    return this.get(key) as? T?
 }
 
 /**
