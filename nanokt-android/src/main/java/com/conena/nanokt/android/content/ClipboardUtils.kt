@@ -18,22 +18,27 @@ import androidx.annotation.CheckResult
  * @param isSensitive If `true` [ClipDescription.EXTRA_IS_SENSITIVE] is added to the [ClipData].
  * This will prevent that the [text] is shown in the clipboard preview in Android 13 and above.
  * [isSensitive] has no effect on android versions below 13!
+ * @param onNotifyUser [The documentation recommends informing the user about copying to the clipboard.](https://developer.android.com/develop/ui/views/touch-and-input/copy-paste#duplicate-notifications)
+ * As of Android 13, the system takes care of this.
+ * [onNotifyUser] is only invoked when a hint is supposed to be given by the app (before Android 13).
  * @see ClipboardManager.setPrimaryClip
  */
 inline fun ClipboardManager.setPrimaryClip(
     text: String,
     label: String? = null,
-    isSensitive: Boolean = false
+    isSensitive: Boolean = false,
+    onNotifyUser: () -> Unit = {}
 ) {
+    val clipData = ClipData.newPlainText(label, text)
     if (isSensitive && Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-        setPrimaryClip(
-            ClipData.newPlainText(label, text).apply {
-                description.extras = PersistableBundle().apply {
-                    putBoolean(ClipDescription.EXTRA_IS_SENSITIVE, true)
-                }
-            }
-        )
-    } else setPrimaryClip(ClipData.newPlainText(label, text))
+        clipData.description.extras = PersistableBundle().apply {
+            putBoolean(ClipDescription.EXTRA_IS_SENSITIVE, true)
+        }
+    }
+    setPrimaryClip(clipData)
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+        onNotifyUser()
+    }
 }
 
 /**
