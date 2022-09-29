@@ -122,7 +122,7 @@ inline fun View.startDragAndDropCompat(
  * @param view The view to add the listener to.
  * @return The receiver object, for chaining multiple calls.
  */
-inline fun <T : View.OnClickListener> T.setFor(view: View): T {
+inline fun <T : View.OnClickListener> T.addAsOnClickListenerFor(view: View): T {
     view.setOnClickListener(this)
     return this
 }
@@ -133,7 +133,7 @@ inline fun <T : View.OnClickListener> T.setFor(view: View): T {
  * @param views The views to add the listener to.
  * @return The receiver object, for chaining multiple calls.
  */
-inline fun <T : View.OnClickListener> T.setFor(vararg views: View): T {
+inline fun <T : View.OnClickListener> T.addAsOnClickListenerFor(vararg views: View): T {
     for (v in views) {
         v.setOnClickListener(this)
     }
@@ -146,7 +146,7 @@ inline fun <T : View.OnClickListener> T.setFor(vararg views: View): T {
  * @param view The view to add the listener to.
  * @return The receiver object, for chaining multiple calls.
  */
-inline fun <T : View.OnLongClickListener> T.setFor(view: View): T {
+inline fun <T : View.OnLongClickListener> T.addAsLongClickListenerFor(view: View): T {
     view.setOnLongClickListener(this)
     return this
 }
@@ -157,7 +157,7 @@ inline fun <T : View.OnLongClickListener> T.setFor(view: View): T {
  * @param views The views to add the listener to.
  * @return The receiver object, for chaining multiple calls.
  */
-inline fun <T : View.OnLongClickListener> T.setFor(vararg views: View): T {
+inline fun <T : View.OnLongClickListener> T.addAsLongClickListenerFor(vararg views: View): T {
     for (v in views) {
         v.setOnLongClickListener(this)
     }
