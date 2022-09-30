@@ -6,6 +6,7 @@ package com.conena.nanokt.android.content
 import android.content.SharedPreferences
 import android.content.SharedPreferences.Editor
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener
+import com.conena.nanokt.android.ExperimentalNanoKtAndroidApi
 
 /**
  * Calls [SharedPreferences.registerOnSharedPreferenceChangeListener]
@@ -139,6 +140,35 @@ inline fun SharedPreferences.getLongOrNull(key: String) = all[key] as? Long
  * @return The preference value if it exists and is from type [String]. `null` otherwise.
  */
 inline fun SharedPreferences.getStringOrNull(key: String) = all[key] as? String
+
+/**
+ * @param key The name of the preference to retrieve.
+ * @param defValue Value to return if this preference does not exist or is no StringSet.
+ * @return The preference value if it exists and is a Set<String>. The [defValue] otherwise.
+ * ### The exact class of the returned Set is undefined.
+ * In any case do not make any changes to the set.
+ * Use [getMutableStringSet] to get a copy of the internal set.
+ */
+@ExperimentalNanoKtAndroidApi
+inline fun SharedPreferences.getImmutableStringSet(key: String, defValue: Set<String>): Set<String> {
+    @Suppress("UNCHECKED_CAST")
+    return all[key] as? Set<String> ?: defValue
+}
+
+/**
+ * @param key The name of the preference to retrieve.
+ * @param defValue Value to return if this preference does not exist or is no StringSet.
+ * @return The preference value if it exists and is a Set<String>. The [defValue] otherwise.
+ * The returned set is not the original one (except if it is the fallback) and can be modified.
+ */
+@ExperimentalNanoKtAndroidApi
+inline fun SharedPreferences.getMutableStringSet(
+    key: String,
+    defValue: MutableSet<String>
+): MutableSet<String> {
+    @Suppress("UNCHECKED_CAST")
+    return HashSet(all[key] as? Set<String> ?: return defValue)
+}
 
 /**
  * @param key The name of the preference to retrieve.
