@@ -8,12 +8,12 @@ import java.net.URLEncoder
 /**
  * @return `null` if the current CharSequence is empty. Otherwise the CharSequence is returned.
  */
-inline fun CharSequence.emptyAsNull() = ifEmpty { null }
+inline fun <T : CharSequence> T.emptyAsNull() = ifEmpty { null }
 
 /**
  * @return `null` if the current CharSequence is blank. Otherwise the CharSequence is returned.
  */
-inline fun CharSequence.blankAsNull() = ifBlank { null }
+inline fun <T : CharSequence> T.blankAsNull() = ifBlank { null }
 
 /**
  * @return A new [StringBuilder] with the current CharSequence.
