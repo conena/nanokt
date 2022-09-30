@@ -7,6 +7,8 @@ import android.content.res.Resources
 import android.util.TypedValue
 import androidx.annotation.AttrRes
 import androidx.annotation.CheckResult
+import androidx.annotation.ColorInt
+import com.conena.nanokt.android.util.isColorTypeCompat
 
 /**
  * Get a [TypedValue] from the theme. Resource references will be resolved.
@@ -71,4 +73,49 @@ inline fun Resources.Theme.getIntegerOrNull(@AttrRes id: Int): Int? {
 @Throws(Resources.NotFoundException::class)
 inline fun Resources.Theme.getInteger(@AttrRes id: Int): Int {
     return getIntegerOrNull(id) ?: throw Resources.NotFoundException("Attribute with id $id not found")
+}
+
+/**
+ * Get a color from the theme. Resource references will be resolved.
+ * @param id Resource attribute id for the color.
+ * @return The color if the attribute was found, `null` otherwise.
+ */
+@ColorInt
+@CheckResult
+inline fun Resources.Theme.getColorOrNull(@AttrRes id: Int): Int? {
+    val attr = getAttributeOrNull(id)
+    return if (attr?.isColorTypeCompat == true) attr.data else null
+}
+
+/**
+ * Get a color from the theme. Resource references will be resolved.
+ * @param id Resource attribute id for the color.
+ * @return The color.
+ * @throws Resources.NotFoundException If [id] does not exist in the theme or is no color.
+ */
+@ColorInt
+@Throws(Resources.NotFoundException::class)
+inline fun Resources.Theme.getColor(@AttrRes id: Int): Int {
+    return getColorOrNull(id) ?: throw Resources.NotFoundException("Attribute with id $id not found")
+}
+
+/**
+ * Get an string value from the theme. Resource references will be resolved.
+ * @param id Resource attribute id for the string.
+ * @return The string if the attribute was found, `null` otherwise.
+ */
+@CheckResult
+inline fun Resources.Theme.getStringOrNull(@AttrRes id: Int): String? {
+    return getAttributeOrNull(id)?.string?.toString()
+}
+
+/**
+ * Get an string value from the theme. Resource references will be resolved.
+ * @param id Resource attribute id for the string.
+ * @return The string.
+ * @throws Resources.NotFoundException If [id] does not exist in the theme.
+ */
+@Throws(Resources.NotFoundException::class)
+inline fun Resources.Theme.getString(@AttrRes id: Int): String {
+    return getStringOrNull(id) ?: throw Resources.NotFoundException("Attribute with id $id not found")
 }
