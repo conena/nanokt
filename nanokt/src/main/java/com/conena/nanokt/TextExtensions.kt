@@ -21,6 +21,36 @@ inline fun <T : CharSequence> T.blankAsNull() = ifBlank { null }
 inline fun CharSequence.toStringBuilder() = StringBuilder(this)
 
 /**
+ * @return A newly created string with [delimiter] added as prefix.
+ */
+inline fun String.addPrefix(delimiter: Char) = delimiter + this
+
+/**
+ * @return A newly created string with [delimiter] added as prefix.
+ */
+inline fun String.addPrefix(delimiter: String) = delimiter + this
+
+/**
+ * @return A newly created string with [delimiter] added as suffix.
+ */
+inline fun String.addSuffix(delimiter: Char) = this + delimiter
+
+/**
+ * @return A newly created string with [delimiter] added as suffix.
+ */
+inline fun String.addSuffix(delimiter: String) = this + delimiter
+
+/**
+ * @return A newly created string with [delimiter] added as suffix and prefix.
+ */
+inline fun String.addSurrounding(delimiter: Char) = delimiter + this + delimiter
+
+/**
+ * @return A newly created string with [delimiter] added as suffix and prefix.
+ */
+inline fun String.addSurrounding(delimiter: String) = delimiter + this + delimiter
+
+/**
  * @return The current string encoded in application/x-www-form-urlencoded format using UTF-8.
  */
 inline fun String.encodeUrl(): String = URLEncoder.encode(this, Charsets.UTF_8.name())

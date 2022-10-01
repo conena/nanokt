@@ -25,6 +25,36 @@ class TextExtensionsKtTest {
         assertEquals("Test", "Test".toStringBuilder().toString())
     }
 
+    @Test
+    fun addPrefix() {
+        assertEquals("<!>Test", "Test".addPrefix("<!>"))
+    }
+
+    @Test
+    fun addPrefix_char() {
+        assertEquals("-Test", "Test".addPrefix('-'))
+    }
+
+    @Test
+    fun addSuffix() {
+        assertEquals("Test<!>", "Test".addSuffix("<!>"))
+    }
+
+    @Test
+    fun addSuffix_char() {
+        assertEquals("Test-", "Test".addSuffix('-'))
+    }
+
+    @Test
+    fun addSurrounding() {
+        assertEquals("``Test``", "Test".addSurrounding("``"))
+    }
+
+    @Test
+    fun addSurrounding_char() {
+        assertEquals("\"Test\"", "Test".addSurrounding('"'))
+    }
+
     @Suppress("SpellCheckingInspection")
     @Test
     fun encodeUrl() {
