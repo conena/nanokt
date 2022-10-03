@@ -26,6 +26,7 @@ import androidx.annotation.*
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.IconCompat
+import androidx.core.net.toUri
 import com.conena.nanokt.android.ExperimentalNanoKtAndroidApi
 import com.conena.nanokt.android.net.getPlayStoreUriForApp
 import com.conena.nanokt.android.net.getPlayStoreUriForDeveloper
@@ -434,6 +435,17 @@ inline fun Context.openWebsite(url: Uri): Result<Unit> {
 }
 
 /**
+ * Open a website in the user's default browser.
+ * @param url The url of the website to open.
+ * @return A [Result] object that indicates the result of the action.
+ * In case of an error the exception is encapsulated in the [Result].
+ * You can use [Result.onFailure] for error handling.
+ */
+inline fun Context.openWebsite(url: String): Result<Unit> {
+    return startActivityCatching(intent = Intent(Intent.ACTION_VIEW, url.toUri()))
+}
+
+/**
  * Share plain text and/or an attachment.
  * How the individual parameters are interpreted depends on the application that the user
  * selects to handle the intent.
@@ -453,6 +465,31 @@ inline fun Context.share(
         intent = createSendIntent(
             subject = subject,
             text = text,
+            attachment = attachment
+        )
+    )
+}
+
+/**
+ * Share plain text and/or an attachment.
+ * How the individual parameters are interpreted depends on the application that the user
+ * selects to handle the intent.
+ * @param subject The string resource of the subject to send.
+ * @param text The string resource of the text to send.
+ * @param attachment A content URI holding a stream of data to send.
+ * @return A [Result] object that indicates the result of the action.
+ * In case of an error the exception is encapsulated in the [Result].
+ * You can use [Result.onFailure] for error handling.
+ */
+inline fun Context.share(
+    @StringRes subject: Int? = null,
+    @StringRes text: Int? = null,
+    attachment: Uri? = null
+): Result<Unit> {
+    return startActivityCatching(
+        intent = createSendIntent(
+            subject = getStringOrNull(subject),
+            text = getStringOrNull(text),
             attachment = attachment
         )
     )
@@ -734,6 +771,19 @@ inline fun Context.getIcon(@DrawableRes id: Int): Icon {
  */
 inline fun Context.getIconCompat(@DrawableRes id: Int): IconCompat {
     return IconCompat.createWithResource(this, id)
+}
+
+/**
+ * Same as [Context.getString] but returns null if [id] is null or not valid.
+ * @param id The resource identifier of the [String].
+ * @return The [String], or `null` if the resource was invalid.
+ */
+inline fun Context.getStringOrNull(@StringRes id: Int?): String? {
+    return try {
+        getString(id ?: return null)
+    } catch (_: Throwable) {
+        null
+    }
 }
 
 /**
