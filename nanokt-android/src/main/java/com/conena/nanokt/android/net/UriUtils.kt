@@ -45,7 +45,7 @@ inline fun Uri.toDocumentFileOrNull(context: Context): DocumentFile? {
 @CheckResult
 inline fun Uri.toDocumentTreeOrNull(context: Context): DocumentFile? {
     return try {
-        if (DocumentFile.isDocumentUri(context, this)) DocumentFile.fromTreeUri(context, this) else null
+        DocumentFile.fromTreeUri(context, this)
     } catch (_: Throwable) {
         null
     }
