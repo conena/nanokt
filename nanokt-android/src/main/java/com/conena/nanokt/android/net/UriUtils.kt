@@ -3,53 +3,12 @@
 
 package com.conena.nanokt.android.net
 
-import android.content.Context
 import android.net.Uri
-import android.os.Build.VERSION_CODES
-import android.provider.DocumentsProvider
 import androidx.annotation.CheckResult
-import androidx.documentfile.provider.DocumentFile
 import java.net.MalformedURLException
 import java.net.URI
 import java.net.URISyntaxException
 import java.net.URL
-
-/**
- * @param context Used internal to query the document providers.
- * @return `true` if given Uri is backed by a [DocumentsProvider]
- */
-@CheckResult
-inline fun Uri.isDocumentUri(context: Context) = DocumentFile.isDocumentUri(context, this)
-
-/**
- * @param context Used internal to query the document providers.
- * @return A [DocumentFile] representing the single document at the [Uri]. Returns `null` if the [Uri]
- * is not backed by a [DocumentsProvider] or if the method is called on devices running versions prior to
- * [VERSION_CODES.KITKAT].
- */
-@CheckResult
-inline fun Uri.toDocumentFileOrNull(context: Context): DocumentFile? {
-    return try {
-        if (DocumentFile.isDocumentUri(context, this)) DocumentFile.fromSingleUri(context, this) else null
-    } catch (_: Throwable) {
-        null
-    }
-}
-
-/**
- * @param context Used internal to query the document providers.
- * @return A [DocumentFile] representing the document tree at the [Uri]. Returns `null` if the [Uri]
- * is not backed by a [DocumentsProvider] or if the method is called on devices running versions prior to
- * [VERSION_CODES.KITKAT].
- */
-@CheckResult
-inline fun Uri.toDocumentTreeOrNull(context: Context): DocumentFile? {
-    return try {
-        DocumentFile.fromTreeUri(context, this)
-    } catch (_: Throwable) {
-        null
-    }
-}
 
 /**
  * Builds an [Uri] to show the application with [packageName] in the Google Play Store.
