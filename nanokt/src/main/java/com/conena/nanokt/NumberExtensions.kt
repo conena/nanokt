@@ -49,6 +49,36 @@ inline fun Int?.isPositive() = this != null && this > 0
 inline fun Int?.isZero() = this == 0
 
 /**
+ * @return `true` if the Int is not negative.
+ */
+inline fun Int?.isNotNegative() = this == null || this >= 0
+
+/**
+ * @return `true` if the Int is not positive.
+ */
+inline fun Int?.isNotPositive() = this == null || this <= 0
+
+/**
+ * @return `true` it the Int is not zero.
+ */
+inline fun Int?.isNotZero() = this != 0
+
+/**
+ * @return `true` if the Int is `null` or negative.
+ */
+inline fun Int?.isNullOrNegative() = this == null || this < 0
+
+/**
+ * @return `true` if the Int is `null` or positive.
+ */
+inline fun Int?.isNullOrPositive() = this == null || this > 0
+
+/**
+ * @return `true` it the Int is `null` or zero.
+ */
+inline fun Int?.isNullOrZero() = this == null || this == 0
+
+/**
  * @return `null` if the Long is zero. Otherwise the Long is returned.
  */
 inline fun Long.zeroAsNull() = if (this == 0L) null else this
@@ -92,3 +122,33 @@ inline fun Long?.isPositive() = this != null && this > 0L
  * @return `true` it the Long is zero.
  */
 inline fun Long?.isZero() = this == 0L
+
+/**
+ * @return `true` if the Long is not negative.
+ */
+inline fun Long?.isNotNegative() = this == null || this >= 0L
+
+/**
+ * @return `true` if the Long is not positive.
+ */
+inline fun Long?.isNotPositive() = this == null || this <= 0L
+
+/**
+ * @return `true` it the Long is not zero.
+ */
+inline fun Long?.isNotZero() = this != 0L
+
+/**
+ * @return `true` if the Long is `null` or negative.
+ */
+inline fun Long?.isNullOrNegative() = this == null || this < 0L
+
+/**
+ * @return `true` if the Long is `null` or positive.
+ */
+inline fun Long?.isNullOrPositive() = this == null || this > 0L
+
+/**
+ * @return `true` it the Long is `null` or zero.
+ */
+inline fun Long?.isNullOrZero() = this == null || this == 0L

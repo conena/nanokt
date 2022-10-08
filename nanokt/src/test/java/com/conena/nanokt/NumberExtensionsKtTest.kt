@@ -78,6 +78,60 @@ class NumberExtensionsKtTest {
     }
 
     @Test
+    fun `isNotNegative - Int`() {
+        val nullValue: Int? = null
+        assertTrue(nullValue.isNotNegative())
+        assertTrue(0.isNotNegative())
+        assertTrue(1.isNotNegative())
+        assertFalse((-1).isNotNegative())
+    }
+
+    @Test
+    fun `isNotPositive - Int`() {
+        val nullValue: Int? = null
+        assertTrue(nullValue.isNotPositive())
+        assertTrue(0.isNotPositive())
+        assertFalse(1.isNotPositive())
+        assertTrue((-1).isNotPositive())
+    }
+
+    @Test
+    fun `isNotZero - Int`() {
+        val nullValue: Int? = null
+        assertTrue(nullValue.isNotZero())
+        assertFalse(0.isNotZero())
+        assertTrue(1.isNotZero())
+        assertTrue((-1).isNotZero())
+    }
+
+    @Test
+    fun `isNullOrNegative - Int`() {
+        val nullValue: Int? = null
+        assertTrue(nullValue.isNullOrNegative())
+        assertFalse(0.isNullOrNegative())
+        assertFalse(1.isNullOrNegative())
+        assertTrue((-1).isNullOrNegative())
+    }
+
+    @Test
+    fun `isNullOrPositive - Int`() {
+        val nullValue: Int? = null
+        assertTrue(nullValue.isNullOrPositive())
+        assertFalse(0.isNullOrPositive())
+        assertTrue(1.isNullOrPositive())
+        assertFalse((-1).isNullOrPositive())
+    }
+
+    @Test
+    fun `isNullOrZero - Int`() {
+        val nullValue: Int? = null
+        assertTrue(nullValue.isNullOrZero())
+        assertTrue(0.isNullOrZero())
+        assertFalse(1.isNullOrZero())
+        assertFalse((-1).isNullOrZero())
+    }
+
+    @Test
     fun `zeroAsNull - Long`() {
         assertNull(0L.zeroAsNull())
         assertEquals(1L, 1L.zeroAsNull())
@@ -146,5 +200,59 @@ class NumberExtensionsKtTest {
         assertTrue(0L.isZero())
         assertFalse(1L.isZero())
         assertFalse((-1L).isZero())
+    }
+
+    @Test
+    fun `isNotNegative - Long`() {
+        val nullValue: Long? = null
+        assertTrue(nullValue.isNotNegative())
+        assertTrue(0L.isNotNegative())
+        assertTrue(1L.isNotNegative())
+        assertFalse((-1L).isNotNegative())
+    }
+
+    @Test
+    fun `isNotPositive - Long`() {
+        val nullValue: Long? = null
+        assertTrue(nullValue.isNotPositive())
+        assertTrue(0L.isNotPositive())
+        assertFalse(1L.isNotPositive())
+        assertTrue((-1L).isNotPositive())
+    }
+
+    @Test
+    fun `isNotZero - Long`() {
+        val nullValue: Long? = null
+        assertTrue(nullValue.isNotZero())
+        assertFalse(0L.isNotZero())
+        assertTrue(1L.isNotZero())
+        assertTrue((-1L).isNotZero())
+    }
+
+    @Test
+    fun `isNullOrNegative - Long`() {
+        val nullValue: Long? = null
+        assertTrue(nullValue.isNullOrNegative())
+        assertFalse(0L.isNullOrNegative())
+        assertFalse(1L.isNullOrNegative())
+        assertTrue((-1L).isNullOrNegative())
+    }
+
+    @Test
+    fun `isNullOrPositive - Long`() {
+        val nullValue: Long? = null
+        assertTrue(nullValue.isNullOrPositive())
+        assertFalse(0L.isNullOrPositive())
+        assertTrue(1L.isNullOrPositive())
+        assertFalse((-1L).isNullOrPositive())
+    }
+
+    @Test
+    fun `isNullOrZero - Long`() {
+        val nullValue: Long? = null
+        assertTrue(nullValue.isNullOrZero())
+        assertTrue(0L.isNullOrZero())
+        assertFalse(1L.isNullOrZero())
+        assertFalse((-1L).isNullOrZero())
     }
 }
