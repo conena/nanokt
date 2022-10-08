@@ -1,4 +1,4 @@
-package com.conena.nanokt
+package com.conena.nanokt.jvm
 
 
 import org.junit.Assert.assertEquals

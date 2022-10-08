@@ -1,6 +1,6 @@
 @file:Suppress("NOTHING_TO_INLINE", "unused")
 
-package com.conena.nanokt
+package com.conena.nanokt.jvm
 
 import java.text.DateFormat
 import java.util.Date

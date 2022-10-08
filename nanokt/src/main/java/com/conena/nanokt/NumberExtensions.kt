@@ -2,7 +2,6 @@
 
 package com.conena.nanokt
 
-
 /**
  * @return `null` if the Int is zero. Otherwise the Int is returned.
  */

@@ -2,9 +2,6 @@
 
 package com.conena.nanokt
 
-import java.net.URLDecoder
-import java.net.URLEncoder
-
 /**
  * @return `null` if the current CharSequence is empty. Otherwise the CharSequence is returned.
  */
@@ -49,16 +46,6 @@ inline fun String.addSurrounding(delimiter: Char) = delimiter + this + delimiter
  * @return A newly created string with [delimiter] added as suffix and prefix.
  */
 inline fun String.addSurrounding(delimiter: String) = delimiter + this + delimiter
-
-/**
- * @return The current string encoded in application/x-www-form-urlencoded format using UTF-8.
- */
-inline fun String.encodeUrl(): String = URLEncoder.encode(this, Charsets.UTF_8.name())
-
-/**
- * @return Decodes the current string from application/x-www-form-urlencoded format using UTF-8.
- */
-inline fun String.decodeUrl(): String = URLDecoder.decode(this, Charsets.UTF_8.name())
 
 /**
  * Same as [CharSequence.indexOf] but returns `null` if the [char] was not found.

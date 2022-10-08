@@ -16,3 +16,4 @@ rootProject.name = "NanoKt Android"
 include ':app'
 include ':nanokt-android'
 include ':nanokt'
+include ':nanokt-jvm'

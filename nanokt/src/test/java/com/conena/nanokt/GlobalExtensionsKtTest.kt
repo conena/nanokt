@@ -167,10 +167,4 @@ class GlobalExtensionsKtTest {
         assertSame(test, result)
     }
 
-    @Test
-    fun toWeakReference() {
-        val pair = "One" to 2
-        assertSame(pair, pair.toWeakReference().get())
-    }
-
 }
