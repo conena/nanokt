@@ -5,7 +5,6 @@ package com.conena.nanokt.android.widget
 
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
-import android.widget.EditText
 import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
@@ -87,25 +86,5 @@ inline fun <T : TextView> T.setError(error: CharSequence, @DrawableRes iconResId
     setError(error, context.getDrawableCompatOrNull(iconResId)?.apply {
         setBounds(0, 0, intrinsicWidth, intrinsicHeight)
     })
-    return this
-}
-
-/**
- * Set the cursor to the start of the text.
- * @param T The type of the EditText.
- * @return The receiver object, for chaining multiple calls.
- */
-inline fun <T : EditText> T.setCursorToStart(): T {
-    setSelection(0)
-    return this
-}
-
-/**
- * Set the cursor to the end of the text.
- * @param T The type of the EditText.
- * @return The receiver object, for chaining multiple calls.
- */
-inline fun <T : EditText> T.setCursorToEnd(): T {
-    setSelection(if (text.isNotEmpty()) text.length - 1 else 0)
     return this
 }
