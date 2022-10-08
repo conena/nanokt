@@ -1,6 +1,7 @@
 @file:Suppress("NOTHING_TO_INLINE", "unused")
 package com.conena.nanokt
 
+import java.lang.ref.WeakReference
 import kotlin.contracts.InvocationKind
 import kotlin.contracts.contract
 
@@ -110,6 +111,11 @@ inline fun <T> T.alsoSilent(block: (T) -> Unit): T {
     } catch (_: Throwable) {}
     return this
 }
+
+/**
+ * @return A [WeakReference] of the receiver.
+ */
+inline fun <T> T.toWeakReference(): WeakReference<T> = WeakReference(this)
 
 
 

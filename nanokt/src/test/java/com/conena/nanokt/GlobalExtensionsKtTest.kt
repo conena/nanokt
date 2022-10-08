@@ -3,7 +3,6 @@ package com.conena.nanokt
 import org.junit.Assert.*
 import org.junit.Test
 
-
 class GlobalExtensionsKtTest {
 
     @Test
@@ -166,6 +165,12 @@ class GlobalExtensionsKtTest {
             throw Throwable()
         }
         assertSame(test, result)
+    }
+
+    @Test
+    fun toWeakReference() {
+        val pair = "One" to 2
+        assertSame(pair, pair.toWeakReference().get())
     }
 
 }
