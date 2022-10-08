@@ -22,6 +22,7 @@ import android.os.Process
 import android.provider.Settings
 import android.widget.Toast
 import androidx.annotation.*
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.IconCompat
@@ -689,7 +690,7 @@ inline fun Context.getColorCompatOrNull(@ColorRes id: Int?): Int? {
 }
 
 /**
- * Same as [ContextCompat.getColorStateList].
+ * Same as [AppCompatResources.getColorStateList].
  * @param id The resource identifier of the [ColorStateList].
  * @return A [ColorStateList], or `null` if the resource could not be resolved.
  * @throws Resources.NotFoundException If [id] does not exist.
@@ -698,24 +699,24 @@ inline fun Context.getColorCompatOrNull(@ColorRes id: Int?): Int? {
 @ExperimentalNanoKtAndroidApi
 @Throws(Resources.NotFoundException::class)
 inline fun Context.getColorStateListCompat(@ColorRes id: Int): ColorStateList? {
-    return ContextCompat.getColorStateList(this, id)
+    return AppCompatResources.getColorStateList(this, id)
 }
 
 /**
- * Same as [ContextCompat.getColorStateList] but returns null if [id] is null or not valid.
+ * Same as [AppCompatResources.getColorStateList] but returns null if [id] is null or not valid.
  * @param id The resource identifier of the [ColorStateList].
  * @return A [ColorStateList], or `null` if the resource could not be resolved or was invalid.
  */
 inline fun Context.getColorStateListCompatOrNull(@ColorRes id: Int?): ColorStateList? {
     return try {
-        ContextCompat.getColorStateList(this, id ?: return null)
+        AppCompatResources.getColorStateList(this, id ?: return null)
     } catch (_: Resources.NotFoundException) {
         null
     }
 }
 
 /**
- * Same as [ContextCompat.getDrawable].
+ * Same as [AppCompatResources.getDrawable].
  * @param id The resource identifier of the [Drawable].
  * @return A [Drawable], or `null` if the resource could not be resolved.
  * @throws Resources.NotFoundException If [id] does not exist.
@@ -724,17 +725,17 @@ inline fun Context.getColorStateListCompatOrNull(@ColorRes id: Int?): ColorState
 @ExperimentalNanoKtAndroidApi
 @Throws(Resources.NotFoundException::class)
 inline fun Context.getDrawableCompat(@DrawableRes id: Int): Drawable? {
-    return ContextCompat.getDrawable(this, id)
+    return AppCompatResources.getDrawable(this, id)
 }
 
 /**
- * Same as [ContextCompat.getDrawable] but returns null if [id] is null or not valid.
+ * Same as [AppCompatResources.getDrawable] but returns null if [id] is null or not valid.
  * @param id The resource identifier of the [Drawable].
  * @return A [Drawable], or `null` if the resource could not be resolved or was invalid.
  */
 inline fun Context.getDrawableCompatOrNull(@DrawableRes id: Int?): Drawable? {
     return try {
-        ContextCompat.getDrawable(this, id ?: return null)
+        AppCompatResources.getDrawable(this, id ?: return null)
     } catch (_: Resources.NotFoundException) {
         null
     }
