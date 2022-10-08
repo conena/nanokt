@@ -6,7 +6,6 @@ package com.conena.nanokt.android.content
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.ActivityManager.RunningAppProcessInfo
-import android.app.AlarmManager
 import android.app.Application
 import android.app.PendingIntent
 import android.content.*
@@ -38,7 +37,6 @@ import kotlin.Suppress
 import kotlin.Throwable
 import kotlin.Throws
 import kotlin.Unit
-import kotlin.system.exitProcess
 
 /**
  * The content of the clipboard's primary clip as text.
@@ -571,20 +569,6 @@ inline fun Context.asActivityOrNull(): Activity? {
         is ContextWrapper -> baseContext as? Activity
         else -> null
     }
-}
-
-/**
- * Exit and restart the application.
- */
-inline fun Context.restartApplication() {
-    val pendingIntent = createImmutableActivityPendingIntent(
-        intent = packageManager.getLaunchIntentForPackage(packageName)!!
-            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK),
-        flags = PendingIntent.FLAG_CANCEL_CURRENT
-    )
-    alarmManager.set(AlarmManager.RTC, System.currentTimeMillis() + 100, pendingIntent)
-    exitProcess(status = 0)
 }
 
 /**
