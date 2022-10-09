@@ -8,6 +8,7 @@ import android.app.Activity
 import android.app.ActivityManager.RunningAppProcessInfo
 import android.app.Application
 import android.app.PendingIntent
+import android.app.Service
 import android.content.*
 import android.content.pm.PackageManager
 import android.content.res.ColorStateList
@@ -725,15 +726,68 @@ inline fun Context.getStringOrNull(@StringRes id: Int?): String? {
  * [Context.startService] on lower versions.
  * @param service Identifies the service to be started.
  * The Intent must be fully explicit (supplying a component name).
+ * @return The [ComponentName] of the service that is started or already running. Null if the
+ * service does not exist.
  * @throws SecurityException  If the caller does not have permission to access the service or
  * the service can not be found.
  * @throws IllegalStateException If the application is in a state where the service can not be started.
  */
 @Throws(SecurityException::class, IllegalStateException::class)
-inline fun Context.startForegroundServiceCompat(service: Intent) {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+inline fun Context.startForegroundServiceCompat(service: Intent): ComponentName? {
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
         startForegroundService(service)
     } else {
         startService(service)
     }
+}
+
+/**
+ * Calls [Context.startForegroundService] on [Build.VERSION_CODES.O] and above and
+ * [Context.startService] on lower versions.
+ * @param T The class of service to start.
+ * @return The [ComponentName] of the service that is started or already running. Null if the
+ * service does not exist.
+ * @throws SecurityException If the caller does not have permission to access the service or
+ * the service can not be found.
+ * @throws IllegalStateException If the application is in a state where the service can not be started.
+ */
+@Throws(SecurityException::class, IllegalStateException::class)
+inline fun <reified T : Service> Context.startForegroundServiceCompat(): ComponentName? {
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        startForegroundService(Intent(this, T::class.java))
+    } else {
+        startService(Intent(this, T::class.java))
+    }
+}
+
+/**
+ * Same as Context.startService(Intent(this, T::class.java)).
+ * @param T The class of service to start.
+ * @return The [ComponentName] of the service that is started or already running. Null if the
+ * service does not exist.
+ * @throws SecurityException  If the caller does not have permission to access the service or
+ * the service can not be found.
+ * @throws IllegalStateException If the application is in a state where the service can not be started.
+ * @see Context.startService
+ */
+@Throws(SecurityException::class, IllegalStateException::class)
+inline fun <reified T : Service> Context.startService(): ComponentName? {
+    return startService(Intent(this, T::class.java))
+}
+
+/**
+ * Same as calling Context.bindService(Intent(this, T::class.java), connection, flags).
+ * @param T The class of service to bind to.
+ * @param connection Receives information when the service is started or stopped.
+ * @param flags See [Context.bindService] for available flags.
+ * @return True if the system is binding to the service. False otherwise.
+ * @throws SecurityException If you do not have permission to access the service or the service cannot be found.
+ * @see Context.bindService
+ */
+@Throws(SecurityException::class)
+inline fun <reified T : Service> Context.bindService(
+    connection: ServiceConnection,
+    flags: Int = 0
+): Boolean {
+    return bindService(Intent(this, T::class.java), connection, flags)
 }
