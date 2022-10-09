@@ -11,4 +11,11 @@ class GlobalExtensionsKtTest {
         val pair = "One" to 2
         assertSame(pair, pair.toWeakReference().get())
     }
+
+    @Test
+    fun toSoftReference() {
+        val pair = "One" to 2
+        assertSame(pair, pair.toSoftReference().get())
+    }
+
 }
