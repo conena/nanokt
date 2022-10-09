@@ -21,6 +21,6 @@ inline fun <T : EditText> T.setCursorToStart(): T {
  * @return The receiver object, for chaining multiple calls.
  */
 inline fun <T : EditText> T.setCursorToEnd(): T {
-    setSelection(if (text.isNotEmpty()) text.length - 1 else 0)
+    setSelection(text.length)
     return this
 }
