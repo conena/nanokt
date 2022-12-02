@@ -22,6 +22,13 @@ inline var TextView.textStyle: Int
     set(value) = setTypeface(typeface, value)
 
 /**
+ * Same as [TextView.getText] but returning [String] instead instead of [CharSequence].
+ */
+inline var TextView.textString: String
+    get() = text.toString()
+    set(value) { text = value }
+
+/**
  * Clear the text in the TextView.
  * @return The receiver object, for chaining multiple calls.
  */
