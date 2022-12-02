@@ -8,6 +8,22 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 
 /**
+ * Same as [DialogFragment.show] but null is used as tag.
+ * @param manager The FragmentManager this fragment will be added to.
+ */
+inline fun DialogFragment.show(manager: FragmentManager) {
+    show(manager, null)
+}
+
+/**
+ * Same as [DialogFragment.show] but null is used as tag.
+ * @param transaction The transaction to add the fragment to.
+ */
+inline fun DialogFragment.show(transaction: FragmentTransaction) {
+    show(transaction, null)
+}
+
+/**
  * Same as [DialogFragment.show] but checks if the state is saved before showing the dialog.
  * If [DialogFragment.isStateSaved] is `true`, the dialog is not shown and `false` is returned.
  * @param manager The FragmentManager this fragment will be added to.
