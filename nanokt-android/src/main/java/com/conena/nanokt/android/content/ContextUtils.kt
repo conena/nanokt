@@ -14,6 +14,7 @@ import android.content.pm.PackageManager
 import android.content.res.ColorStateList
 import android.content.res.Configuration
 import android.content.res.Resources
+import android.content.res.Resources.Theme
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.Icon
 import android.net.Uri
@@ -31,6 +32,7 @@ import com.conena.nanokt.android.ExperimentalNanoKtAndroidApi
 import com.conena.nanokt.android.net.getPlayStoreUriForApp
 import com.conena.nanokt.android.net.getPlayStoreUriForDeveloper
 import com.conena.nanokt.android.net.getTestTrackWebsiteUriForApp
+import com.conena.nanokt.android.util.isColorTypeCompat
 import kotlin.Boolean
 import kotlin.Int
 import kotlin.String
@@ -790,4 +792,64 @@ inline fun <reified T : Service> Context.bindService(
     flags: Int = 0
 ): Boolean {
     return bindService(Intent(this, T::class.java), connection, flags)
+}
+
+/**
+ * Get a color from the current theme. Resource references will be resolved.
+ * Use [Resources.Theme.getColorOrNull] if you do not need support for android versions
+ * below [Build.VERSION_CODES.LOLLIPOP].
+ * @param id Resource attribute id for the color.
+ * @return The color if the attribute was found, `null` otherwise.
+ */
+@ColorInt
+@CheckResult
+inline fun Context.getThemeColorOrNull(@AttrRes id: Int): Int? {
+    val attr = theme.getAttributeOrNull(id) ?: return null
+    return if (attr.isColorTypeCompat) {
+        attr.data
+    } else resources.getColorCompat(id = attr.resourceId, theme = theme)
+}
+
+/**
+ * Get a color from the current theme. Resource references will be resolved.
+ * Use [Resources.Theme.getColor] if you do not need support for android versions
+ * below [Build.VERSION_CODES.LOLLIPOP].
+ * @param id Resource attribute id for the color.
+ * @return The color.
+ * @throws Resources.NotFoundException If [id] does not exist in the theme or is no color.
+ */
+@ColorInt
+@Throws(Resources.NotFoundException::class)
+inline fun Context.getThemeColor(@AttrRes id: Int): Int {
+    return getThemeColorOrNull(id) ?: throw Resources.NotFoundException("Attribute with id $id not found")
+}
+
+/**
+ * Get a [ColorStateList] from the current theme. Resource references will be resolved.
+ * Use [Theme.getColorStateListOrNull] if you do not need support for android versions
+ * below [Build.VERSION_CODES.LOLLIPOP].
+ * @param id Resource attribute id for the color.
+ * @return The [ColorStateList] if the attribute was found, `null` otherwise.
+ */
+@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+@CheckResult
+inline fun Context.getThemeColorStateListOrNull(@AttrRes id: Int): ColorStateList? {
+    return resources.getColorStateListCompatOrNull(
+        id = theme.getAttributeOrNull(id)?.resourceId,
+        theme = theme
+    )
+}
+
+/**
+ * Get a [ColorStateList] from the current theme. Resource references will be resolved.
+ * Use [Theme.getColorStateList] if you do not need support for android versions
+ * below [Build.VERSION_CODES.LOLLIPOP].
+ * @param id Resource attribute id for the color.
+ * @return The [ColorStateList].
+ * @throws Resources.NotFoundException If [id] does not exist in the theme or is no [ColorStateList].
+ */
+@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+@Throws(Resources.NotFoundException::class)
+inline fun Context.getThemeColorStateList(@AttrRes id: Int): ColorStateList {
+    return getThemeColorStateListOrNull(id) ?: throw Resources.NotFoundException("Attribute with id $id not found")
 }
