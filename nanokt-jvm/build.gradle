@@ -1,11 +1,8 @@
 plugins {
     id 'java-library'
     id 'org.jetbrains.kotlin.jvm'
-    id 'maven-publish'
+    id 'com.vanniktech.maven.publish'
 }
-
-version = '1.0-alpha1'
-group = "com.conena.nanokt.jvm"
 
 kotlin.sourceSets.all {
     languageSettings.optIn("kotlin.contracts.ExperimentalContracts")
@@ -18,42 +15,4 @@ java {
 
 dependencies {
     testImplementation 'junit:junit:4.13.2'
-}
-
-afterEvaluate {
-    publishing {
-        publications {
-            release(MavenPublication) {
-                pom {
-                    name = 'NanoKt JVM'
-                    description = 'Useful Kotlin JVM extensions.'
-                    url = 'https://conena.com/nanokt'
-                    licenses {
-                        license {
-                            name = 'The Apache License, Version 2.0'
-                            url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                        }
-                    }
-                    developers {
-                        developer {
-                            id = 'Conena'
-                            name = 'Conena'
-                            email = 'info@conena.com'
-                        }
-                    }
-                    scm {
-                        connection = 'scm:git:git://github.com/conena/nanokt-jvm.git'
-                        developerConnection = 'scm:git:ssh://git@github.com/conena/nanokt-jvm.git'
-                        url = 'https://github.com/conena/nanokt-jvm'
-                    }
-                }
-                from components.java
-            }
-        }
-        repositories {
-            maven {
-                url = mavenLocal().getUrl()
-            }
-        }
-    }
 }

@@ -1,11 +1,8 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
-    id 'maven-publish'
+    id 'com.vanniktech.maven.publish'
 }
-
-version = '1.0-alpha1'
-group = "com.conena.nanokt"
 
 android {
     namespace 'com.conena.nanokt.android'
@@ -45,45 +42,4 @@ dependencies {
     androidTestImplementation 'com.google.truth:truth:1.1.3'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test:runner:1.5.2'
-}
-
-afterEvaluate {
-    publishing {
-        publications {
-            release(MavenPublication) {
-                pom {
-                    name = 'NanoKt Android'
-                    description = 'Useful Kotlin extensions for Android.'
-                    url = 'https://conena.com/nanokt'
-                    licenses {
-                        license {
-                            name = 'The Apache License, Version 2.0'
-                            url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                        }
-                    }
-                    developers {
-                        developer {
-                            id = 'Conena'
-                            name = 'Conena'
-                            email = 'info@conena.com'
-                        }
-                    }
-                    scm {
-                        connection = 'scm:git:git://github.com/conena/nanokt-android.git'
-                        developerConnection = 'scm:git:ssh://git@github.com/conena/nanokt-android.git'
-                        url = 'https://github.com/conena/nanokt-android'
-                    }
-                }
-                from components.release
-            }
-            debug(MavenPublication) {
-                from components.debug
-            }
-        }
-        repositories {
-            maven {
-                url = mavenLocal().getUrl()
-            }
-        }
-    }
 }
