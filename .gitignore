@@ -1,11 +1,11 @@
 *.iml
 .gradle
-/local.properties
-/.idea
+local.properties
+.idea
+!.idea/copyright
 .DS_Store
-/build
-/gradle/wrapper
-/captures
+build
+gradle/wrapper
+captures
 .externalNativeBuild
 .cxx
-local.properties
