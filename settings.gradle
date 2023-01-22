@@ -12,7 +12,7 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "NanoKt Android"
+rootProject.name = "NanoKt"
 include ':app'
 include ':nanokt-android'
 include ':nanokt'
