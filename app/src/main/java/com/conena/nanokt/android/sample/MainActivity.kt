@@ -9,7 +9,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         // TODO add icon
-        // TODO add Readme
         // TODO implement sample app
     }
 
