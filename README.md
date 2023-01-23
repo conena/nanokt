@@ -11,7 +11,6 @@ API breaking changes can still happen within the beta phase. From the first stab
 The library is divided into modules for pure Kotlin, Kotlin-JVM, and Kotlin-Android, making it compatible with a wide range of projects. I may even release a compatible version for Kotlin Multiplatform at a later date.
 
 # Getting started
-### The library is not yet available on Maven Central. This will happen in the next few days.
 
 To start using NanoKt in your project, add the appropriate dependencies to your build.gradle file.
 
