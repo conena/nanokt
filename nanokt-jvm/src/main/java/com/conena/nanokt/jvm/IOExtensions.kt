@@ -34,7 +34,7 @@ inline fun BufferedReader.readLineIfReady() = if (ready()) readLine() else null
 /**
  * Calls [BufferedWriter.newLine] directly after [BufferedWriter.write].
  * @param str The string to be written.
- * @param offset offset from which to start writing characters.
+ * @param offset Offset from which the characters will be written.
  * @param length Number of characters to write.
  * @throws IOException If an I/O error occurs.
  */
@@ -47,7 +47,7 @@ inline fun BufferedWriter.writeLine(str: String, offset: Int = 0, length: Int = 
 /**
  * Calls [BufferedWriter.flush] directly after [BufferedWriter.write].
  * @param str The string to be written.
- * @param offset offset from which to start writing characters.
+ * @param offset Offset from which the characters will be written.
  * @param length Number of characters to write.
  * @throws IOException If an I/O error occurs.
  */
@@ -60,7 +60,7 @@ inline fun BufferedWriter.writeFlushing(str: String, offset: Int = 0, length: In
 /**
  * Calls [BufferedWriter.flush] directly after [BufferedWriter.write] and [BufferedWriter.newLine].
  * @param str The string to be written.
- * @param offset offset from which to start writing characters.
+ * @param offset Offset from which the characters will be written.
  * @param length Number of characters to write.
  * @throws IOException If an I/O error occurs.
  */
