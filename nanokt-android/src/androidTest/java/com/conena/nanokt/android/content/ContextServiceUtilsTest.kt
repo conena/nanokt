@@ -102,7 +102,12 @@ class ContextServiceUtilsTest {
     @SdkSuppress(minSdkVersion = Build.VERSION_CODES.KITKAT)
     @Test
     fun captioningManager() {
-        assertThat(context.systemServices.captioningManager).isNotNull()
+        var called = false
+        instrumentation.runOnMainSync {
+            assertThat(context.systemServices.captioningManager).isNotNull()
+            called = true
+        }
+        assertThat(called).isTrue()
     }
 
     @SdkSuppress(minSdkVersion = Build.VERSION_CODES.M)
