@@ -20,7 +20,8 @@
 package com.conena.nanokt.jvm
 
 import java.text.DateFormat
-import java.util.Date
+import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * Same as [DateFormat.format] but returns null if [date] is null.
@@ -29,4 +30,29 @@ import java.util.Date
  */
 inline fun DateFormat.formatOrNull(date: Date?): String? {
    return format(date ?: return null)
+}
+
+/**
+ * Creates a new [Date] instance with the receiver as epoch timestamp.
+ */
+inline fun Long.toDate() = Date(this)
+
+/**
+ * @param format The [DateFormat] used to format the receiver.
+ * @return The formatted string.
+ */
+inline fun Date.format(format: DateFormat): String {
+   return format.format(this)
+}
+
+/**
+ * This method creates a new [SimpleDateFormat] instance with the given pattern and formats the receiver with it.
+ * You should not use this method if you need the same pattern repeatedly (e.g. in a loop).
+ * In this case it is more effective to store the [SimpleDateFormat] as variable and call [format] with it.
+ * @param pattern The pattern used to format the receiver. Internally a [SimpleDateFormat] is used.
+ * @param locale The locale whose symbols should be used for the date format.
+ * @return The formatted string.
+ */
+inline fun Date.format(pattern: String, locale: Locale = Locale.getDefault()): String {
+   return SimpleDateFormat(pattern, locale).format(this)
 }

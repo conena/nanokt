@@ -33,4 +33,21 @@ class DateTimeExtensionsKtTest {
         assertNull(formatter.formatOrNull(null))
     }
 
+    @Test
+    fun toDate() {
+        val timeStamp = 1665239501000L
+        assertEquals(Date(timeStamp), timeStamp.toDate())
+    }
+
+    @Test
+    fun formatWithDateFormat() {
+        val formatter = SimpleDateFormat("yyyy-MM-dd")
+        assertEquals("2022-10-08", Date(1665239501000L).format(formatter))
+    }
+
+    @Test
+    fun formatWithPattern() {
+        assertEquals("2022-10-08", Date(1665239501000L).format(pattern = "yyyy-MM-dd"))
+    }
+
 }

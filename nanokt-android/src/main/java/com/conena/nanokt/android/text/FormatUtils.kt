@@ -56,3 +56,21 @@ inline fun getSuitableDateTimeFormat(
 inline fun Locale.getSuitableDateTimeFormat(skeleton: String): SimpleDateFormat {
     return SimpleDateFormat(DateFormat.getBestDateTimePattern(this, skeleton), this)
 }
+
+/**
+ * This method creates a new [SimpleDateFormat] instance with a pattern created from the given skeleton
+ * and locale and formats the receiver with it.
+ * You should not use this method if you need the same pattern repeatedly (e.g. in a loop).
+ * In this case it is more effective to call [getSuitableDateTimeFormat], store the [SimpleDateFormat]
+ * as variable and call [format] with it.
+ * @param skeleton A skeleton similar to, and uses the same format characters as, a Unicode
+ * [UTS#35 Pattern](http://www.unicode.org/reports/tr35/#Date_Format_Patterns).
+ * @param locale The locale into which the skeleton should be localized.
+ * @return The date formatted with the best possible localized format of the given skeleton for the given locale.
+ * @see Locale.getSuitableDateTimeFormat
+ */
+@RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
+@CheckResult
+inline fun Date.formatSuitable(skeleton: String, locale: Locale = Locale.getDefault()): String {
+    return locale.getSuitableDateTimeFormat(skeleton = skeleton).format(this)
+}
