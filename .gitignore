@@ -5,7 +5,6 @@ local.properties
 !.idea/copyright
 .DS_Store
 build
-gradle/wrapper
 captures
 .externalNativeBuild
 .cxx
