@@ -32,7 +32,9 @@ android {
 
 dependencies {
     implementation project(':nanokt')
+    implementation project(':nanokt-jvm')
     implementation project(':nanokt-android')
+    implementation project(':nanokt-android-threads')
     implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'androidx.appcompat:appcompat:1.6.0'
     implementation 'com.google.android.material:material:1.8.0'
