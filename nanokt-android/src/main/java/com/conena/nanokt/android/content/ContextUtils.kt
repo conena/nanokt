@@ -345,8 +345,8 @@ inline fun Context.showDeveloperInPlayStoreApp(
  * @see showAppInPlayStoreApp
  * @see showAppInPlayStoreWebsite
  */
-@RestrictTo(RestrictTo.Scope.LIBRARY)
-inline fun Context.showAppInPlayStoreInternal(
+@PublishedApi
+internal inline fun Context.showAppInPlayStoreInternal(
     packageName: String,
     referrer: String?,
     openWeb: Boolean = false
@@ -375,8 +375,8 @@ inline fun Context.showAppInPlayStoreInternal(
  * @see showAppInPlayStoreApp
  * @see showAppInPlayStoreWebsite
  */
-@RestrictTo(RestrictTo.Scope.LIBRARY)
-inline fun Context.showDeveloperInPlayStoreInternal(
+@PublishedApi
+internal inline fun Context.showDeveloperInPlayStoreInternal(
     developerName: String,
     openWeb: Boolean = false
 ): Result<Unit> {

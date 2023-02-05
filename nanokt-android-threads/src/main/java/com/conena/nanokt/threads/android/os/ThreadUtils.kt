@@ -24,14 +24,13 @@ package com.conena.nanokt.threads.android.os
 import android.os.Handler
 import android.os.Looper
 import androidx.annotation.MainThread
-import androidx.annotation.RestrictTo
 import java.util.concurrent.TimeUnit
 
 /**
  * ThreadUtils companion object to avoid creating new [Handler] instances again and again.
  */
-@RestrictTo(RestrictTo.Scope.LIBRARY)
-object NanoKtThreadUtilsCompanion {
+@PublishedApi
+internal object NanoKtThreadUtilsCompanion {
     val mainHandler: Handler by lazy { Handler(Looper.getMainLooper()) }
 }
 

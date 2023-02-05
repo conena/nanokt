@@ -25,7 +25,6 @@ import android.os.Build
 import android.provider.Settings
 import androidx.annotation.CheckResult
 import androidx.annotation.RequiresApi
-import androidx.annotation.RestrictTo
 
 
 /**
@@ -35,7 +34,7 @@ import androidx.annotation.RestrictTo
  * If this is still desired, an ApplicationContext must have been used to obtain the instance.
  */
 @JvmInline
-value class NanoKtSettingsProvider @RestrictTo(RestrictTo.Scope.LIBRARY) constructor (
+value class NanoKtSettingsProvider @PublishedApi internal constructor (
     val context: Context
 ) {
 

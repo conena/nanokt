@@ -24,7 +24,6 @@ import android.content.Context
 import android.content.res.Resources
 import android.widget.Toast
 import androidx.annotation.MainThread
-import androidx.annotation.RestrictTo
 import androidx.annotation.StringRes
 import java.lang.ref.WeakReference
 
@@ -37,8 +36,8 @@ object NanoKtToastCompanion {
      * A [WeakReference] to the last set [Toast].
      * @see NanoKtToastCompanion.cancelAndSet
      */
-    @RestrictTo(RestrictTo.Scope.LIBRARY)
-    var toastReference = WeakReference<Toast>(null)
+    @PublishedApi
+    internal var toastReference = WeakReference<Toast>(null)
 
     /**
      * Cancel the last toast and set a new toast.

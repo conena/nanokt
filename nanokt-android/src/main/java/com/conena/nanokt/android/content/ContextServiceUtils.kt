@@ -99,7 +99,6 @@ import android.view.textservice.TextServicesManager
 import androidx.annotation.MainThread
 import androidx.annotation.RequiresApi
 import androidx.annotation.RequiresPermission
-import androidx.annotation.RestrictTo
 
 /**
  * Helper class that provides getters for all available, non-deprecated, Android services.
@@ -108,7 +107,7 @@ import androidx.annotation.RestrictTo
  * If this is still desired, an ApplicationContext must have been used to obtain the instance.
  */
 @JvmInline
-value class ServiceProvider @RestrictTo(RestrictTo.Scope.LIBRARY) constructor(val context: Context) {
+value class ServiceProvider @PublishedApi internal constructor(val context: Context) {
 
     inline val accessibilityManager get() = context.getSystemService(Context.ACCESSIBILITY_SERVICE) as AccessibilityManager
 
