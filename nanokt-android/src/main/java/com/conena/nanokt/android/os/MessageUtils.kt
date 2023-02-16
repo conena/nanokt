@@ -22,6 +22,8 @@ package com.conena.nanokt.android.os
 
 import android.os.Message
 import android.os.Messenger
+import kotlin.contracts.InvocationKind
+import kotlin.contracts.contract
 
 /**
  * Chainable setter for [Message.replyTo].
@@ -53,4 +55,20 @@ inline fun Message.setArg1(arg1: Int): Message {
 inline fun Message.setArg2(arg2: Int): Message {
     this.arg2 = arg2
     return this
+}
+
+/**
+ * Invokes [block] with the receiver as argument, returns the result and calls [Message.recycle]
+ * even when an exception is thrown. Exceptions are passed through.
+ * @return The result of [block].
+ */
+inline fun <R> Message.use(block: (Message) -> R): R {
+    contract {
+        callsInPlace(block, InvocationKind.EXACTLY_ONCE)
+    }
+    try {
+        return block(this)
+    } finally {
+        recycle()
+    }
 }
