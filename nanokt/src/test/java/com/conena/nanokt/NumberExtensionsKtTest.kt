@@ -21,7 +21,170 @@ import org.junit.Assert.*
 
 import org.junit.Test
 
+private const val FLAG_1 = 1
+private const val FLAG_2 = 2
+private const val FLAG_4 = 4
+private const val FLAG_8 = 8
+private const val FLAG_16 = 16
+
 class NumberExtensionsKtTest {
+
+    @Suppress("KotlinConstantConditions")
+    @Test
+    fun `isFlagSet - Int`() {
+        var flags = 0
+        assertFalse(flags.isFlagSet(FLAG_1))
+        assertFalse(flags.isFlagSet(FLAG_2))
+        assertFalse(flags.isFlagSet(FLAG_4))
+        assertFalse(flags.isFlagSet(FLAG_8))
+        assertFalse(flags.isFlagSet(FLAG_16))
+        flags = flags or FLAG_1
+        assertTrue(flags.isFlagSet(FLAG_1))
+        assertFalse(flags.isFlagSet(FLAG_2))
+        assertFalse(flags.isFlagSet(FLAG_4))
+        assertFalse(flags.isFlagSet(FLAG_8))
+        assertFalse(flags.isFlagSet(FLAG_16))
+        flags = flags or FLAG_16
+        assertTrue(flags.isFlagSet(FLAG_1))
+        assertFalse(flags.isFlagSet(FLAG_2))
+        assertFalse(flags.isFlagSet(FLAG_4))
+        assertFalse(flags.isFlagSet(FLAG_8))
+        assertTrue(flags.isFlagSet(FLAG_16))
+    }
+
+    @Suppress("KotlinConstantConditions")
+    @Test
+    fun `addFlag - Int`() {
+        var flags = 0
+        flags = flags.addFlag(FLAG_1)
+        assertTrue(flags.isFlagSet(FLAG_1))
+        assertFalse(flags.isFlagSet(FLAG_2))
+        assertFalse(flags.isFlagSet(FLAG_4))
+        assertFalse(flags.isFlagSet(FLAG_8))
+        assertFalse(flags.isFlagSet(FLAG_16))
+        flags = flags.addFlag(FLAG_2)
+        assertTrue(flags.isFlagSet(FLAG_1))
+        assertTrue(flags.isFlagSet(FLAG_2))
+        assertFalse(flags.isFlagSet(FLAG_4))
+        assertFalse(flags.isFlagSet(FLAG_8))
+        assertFalse(flags.isFlagSet(FLAG_16))
+        flags = flags.addFlag(FLAG_16)
+        assertTrue(flags.isFlagSet(FLAG_1))
+        assertTrue(flags.isFlagSet(FLAG_2))
+        assertFalse(flags.isFlagSet(FLAG_4))
+        assertFalse(flags.isFlagSet(FLAG_8))
+        assertTrue(flags.isFlagSet(FLAG_16))
+    }
+
+    @Test
+    fun `removeFlag - Int`() {
+        var flags = 0b11111
+        flags = flags.removeFlag(FLAG_1)
+        assertFalse(flags.isFlagSet(FLAG_1))
+        assertTrue(flags.isFlagSet(FLAG_2))
+        assertTrue(flags.isFlagSet(FLAG_4))
+        assertTrue(flags.isFlagSet(FLAG_8))
+        assertTrue(flags.isFlagSet(FLAG_16))
+        flags = flags.removeFlag(FLAG_2)
+        assertFalse(flags.isFlagSet(FLAG_1))
+        assertFalse(flags.isFlagSet(FLAG_2))
+        assertTrue(flags.isFlagSet(FLAG_4))
+        assertTrue(flags.isFlagSet(FLAG_8))
+        assertTrue(flags.isFlagSet(FLAG_16))
+        flags = flags.removeFlag(FLAG_16)
+        assertFalse(flags.isFlagSet(FLAG_1))
+        assertFalse(flags.isFlagSet(FLAG_2))
+        assertTrue(flags.isFlagSet(FLAG_4))
+        assertTrue(flags.isFlagSet(FLAG_8))
+        assertFalse(flags.isFlagSet(FLAG_16))
+    }
+
+    @Test
+    fun `getBitFlags - Int`() {
+        val exceptedFlags = arrayOf(0b10, 0b100, 0b10000, 0b100000)
+        val resolvedFlags = 0b110110.getBitFlags()
+        assertEquals(exceptedFlags.size, resolvedFlags.size)
+        assertArrayEquals(exceptedFlags, resolvedFlags)
+    }
+
+    @Suppress("KotlinConstantConditions")
+    @Test
+    fun `isFlagSet - Long`() {
+        var flags = 0L
+        assertFalse(flags.isFlagSet(FLAG_1.toLong()))
+        assertFalse(flags.isFlagSet(FLAG_2.toLong()))
+        assertFalse(flags.isFlagSet(FLAG_4.toLong()))
+        assertFalse(flags.isFlagSet(FLAG_8.toLong()))
+        assertFalse(flags.isFlagSet(FLAG_16.toLong()))
+        flags = flags or FLAG_1.toLong()
+        assertTrue(flags.isFlagSet(FLAG_1.toLong()))
+        assertFalse(flags.isFlagSet(FLAG_2.toLong()))
+        assertFalse(flags.isFlagSet(FLAG_4.toLong()))
+        assertFalse(flags.isFlagSet(FLAG_8.toLong()))
+        assertFalse(flags.isFlagSet(FLAG_16.toLong()))
+        flags = flags or FLAG_16.toLong()
+        assertTrue(flags.isFlagSet(FLAG_1.toLong()))
+        assertFalse(flags.isFlagSet(FLAG_2.toLong()))
+        assertFalse(flags.isFlagSet(FLAG_4.toLong()))
+        assertFalse(flags.isFlagSet(FLAG_8.toLong()))
+        assertTrue(flags.isFlagSet(FLAG_16.toLong()))
+    }
+
+
+    @Suppress("KotlinConstantConditions")
+    @Test
+    fun `addFlag - Long`() {
+        var flags = 0L
+        flags = flags.addFlag(FLAG_1.toLong())
+        assertTrue(flags.isFlagSet(FLAG_1.toLong()))
+        assertFalse(flags.isFlagSet(FLAG_2.toLong()))
+        assertFalse(flags.isFlagSet(FLAG_4.toLong()))
+        assertFalse(flags.isFlagSet(FLAG_8.toLong()))
+        assertFalse(flags.isFlagSet(FLAG_16.toLong()))
+        flags = flags.addFlag(FLAG_2.toLong())
+        assertTrue(flags.isFlagSet(FLAG_1.toLong()))
+        assertTrue(flags.isFlagSet(FLAG_2.toLong()))
+        assertFalse(flags.isFlagSet(FLAG_4.toLong()))
+        assertFalse(flags.isFlagSet(FLAG_8.toLong()))
+        assertFalse(flags.isFlagSet(FLAG_16.toLong()))
+        flags = flags.addFlag(FLAG_16.toLong())
+        assertTrue(flags.isFlagSet(FLAG_1.toLong()))
+        assertTrue(flags.isFlagSet(FLAG_2.toLong()))
+        assertFalse(flags.isFlagSet(FLAG_4.toLong()))
+        assertFalse(flags.isFlagSet(FLAG_8.toLong()))
+        assertTrue(flags.isFlagSet(FLAG_16.toLong()))
+    }
+
+    @Test
+    fun `removeFlag - Long`() {
+        var flags = 0b11111L
+        flags = flags.removeFlag(FLAG_1.toLong())
+        assertFalse(flags.isFlagSet(FLAG_1.toLong()))
+        assertTrue(flags.isFlagSet(FLAG_2.toLong()))
+        assertTrue(flags.isFlagSet(FLAG_4.toLong()))
+        assertTrue(flags.isFlagSet(FLAG_8.toLong()))
+        assertTrue(flags.isFlagSet(FLAG_16.toLong()))
+        flags = flags.removeFlag(FLAG_2.toLong())
+        assertFalse(flags.isFlagSet(FLAG_1.toLong()))
+        assertFalse(flags.isFlagSet(FLAG_2.toLong()))
+        assertTrue(flags.isFlagSet(FLAG_4.toLong()))
+        assertTrue(flags.isFlagSet(FLAG_8.toLong()))
+        assertTrue(flags.isFlagSet(FLAG_16.toLong()))
+        flags = flags.removeFlag(FLAG_16.toLong())
+        assertFalse(flags.isFlagSet(FLAG_1.toLong()))
+        assertFalse(flags.isFlagSet(FLAG_2.toLong()))
+        assertTrue(flags.isFlagSet(FLAG_4.toLong()))
+        assertTrue(flags.isFlagSet(FLAG_8.toLong()))
+        assertFalse(flags.isFlagSet(FLAG_16.toLong()))
+    }
+
+    @Test
+    fun `getBitFlags - Long`() {
+        val exceptedFlags = arrayOf(0b10L, 0b100L, 0b10000L, 0b100000L)
+        val resolvedFlags = 0b110110L.getBitFlags()
+        assertEquals(exceptedFlags.size, resolvedFlags.size)
+        assertArrayEquals(exceptedFlags, resolvedFlags)
+    }
 
     @Test
     fun `zeroAsNull - Int`() {

@@ -20,6 +20,82 @@
 package com.conena.nanokt
 
 /**
+ * @param flag The flag to check.
+ * @return True if the receiver has all flag bits in [flag] set.
+ */
+inline fun Int.isFlagSet(flag: Int): Boolean {
+    return this.and(flag) == flag
+}
+
+/**
+ * @param flag The bit flag to add to the receiver.
+ * @return The receiver with all flag bits from [flag] added.
+ */
+inline fun Int.addFlag(flag: Int): Int {
+    return this.or(flag)
+}
+
+/**
+ * @param flag The bit flag to remove from the receiver.
+ * @return The receiver with all flag bits from [flag] removed.
+ */
+inline fun Int.removeFlag(flag: Int): Int {
+    return this.and(flag.inv())
+}
+
+/**
+ * @return An array with the set bit flags.
+ */
+inline fun Int.getBitFlags(): Array<Int> {
+    val found = ArrayList<Int>(countOneBits())
+    for (i in 0..31) {
+        val nextFlag = 1.shl(i)
+        if (this.and(nextFlag) == nextFlag) {
+            found.add(nextFlag)
+        }
+    }
+    return found.toTypedArray()
+}
+
+/**
+ * @param flag The flag to check.
+ * @return True if the receiver has all flag bits in [flag] set.
+ */
+inline fun Long.isFlagSet(flag: Long): Boolean {
+    return this.and(flag) == flag
+}
+
+/**
+ * @param flag The bit flag to add to the receiver.
+ * @return The receiver with all flag bits from [flag] added.
+ */
+inline fun Long.addFlag(flag: Long): Long {
+    return this.or(flag)
+}
+
+/**
+ * @param flag The bit flag to remove from the receiver.
+ * @return The receiver with all flag bits from [flag] removed.
+ */
+inline fun Long.removeFlag(flag: Long): Long {
+    return this.and(flag.inv())
+}
+
+/**
+ * @return An array with the set bit flags.
+ */
+inline fun Long.getBitFlags(): Array<Long> {
+    val found = ArrayList<Long>(countOneBits())
+    for (i in 0..31) {
+        val nextFlag = 1L.shl(i)
+        if (this.and(nextFlag) == nextFlag) {
+            found.add(nextFlag)
+        }
+    }
+    return found.toTypedArray()
+}
+
+/**
  * @return `null` if the Int is zero. Otherwise the Int is returned.
  */
 inline fun Int.zeroAsNull() = if (this == 0) null else this
