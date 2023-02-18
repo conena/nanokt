@@ -20,9 +20,13 @@
 
 package com.conena.nanokt.android.content
 
+import android.app.Activity
+import android.content.Context
+import android.content.ContextWrapper
 import android.content.Intent
 import android.content.IntentFilter
 import android.net.Uri
+import android.os.Bundle
 import com.conena.nanokt.android.net.MimeType
 
 /**
@@ -113,4 +117,40 @@ inline fun createMailSendIntent(
     if (body != null) intent.putExtra(Intent.EXTRA_TEXT, body)
     if (attachment != null) intent.putExtra(Intent.EXTRA_STREAM, attachment)
     return intent
+}
+
+/**
+ * Similar to [Context.startActivity].
+ * If invoked on a non-activity context [Intent.FLAG_ACTIVITY_NEW_TASK] is added automatically.
+ * @param context The context used to start the activity.
+ * @param options Additional options for how the Activity should be started.
+ * @see Context.startActivity
+ */
+inline fun Intent.startActivity(
+    context: Context,
+    options: Bundle? = null
+) {
+    if (context !is Activity && (context !is ContextWrapper || context.baseContext !is Activity)) {
+        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+    }
+    context.startActivity(this, options)
+}
+
+/**
+ * Similar to [Context.startActivity] but instead of throwing an exception,
+ * the exception is encapsulated in the returned result.
+ * If invoked on a non-activity context [Intent.FLAG_ACTIVITY_NEW_TASK] is added automatically.
+ * @param context The context used to start the activity.
+ * @param options Additional options for how the Activity should be started.
+ * @return A [Result] object that indicates the result of the action.
+ * In case of an error the exception is encapsulated in the [Result].
+ * You can use [Result.onFailure] for error handling.
+ * @see Context.startActivity
+ * @see Context.startActivityCatching
+ */
+inline fun Intent.startActivityCatching(
+    context: Context,
+    options: Bundle? = null
+): Result<Unit> {
+    return context.startActivityCatching(this, options)
 }
