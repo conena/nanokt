@@ -84,6 +84,18 @@ inline val Context.isAppInForeground: Boolean get() {
 inline val Context.configuration: Configuration get() = resources.configuration
 
 /**
+ * A [SharedPreferences] instance that points to the default file that is used by
+ * the preference framework in the given context.
+ * The returned instance points to the same preferences file as the
+ * PreferenceManager.getDefaultSharedPreferences(receiver) method from the framework and the
+ * AndroidX preferences library.
+ * @see Context.getSharedPreferences
+ */
+inline val Context.defaultSharedPreferences: SharedPreferences get() {
+    return getSharedPreferences("${packageName}_preferences", Context.MODE_PRIVATE)
+}
+
+/**
  * Opens various settings screens for the current application.
  * @param action One of the actions below to get to a specific settings screen.
  * @return A [Result] object that indicates the result of the action.
