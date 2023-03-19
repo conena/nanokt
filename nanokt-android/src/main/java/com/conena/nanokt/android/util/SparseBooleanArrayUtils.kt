@@ -24,8 +24,8 @@ import android.util.SparseBooleanArray
 import androidx.annotation.CheckResult
 
 /**
- * @param pair Pair with the initial value and key.
- * @return A [SparseBooleanArray], mapping the specified key to the specified value.
+ * @param pair Pair with the initial element and key.
+ * @return A [SparseBooleanArray], mapping the specified key to the specified element.
  */
 @CheckResult
 inline fun <T> sparseBooleanArrayOf(pair: Pair<Int, Boolean>): SparseBooleanArray {
@@ -35,7 +35,7 @@ inline fun <T> sparseBooleanArrayOf(pair: Pair<Int, Boolean>): SparseBooleanArra
 }
 
 /**
- * @param pairs The values in [Pair.first] will be used as keys. The values in [Pair.second] as values.
+ * @param pairs The values in [Pair.first] will be used as keys. The values in [Pair.second] as elements.
  * If multiple pairs have the same key, the resulting [SparseBooleanArray] will contain the value from the last of those pairs.
  * @return A [SparseBooleanArray], mapping the specified keys to the specified values.
  */
@@ -49,26 +49,26 @@ inline fun <T> sparseBooleanArrayOf(vararg pairs: Pair<Int, Boolean>): SparseBoo
 }
 
 /**
- * @param value The initial value for the [SparseBooleanArray]. 0 will is used as key.
- * @return A [SparseBooleanArray], mapping 0 to the specified value.
+ * @param element The initial element for the [SparseBooleanArray]. 0 will is used as key.
+ * @return A [SparseBooleanArray], mapping 0 to the specified element.
  */
 @CheckResult
-inline fun sparseBooleanArrayOf(value: Boolean): SparseBooleanArray {
+inline fun sparseBooleanArrayOf(element: Boolean): SparseBooleanArray {
     val r = SparseBooleanArray()
-    r.put(0, value)
+    r.put(0, element)
     return r
 }
 
 /**
- * @param values The values for the [SparseBooleanArray]. The first value will be mapped to the key 0.
+ * @param elements The elements for the [SparseBooleanArray]. The first element will be mapped to the key 0.
  * The second to the key 1 and so on.
- * @return A [SparseBooleanArray], mapping the indexes of [values] to the values.
+ * @return A [SparseBooleanArray], mapping the indexes of [elements] to the elements.
  */
 @CheckResult
-inline fun <T> sparseBooleanArrayOf(vararg values: Boolean): SparseBooleanArray {
+inline fun <T> sparseBooleanArrayOf(vararg elements: Boolean): SparseBooleanArray {
     val r = SparseBooleanArray()
-    for (i in 0 .. values.lastIndex) {
-        r.put(i, values[i])
+    for (i in 0 .. elements.lastIndex) {
+        r.put(i, elements[i])
     }
     return r
 }
@@ -92,8 +92,8 @@ inline fun SparseBooleanArray.toHashMap(): HashMap<Int, Boolean> {
 }
 
 /**
- * @return A new [ArrayList] containing all values from the [SparseBooleanArray]. The original sorting is retained.
- * If the indexes contain gaps, all following entries are shifted forward by the size of the gaps.
+ * @return A new [ArrayList] containing all elements from the [SparseBooleanArray]. The original sorting is retained.
+ * If the indexes contain gaps, all following elements are shifted forward by the size of the gaps.
  */
 @CheckResult
 inline fun SparseBooleanArray.toArrayList(): ArrayList<Boolean> {

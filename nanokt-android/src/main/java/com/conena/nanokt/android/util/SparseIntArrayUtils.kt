@@ -24,8 +24,8 @@ import android.util.SparseIntArray
 import androidx.annotation.CheckResult
 
 /**
- * @param pair Pair with the initial value and key.
- * @return A [SparseIntArray], mapping the specified key to the specified value.
+ * @param pair Pair with the initial element and key.
+ * @return A [SparseIntArray], mapping the specified key to the specified element.
  */
 @CheckResult
 inline fun <T> sparseIntArrayOf(pair: Pair<Int, Int>): SparseIntArray {
@@ -35,7 +35,7 @@ inline fun <T> sparseIntArrayOf(pair: Pair<Int, Int>): SparseIntArray {
 }
 
 /**
- * @param pairs The values in [Pair.first] will be used as keys. The values in [Pair.second] as values.
+ * @param pairs The values in [Pair.first] will be used as keys. The values in [Pair.second] as elements.
  * If multiple pairs have the same key, the resulting [SparseIntArray] will contain the value from the last of those pairs.
  * @return A [SparseIntArray], mapping the specified keys to the specified values.
  */
@@ -49,26 +49,26 @@ inline fun <T> sparseIntArrayOf(vararg pairs: Pair<Int, Int>): SparseIntArray {
 }
 
 /**
- * @param value The initial value for the [SparseIntArray]. 0 will is used as key.
- * @return A [SparseIntArray], mapping 0 to the specified value.
+ * @param element The initial element for the [SparseIntArray]. 0 will is used as key.
+ * @return A [SparseIntArray], mapping 0 to the specified element.
  */
 @CheckResult
-inline fun sparseIntArrayOf(value: Int): SparseIntArray {
+inline fun sparseIntArrayOf(element: Int): SparseIntArray {
     val r = SparseIntArray()
-    r.put(0, value)
+    r.put(0, element)
     return r
 }
 
 /**
- * @param values The values for the [SparseIntArray]. The first value will be mapped to the key 0.
+ * @param elements The elements for the [SparseIntArray]. The first element will be mapped to the key 0.
  * The second to the key 1 and so on.
- * @return A [SparseIntArray], mapping the indexes of [values] to the values.
+ * @return A [SparseIntArray], mapping the indexes of [elements] to the elements.
  */
 @CheckResult
-inline fun <T> sparseIntArrayOf(vararg values: Int): SparseIntArray {
+inline fun <T> sparseIntArrayOf(vararg elements: Int): SparseIntArray {
     val r = SparseIntArray()
-    for (i in 0 .. values.lastIndex) {
-        r.put(i, values[i])
+    for (i in 0 .. elements.lastIndex) {
+        r.put(i, elements[i])
     }
     return r
 }
@@ -92,8 +92,8 @@ inline fun SparseIntArray.toHashMap(): HashMap<Int, Int> {
 }
 
 /**
- * @return A new [ArrayList] containing all values from the [SparseIntArray]. The original sorting is retained.
- * If the indexes contain gaps, all following entries are shifted forward by the size of the gaps.
+ * @return A new [ArrayList] containing all elements from the [SparseIntArray]. The original sorting is retained.
+ * If the indexes contain gaps, all following elements are shifted forward by the size of the gaps.
  */
 @CheckResult
 inline fun SparseIntArray.toArrayList(): ArrayList<Int> {

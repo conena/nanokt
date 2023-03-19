@@ -26,8 +26,8 @@ import androidx.annotation.CheckResult
 import androidx.annotation.RequiresApi
 
 /**
- * @param pair Pair with the initial value and key.
- * @return A [SparseLongArray], mapping the specified key to the specified value.
+ * @param pair Pair with the initial element and key.
+ * @return A [SparseLongArray], mapping the specified key to the specified element.
  */
 @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
 @CheckResult
@@ -38,7 +38,7 @@ inline fun <T> sparseLongArrayOf(pair: Pair<Int, Long>): SparseLongArray {
 }
 
 /**
- * @param pairs The values in [Pair.first] will be used as keys. The values in [Pair.second] as values.
+ * @param pairs The values in [Pair.first] will be used as keys. The values in [Pair.second] as elements.
  * If multiple pairs have the same key, the resulting [SparseLongArray] will contain the value from the last of those pairs.
  * @return A [SparseLongArray], mapping the specified keys to the specified values.
  */
@@ -53,28 +53,28 @@ inline fun <T> sparseLongArrayOf(vararg pairs: Pair<Int, Long>): SparseLongArray
 }
 
 /**
- * @param value The initial value for the [SparseLongArray]. 0 will is used as key.
- * @return A [SparseLongArray], mapping 0 to the specified value.
+ * @param element The initial element for the [SparseLongArray]. 0 will is used as key.
+ * @return A [SparseLongArray], mapping 0 to the specified element.
  */
 @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
 @CheckResult
-inline fun sparseLongArrayOf(value: Long): SparseLongArray {
+inline fun sparseLongArrayOf(element: Long): SparseLongArray {
     val r = SparseLongArray()
-    r.put(0, value)
+    r.put(0, element)
     return r
 }
 
 /**
- * @param values The values for the [SparseLongArray]. The first value will be mapped to the key 0.
+ * @param elements The elements for the [SparseLongArray]. The first element will be mapped to the key 0.
  * The second to the key 1 and so on.
- * @return A [SparseLongArray], mapping the indexes of [values] to the values.
+ * @return A [SparseLongArray], mapping the indexes of [elements] to the elements.
  */
 @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
 @CheckResult
-inline fun <T> sparseLongArrayOf(vararg values: Long): SparseLongArray {
+inline fun <T> sparseLongArrayOf(vararg elements: Long): SparseLongArray {
     val r = SparseLongArray()
-    for (i in 0 .. values.lastIndex) {
-        r.put(i, values[i])
+    for (i in 0 .. elements.lastIndex) {
+        r.put(i, elements[i])
     }
     return r
 }
@@ -100,8 +100,8 @@ inline fun SparseLongArray.toHashMap(): HashMap<Int, Long> {
 }
 
 /**
- * @return A new [ArrayList] containing all values from the [SparseLongArray]. The original sorting is retained.
- * If the indexes contain gaps, all following entries are shifted forward by the size of the gaps.
+ * @return A new [ArrayList] containing all elements from the [SparseLongArray]. The original sorting is retained.
+ * If the indexes contain gaps, all following elements are shifted forward by the size of the gaps.
  */
 @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
 @CheckResult

@@ -117,25 +117,25 @@ class CollectionExtensionsKtTest {
         // Remove
         val list = mutableListOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
         val expectedList = listOf(1, 2, 4, 5, 6, 7, 8, 9, 10)
-        assertTrue(list.addOrRemove(add = false, value = 3))
+        assertTrue(list.addOrRemove(add = false, element = 3))
         assertArrayEquals(expectedList.toTypedArray(), list.toTypedArray())
 
         // Add
         val list2 = mutableListOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
         val expectedList2 = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 18)
-        assertTrue(list2.addOrRemove(add = true, value = 18))
+        assertTrue(list2.addOrRemove(add = true, element = 18))
         assertArrayEquals(expectedList2.toTypedArray(), list2.toTypedArray())
 
         // Do not Remove
         val list3 = mutableListOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
         val expectedList3 = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
-        assertFalse(list3.addOrRemove(add = false, value = 11))
+        assertFalse(list3.addOrRemove(add = false, element = 11))
         assertArrayEquals(expectedList3.toTypedArray(), list3.toTypedArray())
 
         // Do not add
         val set = mutableSetOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
         val expectedSet = setOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
-        assertFalse(set.addOrRemove(add = true, value = 5))
+        assertFalse(set.addOrRemove(add = true, element = 5))
         assertArrayEquals(expectedSet.toTypedArray(), set.toTypedArray())
     }
 

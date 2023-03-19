@@ -77,13 +77,13 @@ inline fun <T> MutableCollection<T>.removeIfAndGet(predicate: (T) -> Boolean): L
 }
 
 /**
- * Remove or add a value based on the value of [add].
- * @param add `true` to add the value, `false` to remove the value.
- * @param value The value.
+ * Remove or add an element based on the value of [add].
+ * @param add `true` to add the element, `false` to remove the element.
+ * @param element The element.
  * @return `true` if the collection was changed, `false` if the collection is unchanged.
  */
-inline fun <T> MutableCollection<T>.addOrRemove(add: Boolean, value: T): Boolean {
-    return if (add) add(value) else remove(value)
+inline fun <T> MutableCollection<T>.addOrRemove(add: Boolean, element: T): Boolean {
+    return if (add) add(element) else remove(element)
 }
 
 /**
