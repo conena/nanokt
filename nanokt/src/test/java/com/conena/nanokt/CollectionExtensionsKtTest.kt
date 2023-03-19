@@ -17,8 +17,11 @@
 
 package com.conena.nanokt
 
-import org.junit.Assert.*
-
+import org.junit.Assert.assertArrayEquals
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNull
+import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class CollectionExtensionsKtTest {
@@ -133,6 +136,48 @@ class CollectionExtensionsKtTest {
         val set = mutableSetOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
         val expectedSet = setOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
         assertFalse(set.addOrRemove(add = true, value = 5))
+        assertArrayEquals(expectedSet.toTypedArray(), set.toTypedArray())
+    }
+
+    @Test
+    fun addNotNull() {
+        // Add null
+        val list = mutableListOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+        val expectedList = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+        assertFalse(list.addNotNull(element = null))
+        assertArrayEquals(expectedList.toTypedArray(), list.toTypedArray())
+
+        // Add not null
+        val list2 = mutableListOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+        val expectedList2 = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 18)
+        assertTrue(list2.addNotNull(element = 18))
+        assertArrayEquals(expectedList2.toTypedArray(), list2.toTypedArray())
+
+        // Do not add
+        val set = mutableSetOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+        val expectedSet = setOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+        assertFalse(set.addNotNull(element = 5))
+        assertArrayEquals(expectedSet.toTypedArray(), set.toTypedArray())
+    }
+
+    @Test
+    fun addAllNotNull() {
+        // Add null
+        val list = mutableListOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+        val expectedList = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+        assertFalse(list.addAllNotNull(elements = listOf(null, null)))
+        assertArrayEquals(expectedList.toTypedArray(), list.toTypedArray())
+
+        // Add not null
+        val list2 = mutableListOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+        val expectedList2 = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 18)
+        assertTrue(list2.addAllNotNull(elements = listOf(null, 18, null)))
+        assertArrayEquals(expectedList2.toTypedArray(), list2.toTypedArray())
+
+        // Do not add
+        val set = mutableSetOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+        val expectedSet = setOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+        assertFalse(set.addAllNotNull(elements  = listOf(5, null, 10, null)))
         assertArrayEquals(expectedSet.toTypedArray(), set.toTypedArray())
     }
 

@@ -85,3 +85,26 @@ inline fun <T> MutableCollection<T>.removeIfAndGet(predicate: (T) -> Boolean): L
 inline fun <T> MutableCollection<T>.addOrRemove(add: Boolean, value: T): Boolean {
     return if (add) add(value) else remove(value)
 }
+
+/**
+ * Adds the element to the collection if it is not null.
+ * @param element The element to add.
+ * @return `true` if the element has been added, `false` if the element was null or the
+ * collection does not support duplicates and the element is already contained in the collection.
+ */
+inline fun <T> MutableCollection<T>.addNotNull(element: T?): Boolean {
+    return add(element = element ?: return false)
+}
+
+/**
+ * Adds all elements to the collection that are not null.
+ * @param elements The elements to add.
+ * @return `true` if any of the specified elements was added to the collection,
+ * `false` if the collection was not modified.
+ */
+inline fun <T> MutableCollection<T>.addAllNotNull(elements: Iterable<T?>): Boolean {
+    var added = false
+    for (item in elements)
+        if (item != null && add(item)) added = true
+    return added
+}
