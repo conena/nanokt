@@ -20,8 +20,13 @@
 package com.conena.nanokt.android.app
 
 import android.app.Activity
+import android.content.ActivityNotFoundException
+import android.content.Context
+import android.content.Intent
 import android.os.Build
+import android.os.Bundle
 import android.view.View
+import com.conena.nanokt.android.content.startActivity
 
 /**
  * `true` if the activity is currently in multi-window mode.
@@ -35,3 +40,17 @@ inline val Activity.isMultiWindowModeEnabled: Boolean get() = Build.VERSION.SDK_
  */
 inline val Activity.contentView: View? get() = window?.decorView?.findViewById(android.R.id.content)
 
+/**
+ * Launch a new activity.
+ * @param T The Activity to start.
+ * @param options Additional options for how the Activity should be started.
+ * @param intentEditor Edit the created [Intent] before it is used to start the activity.
+ * @see Context.startActivity
+ */
+@Throws(ActivityNotFoundException::class)
+inline fun <reified T : Activity> Activity.startActivity(
+    options: Bundle? = null,
+    intentEditor: Intent.() -> Unit = {}
+) {
+    startActivity(Intent(this, T::class.java).also(intentEditor), options)
+}
