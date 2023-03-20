@@ -39,26 +39,6 @@ inline fun <reified T : Any> listOfInstanceOf(element: Any?): List<T> {
 }
 
 /**
- * Same as [MutableCollection.removeIf] but does also work below Java 8 and returns a list
- * containing the removed elements.
- * Remove entries from the collection that match the [predicate].
- * @param predicate Predicate that returns `true` for entries that should be removed.
- * @return A [List] containing the removed elements.
- */
-inline fun <T> MutableCollection<T>.removeIfAndGet(predicate: (T) -> Boolean): List<T> {
-    val removed = mutableListOf<T>()
-    val each = iterator()
-    while (each.hasNext()) {
-        val next = each.next()
-        if (predicate.invoke(next)) {
-            each.remove()
-            removed.add(next)
-        }
-    }
-    return removed
-}
-
-/**
  * Remove or add an element based on the value of [add].
  * @param add `true` to add the element, `false` to remove the element.
  * @param element The element.

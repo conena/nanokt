@@ -60,3 +60,21 @@ inline fun <T> Iterable<T>.indexOfLastOrNull(predicate: (T) -> Boolean): Int? {
     val result = indexOfLast(predicate)
     return if (result == -1) null else result
 }
+
+/**
+ * Same as [MutableIterable.removeAll] but does return a list containing the removed elements.
+ * @param predicate Predicate that returns `true` for entries that should be removed.
+ * @return A [List] containing the removed elements.
+ */
+inline fun <T> MutableIterable<T>.removeAllAndGet(predicate: (T) -> Boolean): List<T> {
+    val removed = mutableListOf<T>()
+    val each = iterator()
+    while (each.hasNext()) {
+        val next = each.next()
+        if (predicate.invoke(next)) {
+            each.remove()
+            removed.add(next)
+        }
+    }
+    return removed
+}
