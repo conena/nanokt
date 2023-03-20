@@ -39,24 +39,6 @@ inline fun <reified T : Any> listOfInstanceOf(element: Any?): List<T> {
 }
 
 /**
- * Same as [MutableCollection.removeIf] but does also work below Java 8.
- * Remove entries from the collection that match the [predicate].
- * @param predicate Predicate that returns `true` for entries that should be removed.
- * @return `true` if at least one entry was removed.
- */
-inline fun <T> MutableCollection<T>.removeIfCompat(predicate: (T) -> Boolean): Boolean {
-    var removed = false
-    val each = iterator()
-    while (each.hasNext()) {
-        if (predicate.invoke(each.next())) {
-            each.remove()
-            removed = true
-        }
-    }
-    return removed
-}
-
-/**
  * Same as [MutableCollection.removeIf] but does also work below Java 8 and returns a list
  * containing the removed elements.
  * Remove entries from the collection that match the [predicate].

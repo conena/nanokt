@@ -57,33 +57,6 @@ class CollectionExtensionsKtTest {
     }
 
     @Test
-    fun removeIfCompat() {
-        // Remove from list
-        val list = mutableListOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
-        val expectedList = listOf(1, 2, 3, 4, 5)
-        assertTrue(list.removeIfCompat { it > 5 })
-        assertArrayEquals(expectedList.toTypedArray(), list.toTypedArray())
-
-        // Remove from set
-        val set = mutableSetOf("ABC", "BCD", "CDE", "DEF", "EFG", "FGH")
-        val expectedSet = mutableSetOf("ABC", "BCD", "FGH")
-        assertTrue(set.removeIfCompat { it.contains('E') })
-        assertArrayEquals(expectedSet.toTypedArray(), set.toTypedArray())
-
-        // Do not remove from list
-        val list2 = mutableListOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
-        val expectedList2 = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
-        assertFalse(list2.removeIfCompat { it > 10 })
-        assertArrayEquals(expectedList2.toTypedArray(), list2.toTypedArray())
-
-        // Do not remove from set
-        val set2 = mutableSetOf("ABC", "BCD", "CDE", "DEF", "EFG", "FGH")
-        val expectedSet2 = mutableSetOf("ABC", "BCD", "CDE", "DEF", "EFG", "FGH")
-        assertFalse(set2.removeIfCompat { it.contains('I') })
-        assertArrayEquals(expectedSet2.toTypedArray(), set2.toTypedArray())
-    }
-
-    @Test
     fun removeIfAndGet() {
         // Remove from list
         val list = mutableListOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
