@@ -14,14 +14,16 @@
  * limitations under the License.
  *
  */
-
 @file:Suppress("NOTHING_TO_INLINE", "unused")
 
-package com.conena.nanokt
+package com.conena.nanokt.collections
 
 /**
- * Calls [MutableIterator.remove] if [condition] is `true`.
+ * Same as [Map.forEach] but does also work below Java 8.
+ * @param action The action to perform on each entry.
  */
-inline fun <T> MutableIterator<T>.removeIf(condition: Boolean) {
-    if (condition) remove()
+inline fun <K, V> Map<K, V>.forEachCompat(action: (key: K, value: V) -> Unit) {
+    for (mapEntry in this) {
+        action(mapEntry.key, mapEntry.value)
+    }
 }

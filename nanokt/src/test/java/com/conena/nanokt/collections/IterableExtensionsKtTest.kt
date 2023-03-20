@@ -15,7 +15,7 @@
  *
  */
 
-package com.conena.nanokt
+package com.conena.nanokt.collections
 
 import org.junit.Assert.assertArrayEquals
 import org.junit.Assert.assertEquals

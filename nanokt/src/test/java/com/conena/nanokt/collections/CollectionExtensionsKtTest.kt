@@ -15,7 +15,7 @@
  *
  */
 
-package com.conena.nanokt
+package com.conena.nanokt.collections
 
 import org.junit.Assert.assertArrayEquals
 import org.junit.Assert.assertEquals
@@ -44,11 +44,19 @@ class CollectionExtensionsKtTest {
 
     @Test
     fun listOfInstanceOf() {
-        val list1 = listOfInstanceOf<String>("String", 1L, 1, 1.0, 0 .. 1, "String2")
+        val list1 = listOfInstanceOf<String>(
+            "String",
+            1L,
+            1,
+            1.0,
+            0..1,
+            "String2"
+        )
         assertEquals(2, list1.size)
         val list2 = listOfInstanceOf<String>(1L, null, 2L, null, 3L)
         assertEquals(0, list2.size)
-        val list3 = listOfInstanceOf<Long>(1L, null, 2L, null, 3L, null, 4)
+        val list3 =
+            listOfInstanceOf<Long>(1L, null, 2L, null, 3L, null, 4)
         assertEquals(3, list3.size)
         val list4 = listOfInstanceOf<Long>(1L)
         assertEquals(1, list4.size)

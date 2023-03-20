@@ -17,7 +17,7 @@
 
 @file:Suppress("NOTHING_TO_INLINE", "unused")
 
-package com.conena.nanokt
+package com.conena.nanokt.collections
 
 /**
  * Same as [Iterable.indexOf] but returns `null` if the [element] does not exist in the collection.

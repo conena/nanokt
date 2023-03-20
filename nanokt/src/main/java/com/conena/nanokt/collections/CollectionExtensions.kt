@@ -17,7 +17,7 @@
 
 @file:Suppress("NOTHING_TO_INLINE", "unused")
 
-package com.conena.nanokt
+package com.conena.nanokt.collections
 
 /**
  * @return `null` if the collection is empty or `null`. Otherwise the collection is returned.

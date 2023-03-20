@@ -15,20 +15,13 @@
  *
  */
 
-package com.conena.nanokt
+@file:Suppress("NOTHING_TO_INLINE", "unused")
 
-import org.junit.Assert.assertEquals
-import org.junit.Test
+package com.conena.nanokt.collections
 
-class MapExtensionsKtTest {
-
-    @Test
-    fun forEachCompat() {
-        val map = mapOf(1 to "1", 2 to "2", 3 to "3")
-        val actionMap = mutableMapOf<Int, String>()
-        map.forEachCompat { key, value ->
-            actionMap[key] = value
-        }
-        assertEquals(map, actionMap)
-    }
+/**
+ * Calls [MutableIterator.remove] if [condition] is `true`.
+ */
+inline fun <T> MutableIterator<T>.removeIf(condition: Boolean) {
+    if (condition) remove()
 }

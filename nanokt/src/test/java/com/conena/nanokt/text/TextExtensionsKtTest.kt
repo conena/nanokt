@@ -15,10 +15,10 @@
  *
  */
 
-package com.conena.nanokt
+package com.conena.nanokt.text
 
-import org.junit.Assert.*
-
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNull
 import org.junit.Test
 
 class TextExtensionsKtTest {

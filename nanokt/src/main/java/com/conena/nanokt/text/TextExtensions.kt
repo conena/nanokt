@@ -17,7 +17,7 @@
 
 @file:Suppress("NOTHING_TO_INLINE", "unused")
 
-package com.conena.nanokt
+package com.conena.nanokt.text
 
 /**
  * @return `null` if the current CharSequence is empty. Otherwise the CharSequence is returned.

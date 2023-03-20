@@ -15,20 +15,20 @@
  *
  */
 
-package com.conena.nanokt
+package com.conena.nanokt.collections
 
-import org.junit.Assert.assertArrayEquals
+import org.junit.Assert.assertEquals
 import org.junit.Test
 
-class IteratorExtensionsKtTest {
+class MapExtensionsKtTest {
 
     @Test
-    fun removeIf() {
-        val list = mutableListOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
-        val expectedList = listOf(1, 3, 5, 7, 9)
-        val iterator = list.iterator()
-        while (iterator.hasNext()) iterator.removeIf(condition = iterator.next() % 2 == 0)
-        assertArrayEquals(expectedList.toTypedArray(), list.toTypedArray())
+    fun forEachCompat() {
+        val map = mapOf(1 to "1", 2 to "2", 3 to "3")
+        val actionMap = mutableMapOf<Int, String>()
+        map.forEachCompat { key, value ->
+            actionMap[key] = value
+        }
+        assertEquals(map, actionMap)
     }
-
 }

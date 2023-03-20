@@ -14,16 +14,21 @@
  * limitations under the License.
  *
  */
-@file:Suppress("NOTHING_TO_INLINE", "unused")
 
-package com.conena.nanokt
+package com.conena.nanokt.collections
 
-/**
- * Same as [Map.forEach] but does also work below Java 8.
- * @param action The action to perform on each entry.
- */
-inline fun <K, V> Map<K, V>.forEachCompat(action: (key: K, value: V) -> Unit) {
-    for (mapEntry in this) {
-        action(mapEntry.key, mapEntry.value)
+import org.junit.Assert.assertArrayEquals
+import org.junit.Test
+
+class IteratorExtensionsKtTest {
+
+    @Test
+    fun removeIf() {
+        val list = mutableListOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+        val expectedList = listOf(1, 3, 5, 7, 9)
+        val iterator = list.iterator()
+        while (iterator.hasNext()) iterator.removeIf(condition = iterator.next() % 2 == 0)
+        assertArrayEquals(expectedList.toTypedArray(), list.toTypedArray())
     }
+
 }
