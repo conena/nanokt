@@ -15,24 +15,19 @@
  *
  */
 
-package com.conena.nanokt.jvm
+@file:Suppress("NOTHING_TO_INLINE", "unused")
 
-import org.junit.Assert.*
+package com.conena.nanokt.jvm.lang
 
-import org.junit.Test
+import java.lang.ref.SoftReference
+import java.lang.ref.WeakReference
 
-class GlobalExtensionsKtTest {
+/**
+ * @return A [WeakReference] of the receiver.
+ */
+inline fun <T> T.toWeakReference(): WeakReference<T> = WeakReference(this)
 
-    @Test
-    fun toWeakReference() {
-        val pair = "One" to 2
-        assertSame(pair, pair.toWeakReference().get())
-    }
-
-    @Test
-    fun toSoftReference() {
-        val pair = "One" to 2
-        assertSame(pair, pair.toSoftReference().get())
-    }
-
-}
+/**
+ * @return A [SoftReference] of the receiver.
+ */
+inline fun <T> T.toSoftReference(): SoftReference<T> = SoftReference(this)

@@ -17,7 +17,7 @@
 
 @file:Suppress("NOTHING_TO_INLINE", "unused")
 
-package com.conena.nanokt.jvm
+package com.conena.nanokt.jvm.net
 
 import java.net.URLDecoder
 import java.net.URLEncoder

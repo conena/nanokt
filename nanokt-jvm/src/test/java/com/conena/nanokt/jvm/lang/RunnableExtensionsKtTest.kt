@@ -15,31 +15,24 @@
  *
  */
 
-package com.conena.nanokt.jvm
+package com.conena.nanokt.jvm.lang
 
-import org.junit.Assert.*
-
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
 import org.junit.Test
 
-class RegexExtensionsKtTest {
+class RunnableExtensionsKtTest {
 
     @Test
-    fun `toPatternOrNull - valid pattern`() {
-        val pattern = "^test\$"
-        assertEquals(pattern, pattern.toPatternOrNull()?.pattern())
+    operator fun invoke() {
+        var called = false
+        val runnable = Runnable { called = true }
+        assertFalse(called)
+        runnable()
+        assertTrue(called)
+        called = false
+        assertFalse(called)
+        runnable.invoke()
+        assertTrue(called)
     }
-
-    @Test
-    fun `toPatternOrNull - invalid pattern`() {
-        val pattern = "("
-        assertNull(pattern.toPatternOrNull())
-    }
-
-    @Test
-    fun `toPatternOrNull - Invalid flag`() {
-        assertThrows(IllegalArgumentException::class.java) {
-            "^test\$".toPatternOrNull(flags = -1)
-        }
-    }
-
 }

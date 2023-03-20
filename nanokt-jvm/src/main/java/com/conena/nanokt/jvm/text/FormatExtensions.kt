@@ -17,17 +17,23 @@
 
 @file:Suppress("NOTHING_TO_INLINE", "unused")
 
-package com.conena.nanokt.jvm
+package com.conena.nanokt.jvm.text
 
-import java.lang.ref.SoftReference
-import java.lang.ref.WeakReference
+import java.text.NumberFormat
 
-/**
- * @return A [WeakReference] of the receiver.
- */
-inline fun <T> T.toWeakReference(): WeakReference<T> = WeakReference(this)
 
 /**
- * @return A [SoftReference] of the receiver.
+ * @param format The format in which the long is to be formatted.
+ * @return The formatted long.
  */
-inline fun <T> T.toSoftReference(): SoftReference<T> = SoftReference(this)
+inline fun Long.format(format: NumberFormat = NumberFormat.getInstance()): String {
+    return format.format(this)
+}
+
+/**
+ * @param format The format in which the integer is to be formatted.
+ * @return The formatted integer.
+ */
+inline fun Int.format(format: NumberFormat = NumberFormat.getInstance()): String {
+    return format.format(this.toLong())
+}

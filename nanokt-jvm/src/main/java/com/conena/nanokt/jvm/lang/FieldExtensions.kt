@@ -16,7 +16,7 @@
  */
 @file:Suppress("NOTHING_TO_INLINE", "unused")
 
-package com.conena.nanokt.jvm
+package com.conena.nanokt.jvm.lang
 
 import java.lang.reflect.Field
 import java.lang.reflect.Modifier

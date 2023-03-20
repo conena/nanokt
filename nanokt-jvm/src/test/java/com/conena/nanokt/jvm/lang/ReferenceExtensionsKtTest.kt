@@ -15,24 +15,23 @@
  *
  */
 
-package com.conena.nanokt.jvm
+package com.conena.nanokt.jvm.lang
 
-import org.junit.Assert.*
-
+import org.junit.Assert.assertSame
 import org.junit.Test
 
-class RunnableExtensionsKtTest {
+class ReferenceExtensionsKtTest {
 
     @Test
-    operator fun invoke() {
-        var called = false
-        val runnable = Runnable { called = true }
-        assertFalse(called)
-        runnable()
-        assertTrue(called)
-        called = false
-        assertFalse(called)
-        runnable.invoke()
-        assertTrue(called)
+    fun toWeakReference() {
+        val pair = "One" to 2
+        assertSame(pair, pair.toWeakReference().get())
     }
+
+    @Test
+    fun toSoftReference() {
+        val pair = "One" to 2
+        assertSame(pair, pair.toSoftReference().get())
+    }
+
 }

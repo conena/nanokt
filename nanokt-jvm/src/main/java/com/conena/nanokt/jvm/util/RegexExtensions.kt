@@ -17,7 +17,7 @@
 
 @file:Suppress("NOTHING_TO_INLINE", "unused")
 
-package com.conena.nanokt.jvm
+package com.conena.nanokt.jvm.util
 
 import java.util.regex.Pattern
 import java.util.regex.PatternSyntaxException

@@ -15,13 +15,12 @@
  *
  */
 
-package com.conena.nanokt.jvm
+package com.conena.nanokt.jvm.net
 
 import org.junit.Assert.*
-
 import org.junit.Test
 
-class TextExtensionsKtTest {
+class URLExtensionsKtTest {
 
     @Suppress("SpellCheckingInspection")
     @Test

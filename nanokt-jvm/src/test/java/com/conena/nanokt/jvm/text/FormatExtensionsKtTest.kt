@@ -15,15 +15,14 @@
  *
  */
 
-package com.conena.nanokt.jvm
+package com.conena.nanokt.jvm.text
 
-import org.junit.Assert.*
-
+import org.junit.Assert.assertEquals
 import org.junit.Test
 import java.text.NumberFormat
-import java.util.*
+import java.util.Locale
 
-class NumberExtensionsKtTest {
+class FormatExtensionsKtTest {
 
     @Test
     fun formatInt() {

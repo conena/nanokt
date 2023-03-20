@@ -17,11 +17,12 @@
 
 @file:Suppress("NOTHING_TO_INLINE", "unused")
 
-package com.conena.nanokt.jvm
+package com.conena.nanokt.jvm.util
 
 import java.text.DateFormat
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Locale
 
 /**
  * Same as [DateFormat.format] but returns null if [date] is null.
