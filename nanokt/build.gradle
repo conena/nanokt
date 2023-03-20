@@ -14,5 +14,6 @@ java {
 }
 
 dependencies {
+    api 'com.conena.nanokt:nanokt-annotations:1.0.0'
     testImplementation 'junit:junit:4.13.2'
 }
