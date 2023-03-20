@@ -45,11 +45,11 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.IconCompat
 import androidx.core.net.toUri
-import com.conena.nanokt.android.ExperimentalNanoKtAndroidApi
 import com.conena.nanokt.android.net.getPlayStoreUriForApp
 import com.conena.nanokt.android.net.getPlayStoreUriForDeveloper
 import com.conena.nanokt.android.net.getTestTrackWebsiteUriForApp
 import com.conena.nanokt.android.util.isColorTypeCompat
+import com.conena.nanokt.annotations.ExperimentalNanoKtApi
 
 /**
  * The content of the clipboard's primary clip as text.
@@ -672,7 +672,7 @@ inline fun Context.getColorCompatOrNull(@ColorRes id: Int?): Int? {
  * @throws Resources.NotFoundException If [id] does not exist.
  * @experimental Consider using [Context.getColorStateListCompatOrNull].
  */
-@ExperimentalNanoKtAndroidApi
+@ExperimentalNanoKtApi
 @Throws(Resources.NotFoundException::class)
 inline fun Context.getColorStateListCompat(@ColorRes id: Int): ColorStateList? {
     return AppCompatResources.getColorStateList(this, id)
@@ -698,7 +698,7 @@ inline fun Context.getColorStateListCompatOrNull(@ColorRes id: Int?): ColorState
  * @throws Resources.NotFoundException If [id] does not exist.
  * @experimental Consider using [Context.getDrawableCompatOrNull].
  */
-@ExperimentalNanoKtAndroidApi
+@ExperimentalNanoKtApi
 @Throws(Resources.NotFoundException::class)
 inline fun Context.getDrawableCompat(@DrawableRes id: Int): Drawable? {
     return AppCompatResources.getDrawable(this, id)

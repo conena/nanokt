@@ -30,12 +30,12 @@ import android.util.SizeF
 import android.util.SparseArray
 import androidx.test.filters.SdkSuppress
 import androidx.test.services.events.TimeStamp
-import com.conena.nanokt.android.ExperimentalNanoKtAndroidApi
 import com.conena.nanokt.android.net.MimeType
 import com.conena.nanokt.android.util.sparseArrayOf
 import com.conena.nanokt.android.util.toHashMap
-import org.junit.Test
+import com.conena.nanokt.annotations.ExperimentalNanoKtApi
 import com.google.common.truth.Truth.assertThat
+import org.junit.Test
 import java.io.Serializable
 
 class BundleUtilsTest {
@@ -240,7 +240,7 @@ class BundleUtilsTest {
         assertThat(bundle.getOrNull<Uri>("Key3")).isNull()
     }
 
-    @OptIn(ExperimentalNanoKtAndroidApi::class)
+    @OptIn(ExperimentalNanoKtApi::class)
     @Test
     fun get() {
         var bundle: Bundle? = null

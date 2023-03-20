@@ -28,7 +28,7 @@ import android.content.res.Resources.Theme
 import android.graphics.drawable.Drawable
 import androidx.annotation.*
 import androidx.core.content.res.ResourcesCompat
-import com.conena.nanokt.android.ExperimentalNanoKtAndroidApi
+import com.conena.nanokt.annotations.ExperimentalNanoKtApi
 
 
 /**
@@ -67,7 +67,7 @@ inline fun Resources.getColorCompatOrNull(@ColorRes id: Int?, theme: Theme? = nu
  * @throws NotFoundException If [id] does not exist.
  * @experimental Consider using [Resources.getColorStateListCompatOrNull].
  */
-@ExperimentalNanoKtAndroidApi
+@ExperimentalNanoKtApi
 @Throws(NotFoundException::class)
 inline fun Resources.getColorStateListCompat(@ColorRes id: Int, theme: Theme? = null): ColorStateList? {
     return ResourcesCompat.getColorStateList(this, id, theme)
@@ -95,7 +95,7 @@ inline fun Resources.getColorStateListCompatOrNull(@ColorRes id: Int?, theme: Th
  * @throws NotFoundException If [id] does not exist.
  * @experimental Consider using [Resources.getDrawableCompatOrNull].
  */
-@ExperimentalNanoKtAndroidApi
+@ExperimentalNanoKtApi
 @Throws(NotFoundException::class)
 inline fun Resources.getDrawableCompat(@DrawableRes id: Int, theme: Theme? = null): Drawable? {
     return ResourcesCompat.getDrawable(this, id, theme)

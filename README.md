@@ -288,12 +288,12 @@ view.startDragAndDropCompat()
 
 // ... and many more
 ```
-# Experimental parts of the library (nanokt-android only)
+# Experimental parts of the library
 
 Some parts of the library (not seen in the examples) are marked as experimental because they are likely to change or be removed in the next releases. To be able to use them without warning, you can opt-in in the module level build.gradle.
 ```groovy
 kotlin.sourceSets.all {
-    languageSettings.optIn("com.conena.nanokt.android.ExperimentalNanoKtAndroidApi")
+    languageSettings.optIn("com.conena.nanokt.annotations.ExperimentalNanoKtApi")
 }
 ```
 

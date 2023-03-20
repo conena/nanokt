@@ -26,7 +26,7 @@ import android.os.Build
 import android.os.Bundle
 import androidx.annotation.CheckResult
 import androidx.annotation.RequiresApi
-import com.conena.nanokt.android.ExperimentalNanoKtAndroidApi
+import com.conena.nanokt.annotations.ExperimentalNanoKtApi
 
 
 /**
@@ -50,7 +50,7 @@ inline fun <reified T> Bundle.getOrNull(key: String?): T? {
  * @return The value associated with the given key otherwise the [defaultValue].
  */
 @CheckResult
-@ExperimentalNanoKtAndroidApi
+@ExperimentalNanoKtApi
 inline fun <reified T> Bundle?.get(key: String?, defaultValue: T): T {
     return (this?.get(key) as? T?) ?: defaultValue
 }
@@ -78,7 +78,7 @@ inline fun <reified T> BaseBundle.getOrNull(key: String?): T? {
  */
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
 @CheckResult
-@ExperimentalNanoKtAndroidApi
+@ExperimentalNanoKtApi
 inline fun <reified T> BaseBundle?.get(key: String?, defaultValue: T): T {
     return (this?.get(key) as? T?) ?: defaultValue
 }

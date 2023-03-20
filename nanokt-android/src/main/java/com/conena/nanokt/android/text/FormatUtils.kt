@@ -24,7 +24,7 @@ import android.os.Build
 import android.text.format.DateFormat
 import androidx.annotation.CheckResult
 import androidx.annotation.RequiresApi
-import com.conena.nanokt.android.ExperimentalNanoKtAndroidApi
+import com.conena.nanokt.annotations.ExperimentalNanoKtApi
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -36,7 +36,7 @@ import java.util.*
  * @see DateFormat.getBestDateTimePattern
  * @see Locale.getSuitableDateTimeFormat
  */
-@ExperimentalNanoKtAndroidApi
+@ExperimentalNanoKtApi
 @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
 @CheckResult
 inline fun getSuitableDateTimeFormat(
