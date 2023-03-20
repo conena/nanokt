@@ -50,13 +50,6 @@ import com.conena.nanokt.android.net.getPlayStoreUriForApp
 import com.conena.nanokt.android.net.getPlayStoreUriForDeveloper
 import com.conena.nanokt.android.net.getTestTrackWebsiteUriForApp
 import com.conena.nanokt.android.util.isColorTypeCompat
-import kotlin.Boolean
-import kotlin.Int
-import kotlin.String
-import kotlin.Suppress
-import kotlin.Throwable
-import kotlin.Throws
-import kotlin.Unit
 
 /**
  * The content of the clipboard's primary clip as text.
@@ -150,15 +143,17 @@ inline fun Context.openAppNotificationChannelSettings(channelId: String): Result
  * If invoked on a non-activity context [Intent.FLAG_ACTIVITY_NEW_TASK] is added automatically.
  * @param T The Activity to start.
  * @param options Additional options for how the Activity should be started.
+ * @param intentEditor Edit the created [Intent] before it is used to start the activity.
  * @see Context.startActivity
  */
 @Throws(ActivityNotFoundException::class)
-inline fun <reified T : Activity> Context.startActivity(options: Bundle? = null) {
-    if (this is Activity) {
-        startActivity(Intent(this, T::class.java), options)
-    } else {
-        startActivity(Intent(this, T::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK), options)
-    }
+inline fun <reified T : Activity> Context.startActivity(
+    options: Bundle? = null,
+    intentEditor: Intent.() -> Unit = {}
+) {
+    val intent = Intent(this, T::class.java)
+    if (this !is Activity) intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+    startActivity(intent.also(intentEditor), options)
 }
 
 /**
