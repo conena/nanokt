@@ -28,3 +28,35 @@ inline fun <T> Result<T>.printStackTraceOnFailure(): Result<T> {
     exceptionOrNull()?.printStackTrace()
     return this
 }
+
+/**
+ * @param transform The method to transform the encapsulated value.
+ * @return Transforms the encapsulated value of the current Result into a new Result
+ * using the [transform] function if it is [success][Result.isSuccess],
+ * otherwise it returns the unmodified exception encapsulated in a new Result object.
+ */
+inline fun <T, R> Result<T>.mapSuccess(transform: (T) -> R): Result<R> {
+    return Result.success(
+        value = transform(getOrNull() ?: return Result.failure(exception = exceptionOrNull()!!))
+    )
+}
+
+/**
+ * @param transform The method to transform the encapsulated [Throwable].
+ * @return Transforms the encapsulated throwable of the current Result into a new Result
+ * using the [transform] function if it is [failure][Result.isFailure],
+ * otherwise it returns the current Result unchanged.
+ */
+inline fun <T> Result<T>.mapFailure(transform: (Throwable) -> Throwable): Result<T> {
+    return Result.failure(transform(exceptionOrNull() ?: return this))
+}
+
+/**
+ * @return Same as [Result.getOrNull].
+ */
+inline operator fun <T> Result<T>.component1(): T? = getOrNull()
+
+/**
+ * @return Same as [Result.exceptionOrNull].
+ */
+inline operator fun <T> Result<T>.component2(): Throwable? = exceptionOrNull()
