@@ -18,29 +18,12 @@
 package com.conena.nanokt
 
 import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNotEquals
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertSame
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class ResultExtensionsKtTest {
-
-    @Test
-    fun mapSuccess() {
-        val successValue = "15"
-        val failureValue = UninitializedPropertyAccessException()
-        val success = Result.success(value = successValue)
-        val failure = Result.failure<String>(exception = failureValue)
-        val transformedSuccess = success.mapSuccess(String::toInt)
-        val transformedFailure = failure.mapSuccess(String::toInt)
-        assertTrue(transformedSuccess.isSuccess)
-        assertTrue(transformedFailure.isFailure)
-        assertEquals(successValue.toInt(), transformedSuccess.getOrNull())
-        assertSame(failureValue, transformedFailure.exceptionOrNull())
-        assertNotEquals(success, transformedSuccess)
-        assertEquals(failure, transformedFailure)
-    }
 
     @Test
     fun mapFailure() {
