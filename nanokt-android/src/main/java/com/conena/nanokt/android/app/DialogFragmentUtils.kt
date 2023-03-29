@@ -51,27 +51,9 @@ inline fun DialogFragment.showIfStateIsNotSaved(
     manager: FragmentManager,
     tag: String? = null
 ): Boolean {
-    if (isStateSaved) {
+    if (manager.isStateSaved) {
         return false
     }
     show(manager, tag)
-    return true
-}
-
-/**
- * Same as [DialogFragment.show] but checks if the state is saved before showing the dialog.
- * If [DialogFragment.isStateSaved] is `true`, the dialog is not shown and `false` is returned.
- * @param transaction The transaction to add the fragment to.
- * @param tag The optional tag for this fragment.
- * @return `true` if the dialog was shown. `false` otherwise.
- */
-inline fun DialogFragment.showIfStateIsNotSaved(
-    transaction: FragmentTransaction,
-    tag: String? = null
-): Boolean {
-    if (isStateSaved) {
-        return false
-    }
-    show(transaction, tag)
     return true
 }
