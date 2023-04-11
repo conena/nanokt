@@ -69,7 +69,10 @@ inline fun Resources.getColorCompatOrNull(@ColorRes id: Int?, theme: Theme? = nu
  */
 @ExperimentalNanoKtApi
 @Throws(NotFoundException::class)
-inline fun Resources.getColorStateListCompat(@ColorRes id: Int, theme: Theme? = null): ColorStateList? {
+inline fun Resources.getColorStateListCompat(
+    @ColorRes id: Int,
+    theme: Theme? = null
+): ColorStateList? {
     return ResourcesCompat.getColorStateList(this, id, theme)
 }
 
@@ -79,7 +82,10 @@ inline fun Resources.getColorStateListCompat(@ColorRes id: Int, theme: Theme? = 
  * @param theme The theme used to style the color attributes.
  * @return A [ColorStateList], or `null` if the resource could not be resolved or was invalid.
  */
-inline fun Resources.getColorStateListCompatOrNull(@ColorRes id: Int?, theme: Theme? = null): ColorStateList? {
+inline fun Resources.getColorStateListCompatOrNull(
+    @ColorRes id: Int?,
+    theme: Theme? = null
+): ColorStateList? {
     return try {
         ResourcesCompat.getColorStateList(this, id ?: return null, theme)
     } catch (_: NotFoundException) {
@@ -107,7 +113,10 @@ inline fun Resources.getDrawableCompat(@DrawableRes id: Int, theme: Theme? = nul
  * @param theme The theme used to style the drawable attributes.
  * @return A [Drawable], or `null` if the resource could not be resolved or was invalid.
  */
-inline fun Resources.getDrawableCompatOrNull(@DrawableRes id: Int?, theme: Theme? = null): Drawable? {
+inline fun Resources.getDrawableCompatOrNull(
+    @DrawableRes id: Int?,
+    theme: Theme? = null
+): Drawable? {
     return try {
         ResourcesCompat.getDrawable(this, id ?: return null, theme)
     } catch (_: NotFoundException) {

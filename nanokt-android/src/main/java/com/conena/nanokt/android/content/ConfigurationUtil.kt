@@ -126,6 +126,5 @@ inline val Configuration.isRtlLayout get() = Build.VERSION.SDK_INT >= Build.VERS
 /**
  * `true` if the system is in night mode.
  */
-inline val Configuration.isNightModeActiveCompat: Boolean get() {
-    return uiMode.and(Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
-}
+inline val Configuration.isNightModeActiveCompat: Boolean
+    get() = uiMode.and(Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES

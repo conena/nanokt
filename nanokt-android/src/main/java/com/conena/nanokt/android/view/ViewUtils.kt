@@ -91,7 +91,9 @@ inline fun <T : View> T.setVerticalPadding(@Px value: Int): T {
  */
 inline var View.focus: Boolean
     get() = hasFocus()
-    set(value) { if (value) requestFocus() else clearFocus() }
+    set(value) {
+        if (value) requestFocus() else clearFocus()
+    }
 
 /**
  * `true` if the current view is the currently active view for the input method.

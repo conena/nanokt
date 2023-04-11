@@ -43,7 +43,9 @@ inline var TextView.textStyle: Int
  */
 inline var TextView.textString: String
     get() = text.toString()
-    set(value) { text = value }
+    set(value) {
+        text = value
+    }
 
 /**
  * Clear the text in the TextView.

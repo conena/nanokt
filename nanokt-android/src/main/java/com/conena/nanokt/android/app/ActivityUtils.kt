@@ -17,6 +17,7 @@
 
 @file:JvmName(name = "ActivityUtils")
 @file:Suppress("NOTHING_TO_INLINE", "unused")
+
 package com.conena.nanokt.android.app
 
 import android.app.Activity

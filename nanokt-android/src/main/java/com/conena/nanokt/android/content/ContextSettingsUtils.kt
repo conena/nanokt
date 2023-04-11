@@ -34,33 +34,35 @@ import androidx.annotation.RequiresApi
  * If this is still desired, an ApplicationContext must have been used to obtain the instance.
  */
 @JvmInline
-value class NanoKtSettingsProvider @PublishedApi internal constructor (
+value class NanoKtSettingsProvider @PublishedApi internal constructor(
     val context: Context
 ) {
 
     /**
      * `true` if USB-Debugging is enabled on the device.
      */
-    inline val adbEnabled: Boolean get() {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            getGlobalIntOrNull(Settings.Global.ADB_ENABLED) == 1
-        } else {
-            @Suppress("DEPRECATION")
-            getSystemIntOrNull(Settings.System.ADB_ENABLED) == 1
+    inline val adbEnabled: Boolean
+        get() {
+            return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                getGlobalIntOrNull(Settings.Global.ADB_ENABLED) == 1
+            } else {
+                @Suppress("DEPRECATION")
+                getSystemIntOrNull(Settings.System.ADB_ENABLED) == 1
+            }
         }
-    }
 
     /**
      * `true` if airplane mode is enabled on the device.
      */
-    inline val airplaneModeEnabled: Boolean get() {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            getGlobalIntOrNull(Settings.Global.AIRPLANE_MODE_ON) == 1
-        } else {
-            @Suppress("DEPRECATION")
-            getSystemIntOrNull(Settings.System.AIRPLANE_MODE_ON) == 1
+    inline val airplaneModeEnabled: Boolean
+        get() {
+            return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                getGlobalIntOrNull(Settings.Global.AIRPLANE_MODE_ON) == 1
+            } else {
+                @Suppress("DEPRECATION")
+                getSystemIntOrNull(Settings.System.AIRPLANE_MODE_ON) == 1
+            }
         }
-    }
 
     /**
      * `true` if "Always finish activities" is enabled on the device.
@@ -69,73 +71,80 @@ value class NanoKtSettingsProvider @PublishedApi internal constructor (
      * It is a common source of weird behavior when users enable this option
      * without knowing what it actually does.
      */
-    inline val alwaysFinishActivities: Boolean get() {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            getGlobalIntOrNull(Settings.Global.ALWAYS_FINISH_ACTIVITIES) == 1
-        } else {
-            @Suppress("DEPRECATION")
-            getSystemIntOrNull(Settings.System.ALWAYS_FINISH_ACTIVITIES) == 1
+    inline val alwaysFinishActivities: Boolean
+        get() {
+            return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                getGlobalIntOrNull(Settings.Global.ALWAYS_FINISH_ACTIVITIES) == 1
+            } else {
+                @Suppress("DEPRECATION")
+                getSystemIntOrNull(Settings.System.ALWAYS_FINISH_ACTIVITIES) == 1
+            }
         }
-    }
 
     /**
      * `true` if bluetooth is enabled on the device.
      */
-    inline val bluetoothEnabled: Boolean get() {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            getGlobalIntOrNull(Settings.Global.BLUETOOTH_ON) == 1
-        } else {
-            @Suppress("DEPRECATION")
-            getSystemIntOrNull(Settings.System.BLUETOOTH_ON) == 1
+    inline val bluetoothEnabled: Boolean
+        get() {
+            return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                getGlobalIntOrNull(Settings.Global.BLUETOOTH_ON) == 1
+            } else {
+                @Suppress("DEPRECATION")
+                getSystemIntOrNull(Settings.System.BLUETOOTH_ON) == 1
+            }
         }
-    }
 
     /**
      * `true` if data roaming is enabled on the device.
      */
-    inline val dataRoamingEnabled: Boolean get() {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            getGlobalIntOrNull(Settings.Global.DATA_ROAMING) == 1
-        } else {
-            @Suppress("DEPRECATION")
-            getSystemIntOrNull(Settings.System.DATA_ROAMING) == 1
+    inline val dataRoamingEnabled: Boolean
+        get() {
+            return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                getGlobalIntOrNull(Settings.Global.DATA_ROAMING) == 1
+            } else {
+                @Suppress("DEPRECATION")
+                getSystemIntOrNull(Settings.System.DATA_ROAMING) == 1
+            }
         }
-    }
 
     /**
      * `true` if the developer options are enabled on the device.
      */
-    inline val developerOptionsEnabled: Boolean @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
-    get() = getGlobalIntOrNull(Settings.Global.DEVELOPMENT_SETTINGS_ENABLED) == 1
+    inline val developerOptionsEnabled: Boolean
+        @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
+        get() = getGlobalIntOrNull(Settings.Global.DEVELOPMENT_SETTINGS_ENABLED) == 1
 
     /**
      * The name of the device
      */
-    inline val deviceName: String? @RequiresApi(Build.VERSION_CODES.N_MR1)
-    get() = getGlobalStringOrNull(Settings.Global.DEVICE_NAME)
+    inline val deviceName: String?
+        @RequiresApi(Build.VERSION_CODES.N_MR1)
+        get() = getGlobalStringOrNull(Settings.Global.DEVICE_NAME)
 
     /**
      * `true` if mobile data is enabled on the device.
      */
-    inline val mobileDataEnabled: Boolean get() {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            getGlobalIntOrNull("mobile_data") == 1
-        } else {
-            getSystemIntOrNull("mobile_data") == 1
+    inline val mobileDataEnabled: Boolean
+        get() {
+            return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                getGlobalIntOrNull("mobile_data") == 1
+            } else {
+                getSystemIntOrNull("mobile_data") == 1
+            }
         }
-    }
 
     /**
      * `true` if wifi is enabled on the device.
      */
-    inline val wifiEnabled: Boolean get() {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            getGlobalIntOrNull(Settings.Global.WIFI_ON) == 1
-        } else {
-            @Suppress("DEPRECATION")
-            getSystemIntOrNull(Settings.System.WIFI_ON) == 1
+    inline val wifiEnabled: Boolean
+        get() {
+            return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                getGlobalIntOrNull(Settings.Global.WIFI_ON) == 1
+            } else {
+                @Suppress("DEPRECATION")
+                getSystemIntOrNull(Settings.System.WIFI_ON) == 1
+            }
         }
-    }
 
     /**
      * `true` if accessibility is enabled.

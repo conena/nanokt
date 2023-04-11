@@ -67,7 +67,7 @@ inline fun sparseBooleanArrayOf(element: Boolean): SparseBooleanArray {
 @CheckResult
 inline fun <T> sparseBooleanArrayOf(vararg elements: Boolean): SparseBooleanArray {
     val r = SparseBooleanArray()
-    for (i in 0 .. elements.lastIndex) {
+    for (i in 0..elements.lastIndex) {
         r.put(i, elements[i])
     }
     return r

@@ -66,7 +66,10 @@ inline fun String.encodeBase64(
  */
 @CheckResult
 @Throws(IllegalArgumentException::class)
-inline fun String.decodeBase64(charset: Charset = Charsets.UTF_8, urlSafe: Boolean = false): String {
+inline fun String.decodeBase64(
+    charset: Charset = Charsets.UTF_8,
+    urlSafe: Boolean = false
+): String {
     return String(
         bytes = Base64.decode(this, if (urlSafe) Base64.URL_SAFE else Base64.DEFAULT),
         charset = charset

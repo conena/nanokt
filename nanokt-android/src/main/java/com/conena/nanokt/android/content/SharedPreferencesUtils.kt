@@ -167,7 +167,10 @@ inline fun SharedPreferences.getStringOrNull(key: String) = all[key] as? String
  * Use [getMutableStringSet] to get a copy of the internal set.
  */
 @ExperimentalNanoKtApi
-inline fun SharedPreferences.getImmutableStringSet(key: String, defValue: Set<String>): Set<String> {
+inline fun SharedPreferences.getImmutableStringSet(
+    key: String,
+    defValue: Set<String>
+): Set<String> {
     @Suppress("UNCHECKED_CAST")
     return all[key] as? Set<String> ?: defValue
 }

@@ -58,18 +58,19 @@ import com.conena.nanokt.annotations.ExperimentalNanoKtApi
  * @see ClipboardManager.getPrimaryClipDataItem
  */
 inline var Context.clipboardTextContent: String?
-get() = clipboardManager.getPrimaryClipDataItem()?.coerceToText(this)?.toString()
-set(value) = clipboardManager.setPrimaryClip(text = value ?: "")
+    get() = clipboardManager.getPrimaryClipDataItem()?.coerceToText(this)?.toString()
+    set(value) = clipboardManager.setPrimaryClip(text = value ?: "")
 
 /**
  * `true` if the app is currently at the top of the screen that the user is interacting with.
  * @see RunningAppProcessInfo.IMPORTANCE_FOREGROUND
  */
-inline val Context.isAppInForeground: Boolean get() {
-    return activityManager.runningAppProcesses.orEmpty().any { process ->
-        process.importance == RunningAppProcessInfo.IMPORTANCE_FOREGROUND && process.uid == Process.myUid()
+inline val Context.isAppInForeground: Boolean
+    get() {
+        return activityManager.runningAppProcesses.orEmpty().any { process ->
+            process.importance == RunningAppProcessInfo.IMPORTANCE_FOREGROUND && process.uid == Process.myUid()
+        }
     }
-}
 
 /**
  * The current configuration for the application's package resources instance.
@@ -84,9 +85,8 @@ inline val Context.configuration: Configuration get() = resources.configuration
  * AndroidX preferences library.
  * @see Context.getSharedPreferences
  */
-inline val Context.defaultSharedPreferences: SharedPreferences get() {
-    return getSharedPreferences("${packageName}_preferences", Context.MODE_PRIVATE)
-}
+inline val Context.defaultSharedPreferences: SharedPreferences
+    get() = getSharedPreferences("${packageName}_preferences", Context.MODE_PRIVATE)
 
 /**
  * Opens various settings screens for the current application.
