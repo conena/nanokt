@@ -26,7 +26,6 @@ import android.view.DragEvent
 import android.view.View
 import android.view.View.DragShadowBuilder
 import android.view.inputmethod.InputMethodManager
-import android.widget.CompoundButton
 import androidx.annotation.Px
 import com.conena.nanokt.android.content.inputMethodManager
 
@@ -178,34 +177,6 @@ inline fun <T : View.OnLongClickListener> T.addAsLongClickListenerFor(view: View
 inline fun <T : View.OnLongClickListener> T.addAsLongClickListenerFor(vararg views: View): T {
     for (v in views) {
         v.setOnLongClickListener(this)
-    }
-    return this
-}
-
-/**
- * Sets the current instance as [View.OnLongClickListener] for the [view].
- * @param T The Type of the [CompoundButton.OnCheckedChangeListener].
- * @param view The view to add the listener to.
- * @return The receiver object, for chaining multiple calls.
- */
-inline fun <T : CompoundButton.OnCheckedChangeListener> T.addAsCheckedChangeListenerFor(
-    view: CompoundButton
-): T {
-    view.setOnCheckedChangeListener(this)
-    return this
-}
-
-/**
- * Sets the current instance as [CompoundButton.OnCheckedChangeListener] for all of the given [views].
- * @param T The Type of the [CompoundButton.OnCheckedChangeListener].
- * @param views The views to add the listener to.
- * @return The receiver object, for chaining multiple calls.
- */
-inline fun <T : CompoundButton.OnCheckedChangeListener> T.addAsCheckedChangeListenerFor(
-    vararg views: CompoundButton
-): T {
-    for (v in views) {
-        v.setOnCheckedChangeListener(this)
     }
     return this
 }
