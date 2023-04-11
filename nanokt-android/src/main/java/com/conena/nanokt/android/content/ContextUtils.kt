@@ -27,6 +27,7 @@ import android.app.Application
 import android.app.PendingIntent
 import android.app.Service
 import android.content.*
+import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.content.res.ColorStateList
 import android.content.res.Configuration
@@ -50,6 +51,26 @@ import com.conena.nanokt.android.net.getPlayStoreUriForDeveloper
 import com.conena.nanokt.android.net.getTestTrackWebsiteUriForApp
 import com.conena.nanokt.android.util.isColorTypeCompat
 import com.conena.nanokt.annotations.ExperimentalNanoKtApi
+
+/**
+ * The application label of this context's package.
+ */
+inline val Context.applicationLabel: String get() = applicationInfo.loadLabel(packageManager).toString()
+
+/**
+ * The [PackageInfo] of this context's package.
+ * @throws IllegalStateException In case the [PackageInfo] is not found.
+ * This should never happen, but for the sake of completeness it is documented.
+ */
+@get:Throws(IllegalStateException::class)
+inline val Context.packageInfo: PackageInfo
+    get() {
+        return try {
+            packageManager.getPackageInfo(packageName, 0)
+        } catch (e: PackageManager.NameNotFoundException) {
+            throw IllegalStateException("Failed to find own package '$packageName'.", e)
+        }
+    }
 
 /**
  * The content of the clipboard's primary clip as text.
