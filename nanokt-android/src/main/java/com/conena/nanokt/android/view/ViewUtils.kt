@@ -27,6 +27,8 @@ import android.view.View
 import android.view.View.DragShadowBuilder
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.Px
+import androidx.annotation.RequiresApi
+import androidx.annotation.StringRes
 import com.conena.nanokt.android.content.inputMethodManager
 
 /**
@@ -133,6 +135,23 @@ inline fun View.startDragAndDropCompat(
         @Suppress("DEPRECATION")
         startDrag(data, shadowBuilder, myLocalState, flags)
     }
+}
+
+/**
+ * Same as [View.setContentDescription] but accepts a string resource.
+ * @param resId The content description for the view.
+ */
+inline fun View.setContentDescription(@StringRes resId: Int) {
+    contentDescription = context.getString(resId)
+}
+
+/**
+ * Same as [View.setTooltipText] but accepts a string resource.
+ * @param resId The tooltip text for the view.
+ */
+@RequiresApi(Build.VERSION_CODES.O)
+inline fun View.setTooltipText(@StringRes resId: Int) {
+    tooltipText = context.getString(resId)
 }
 
 /**
