@@ -1,8 +1,6 @@
 # NanoKt
 
-Introducing NanoKt – an elegant and lightweight solution for streamlined Android development. Tired of copying and pasting the same boilerplate code into every project? NanoKt offers an extensive collection of up-to-date extension functions that will streamline your development process, making your code more elegant, efficient and saving you time in the process. Say goodbye to repetitive tasks and hello to faster, more efficient development with NanoKt.
-
-With NanoKt, you have access to a wide range of extension functions that cover many areas of the Android framework and the Java and Kotlin standard libraries. The best part is that almost all methods and properties are inlined at compile time, ensuring that there is no performance penalty compared to not using the extension functions. You will be amazed at how much time and effort you can save using this library.
+Introducing NanoKt – an elegant and lightweight solution for streamlined Android development that offers an extensive collection of up-to-date extension functions covering many areas of the Android framework and the Java and Kotlin standard libraries. NanoKt will make your code more elegant, efficient and save you time in the process. Moreover, this is achieved without compromising performance, as almost all provided functions and properties are inlined at compile time.
 
 The library is also well-documented with KDoc and includes meaningful annotations in appropriate spots, making it very user-friendly and easy to get started with.
 
