@@ -29,7 +29,7 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    kotlin.sourceSets.all {
+    kotlin.sourceSets.configureEach {
         languageSettings.optIn("kotlin.contracts.ExperimentalContracts")
     }
 }
