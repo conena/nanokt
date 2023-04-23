@@ -1,6 +1,6 @@
 plugins {
-    id 'com.android.application'
-    id 'org.jetbrains.kotlin.android'
+    alias libs.plugins.androidApplication
+    alias libs.plugins.kotlinAndroid
 }
 
 android {
@@ -35,8 +35,7 @@ dependencies {
     implementation project(':nanokt-jvm')
     implementation project(':nanokt-android')
     implementation project(':nanokt-android-threads')
-    implementation 'androidx.core:core-ktx:1.10.0'
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.8.0'
-    testImplementation 'junit:junit:4.13.2'
+    implementation libs.androidx.coreKtx
+    implementation libs.androidx.appcompat
+    implementation libs.material
 }

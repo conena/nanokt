@@ -2,9 +2,8 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompilationTask
 
 plugins {
-    id 'java-library'
-    id 'org.jetbrains.kotlin.jvm'
-    id 'com.vanniktech.maven.publish'
+    alias libs.plugins.kotlinJvm
+    alias libs.plugins.mavenPublish
 }
 
 kotlin.sourceSets.configureEach {
@@ -25,6 +24,6 @@ java {
 }
 
 dependencies {
-    api 'com.conena.nanokt:nanokt-annotations:1.0.0'
-    testImplementation 'junit:junit:4.13.2'
+    api libs.nanokt.annotations
+    testImplementation libs.junit
 }
