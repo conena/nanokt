@@ -89,7 +89,7 @@ inline fun <T> emptySparseArray() = SparseArray<T>()
 @CheckResult
 inline fun <T> SparseArray<T>.toHashMap(): HashMap<Int, T> {
     val map = HashMap<Int, T>(size())
-    for (i in 0 until size()) {
+    for (i in 0 ..< size()) {
         map[i] = valueAt(i)
     }
     return map
@@ -102,7 +102,7 @@ inline fun <T> SparseArray<T>.toHashMap(): HashMap<Int, T> {
 @CheckResult
 inline fun <T> SparseArray<T>.toArrayList(): ArrayList<T> {
     val list = ArrayList<T>(size())
-    for (i in 0 until size()) {
+    for (i in 0 ..< size()) {
         list.add(valueAt(i))
     }
     return list

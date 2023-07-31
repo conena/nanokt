@@ -49,7 +49,7 @@ inline fun <reified T : Fragment> FragmentManager.findFragment(tag: String) = fi
  */
 @CheckResult
 inline fun FragmentManager.backStackContains(name: String): Boolean {
-    for (i in 0 until backStackEntryCount) {
+    for (i in 0 ..< backStackEntryCount) {
         if (getBackStackEntryAt(i).name == name) {
             return true
         }

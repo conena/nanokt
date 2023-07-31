@@ -89,7 +89,7 @@ inline fun <T> emptyLongSparseArray() = LongSparseArray<T>()
 @CheckResult
 inline fun <T> LongSparseArray<T>.toHashMap(): HashMap<Long, T> {
     val map = HashMap<Long, T>(size())
-    for (i in 0 until size()) {
+    for (i in 0 ..< size()) {
         map[i.toLong()] = valueAt(i)
     }
     return map
@@ -102,7 +102,7 @@ inline fun <T> LongSparseArray<T>.toHashMap(): HashMap<Long, T> {
 @CheckResult
 inline fun <T> LongSparseArray<T>.toArrayList(): ArrayList<T> {
     val list = ArrayList<T>(size())
-    for (i in 0 until size()) {
+    for (i in 0 ..< size()) {
         list.add(valueAt(i))
     }
     return list

@@ -85,7 +85,7 @@ inline fun <T> emptySparseBooleanArray() = SparseBooleanArray()
 @CheckResult
 inline fun SparseBooleanArray.toHashMap(): HashMap<Int, Boolean> {
     val map = HashMap<Int, Boolean>(size())
-    for (i in 0 until size()) {
+    for (i in 0 ..< size()) {
         map[i] = valueAt(i)
     }
     return map
@@ -98,7 +98,7 @@ inline fun SparseBooleanArray.toHashMap(): HashMap<Int, Boolean> {
 @CheckResult
 inline fun SparseBooleanArray.toArrayList(): ArrayList<Boolean> {
     val list = ArrayList<Boolean>(size())
-    for (i in 0 until size()) {
+    for (i in 0 ..< size()) {
         list.add(valueAt(i))
     }
     return list
