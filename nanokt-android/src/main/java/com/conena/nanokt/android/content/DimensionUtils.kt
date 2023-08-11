@@ -29,21 +29,27 @@ import kotlin.math.roundToInt
 /**
  * The current value interpreted as density-independent pixels and converted to pixels.
  */
+@get:CheckResult
+@get:Px
 inline val Int.dpInPx get() = this.times(Resources.getSystem().displayMetrics.density).roundToInt()
 
 /**
  * The current value interpreted as pixels and converted to density-independent pixels.
  */
+@get:CheckResult
 inline val Int.pxInDp get() = this.div(Resources.getSystem().displayMetrics.density).roundToInt()
 
 /**
  * The current value interpreted as scale-independent pixels and converted to pixels.
  */
+@get:CheckResult
+@get:Px
 inline val Int.spInPx get() = this.times(Resources.getSystem().displayMetrics.scaledDensity).roundToInt()
 
 /**
  * The current value interpreted as pixels and converted to scale-independent pixels.
  */
+@get:CheckResult
 inline val Int.pxInSp get() = this.div(Resources.getSystem().displayMetrics.scaledDensity).roundToInt()
 
 /**
@@ -91,21 +97,27 @@ inline fun Int.toPx(unit: Int): Int {
 /**
  * The current value interpreted as density-independent pixels and converted to pixels.
  */
+@get:CheckResult
+@get:Px
 inline val Float.dpInPx get() = this.times(Resources.getSystem().displayMetrics.density).roundToInt()
 
 /**
  * The current value interpreted as pixels and converted to density-independent pixels.
  */
+@get:CheckResult
 inline val Float.pxInDp get() = this.div(Resources.getSystem().displayMetrics.density).roundToInt()
 
 /**
  * The current value interpreted as scale-independent pixels and converted to pixels.
  */
+@get:CheckResult
+@get:Px
 inline val Float.spInPx get() = this.times(Resources.getSystem().displayMetrics.scaledDensity).roundToInt()
 
 /**
  * The current value interpreted as pixels and converted to scale-independent pixels.
  */
+@get:CheckResult
 inline val Float.pxInSp get() = this.div(Resources.getSystem().displayMetrics.scaledDensity).roundToInt()
 
 /**

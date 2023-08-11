@@ -50,6 +50,7 @@ inline fun Resources.getColorCompat(@ColorRes id: Int, theme: Theme? = null): In
  * @param theme The theme used to style the color attributes.
  * @return A single color value in the form 0xAARRGGBB.
  */
+@CheckResult
 @ColorInt
 inline fun Resources.getColorCompatOrNull(@ColorRes id: Int?, theme: Theme? = null): Int? {
     return try {
@@ -82,6 +83,7 @@ inline fun Resources.getColorStateListCompat(
  * @param theme The theme used to style the color attributes.
  * @return A [ColorStateList], or `null` if the resource could not be resolved or was invalid.
  */
+@CheckResult
 inline fun Resources.getColorStateListCompatOrNull(
     @ColorRes id: Int?,
     theme: Theme? = null
@@ -113,6 +115,7 @@ inline fun Resources.getDrawableCompat(@DrawableRes id: Int, theme: Theme? = nul
  * @param theme The theme used to style the drawable attributes.
  * @return A [Drawable], or `null` if the resource could not be resolved or was invalid.
  */
+@CheckResult
 inline fun Resources.getDrawableCompatOrNull(
     @DrawableRes id: Int?,
     theme: Theme? = null
@@ -130,6 +133,7 @@ inline fun Resources.getDrawableCompatOrNull(
  * @param packageName The package of the resource.
  * @return The associated resource identifier. Returns `null` if no matching resource was found.
  */
+@CheckResult
 @SuppressLint("DiscouragedApi")
 @DrawableRes
 @Discouraged(message = "See Resources.getIdentifier for details.")
@@ -144,6 +148,7 @@ inline fun Resources.getDrawableIdByNameOrNull(name: String, packageName: String
  * @param packageName The package of the resource.
  * @return The associated resource identifier. Returns `null` if no matching resource was found.
  */
+@CheckResult
 @SuppressLint("DiscouragedApi")
 @StringRes
 @Discouraged(message = "See Resources.getIdentifier for details.")
@@ -158,6 +163,7 @@ inline fun Resources.getStringIdByNameOrNull(name: String, packageName: String):
  * @param packageName The package of the resource.
  * @return The associated resource identifier. Returns `null` if no matching resource was found.
  */
+@CheckResult
 @SuppressLint("DiscouragedApi")
 @LayoutRes
 @Discouraged(message = "See Resources.getIdentifier for details.")

@@ -27,6 +27,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.net.Uri
 import android.os.Bundle
+import androidx.annotation.CheckResult
 import com.conena.nanokt.android.net.MimeType
 
 /**
@@ -35,6 +36,7 @@ import com.conena.nanokt.android.net.MimeType
  * [Intent.ACTION_SEND] and [Intent.ACTION_SEND_MULTIPLE].
  * @return The new [Intent.ACTION_CHOOSER] intent.
  */
+@CheckResult
 inline fun Intent.chooser(title: CharSequence? = null): Intent = Intent.createChooser(this, title)
 
 /**
@@ -42,6 +44,7 @@ inline fun Intent.chooser(title: CharSequence? = null): Intent = Intent.createCh
  * @param actions The intent actions to match against.
  * @return the created intent filter.
  */
+@CheckResult
 inline fun createIntentFilter(vararg actions: String): IntentFilter {
     val filter = IntentFilter()
     for (action in actions) {
@@ -85,6 +88,7 @@ inline fun Intent.setPackageUri(packageName: String): Intent {
  * @param attachment A content URI holding a stream of data to send.
  * @return The created intent.
  */
+@CheckResult
 inline fun createSendIntent(
     subject: String? = null,
     text: String? = null,
@@ -105,6 +109,7 @@ inline fun createSendIntent(
  * @param attachment A content URI holding a stream of data to send.
  * @return The created intent.
  */
+@CheckResult
 inline fun createMailSendIntent(
     subject: String? = null,
     body: String? = null,

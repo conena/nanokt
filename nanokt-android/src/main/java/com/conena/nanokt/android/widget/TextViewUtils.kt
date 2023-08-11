@@ -23,6 +23,7 @@ package com.conena.nanokt.android.widget
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.widget.TextView
+import androidx.annotation.CheckResult
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.conena.nanokt.android.content.getDrawableCompatOrNull
@@ -34,6 +35,7 @@ import com.conena.nanokt.android.content.getDrawableCompatOrNull
  * @see Typeface.ITALIC
  * @see Typeface.BOLD_ITALIC
  */
+@get:CheckResult
 inline var TextView.textStyle: Int
     get() = typeface.style
     set(value) = setTypeface(typeface, value)
@@ -41,6 +43,7 @@ inline var TextView.textStyle: Int
 /**
  * Same as [TextView.getText] but returning [String] instead instead of [CharSequence].
  */
+@get:CheckResult
 inline var TextView.textString: String
     get() = text.toString()
     set(value) {

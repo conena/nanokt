@@ -23,6 +23,7 @@ package com.conena.nanokt.android.content
 import android.content.SharedPreferences
 import android.content.SharedPreferences.Editor
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener
+import androidx.annotation.CheckResult
 import com.conena.nanokt.annotations.ExperimentalNanoKtApi
 
 /**
@@ -126,36 +127,42 @@ inline fun SharedPreferences.clear() {
 /**
  * The number of key value paris in the receiver.
  */
+@get:CheckResult
 inline val SharedPreferences.size: Int get() = all.size
 
 /**
  * @param key The name of the preference to retrieve.
  * @return The preference value if it exists and is from type [Boolean]. `null` otherwise.
  */
+@CheckResult
 inline fun SharedPreferences.getBooleanOrNull(key: String) = all[key] as? Boolean
 
 /**
  * @param key The name of the preference to retrieve.
  * @return The preference value if it exists and is from type [Float]. `null` otherwise.
  */
+@CheckResult
 inline fun SharedPreferences.getFloatOrNull(key: String) = all[key] as? Float
 
 /**
  * @param key The name of the preference to retrieve.
  * @return The preference value if it exists and is from type [Int]. `null` otherwise.
  */
+@CheckResult
 inline fun SharedPreferences.getIntOrNull(key: String) = all[key] as? Int
 
 /**
  * @param key The name of the preference to retrieve.
  * @return The preference value if it exists and is from type [Long]. `null` otherwise.
  */
+@CheckResult
 inline fun SharedPreferences.getLongOrNull(key: String) = all[key] as? Long
 
 /**
  * @param key The name of the preference to retrieve.
  * @return The preference value if it exists and is from type [String]. `null` otherwise.
  */
+@CheckResult
 inline fun SharedPreferences.getStringOrNull(key: String) = all[key] as? String
 
 /**
@@ -166,6 +173,7 @@ inline fun SharedPreferences.getStringOrNull(key: String) = all[key] as? String
  * In any case do not make any changes to the set.
  * Use [getMutableStringSet] to get a copy of the internal set.
  */
+@CheckResult
 @ExperimentalNanoKtApi
 inline fun SharedPreferences.getImmutableStringSet(
     key: String,
@@ -181,6 +189,7 @@ inline fun SharedPreferences.getImmutableStringSet(
  * @return The preference value if it exists and is a Set<String>. The [defValue] otherwise.
  * The returned set is not the original one (except if it is the fallback) and can be modified.
  */
+@CheckResult
 @ExperimentalNanoKtApi
 inline fun SharedPreferences.getMutableStringSet(
     key: String,
@@ -195,6 +204,7 @@ inline fun SharedPreferences.getMutableStringSet(
  * @return The preference value if it exists and is a Set<String>. `null` otherwise.
  * ### The exact class of the returned Set is undefined. In any case do not make any changes to the set. Use [getMutableStringSetOrNull] to get a copy of the internal set.
  */
+@CheckResult
 @Suppress("UNCHECKED_CAST")
 inline fun SharedPreferences.getImmutableStringSetOrNull(key: String) = all[key] as? Set<String>
 
@@ -203,6 +213,7 @@ inline fun SharedPreferences.getImmutableStringSetOrNull(key: String) = all[key]
  * @return The preference value if it exists and is a Set<String>. `null` otherwise.
  * The returned set is not the original one and can be modified.
  */
+@CheckResult
 inline fun SharedPreferences.getMutableStringSetOrNull(key: String): MutableSet<String>? {
     @Suppress("UNCHECKED_CAST")
     val set = all[key] as? Set<String>
@@ -214,6 +225,7 @@ inline fun SharedPreferences.getMutableStringSetOrNull(key: String): MutableSet<
  * @param key The name of the preference to modify.
  * @return The new value of [key]. `null` if no value is assigned to the [key].
  */
+@CheckResult
 inline fun SharedPreferences.invertBoolean(key: String): Boolean? {
     return getBooleanOrNull(key)?.not()?.also { newValue ->
         put(key, newValue)
@@ -227,6 +239,7 @@ inline fun SharedPreferences.invertBoolean(key: String): Boolean? {
  * @param defaultValue This value is set if currently no boolean is set for [key].
  * @return The new value of [key].
  */
+@CheckResult
 inline fun SharedPreferences.invertBoolean(key: String, defaultValue: Boolean): Boolean {
     val newValue = getBooleanOrNull(key)?.not() ?: defaultValue
     put(key, newValue)

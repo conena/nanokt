@@ -22,7 +22,6 @@ package com.conena.nanokt.android.content
 
 import android.Manifest
 import android.accounts.AccountManager
-import android.annotation.SuppressLint
 import android.app.ActivityManager
 import android.app.AlarmManager
 import android.app.AppOpsManager
@@ -96,6 +95,7 @@ import android.view.displayhash.DisplayHashManager
 import android.view.inputmethod.InputMethodManager
 import android.view.textclassifier.TextClassificationManager
 import android.view.textservice.TextServicesManager
+import androidx.annotation.CheckResult
 import androidx.annotation.MainThread
 import androidx.annotation.RequiresApi
 import androidx.annotation.RequiresPermission
@@ -109,316 +109,360 @@ import androidx.annotation.RequiresPermission
 @JvmInline
 value class ServiceProvider @PublishedApi internal constructor(val context: Context) {
 
+    @get:CheckResult
     inline val accessibilityManager get() = context.getSystemService(Context.ACCESSIBILITY_SERVICE) as AccessibilityManager
 
+    @get:CheckResult
     inline val accountManager get() = context.getSystemService(Context.ACCOUNT_SERVICE) as AccountManager
 
+    @get:CheckResult
     inline val activityManager get() = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
 
+    @get:CheckResult
     inline val alarmManager get() = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
-    inline val appOpsManager
-        @RequiresApi(Build.VERSION_CODES.KITKAT)
-        get() = context.getSystemService(Context.APP_OPS_SERVICE) as AppOpsManager
+    @get:CheckResult
+    @get:RequiresApi(Build.VERSION_CODES.KITKAT)
+    inline val appOpsManager get() = context.getSystemService(Context.APP_OPS_SERVICE) as AppOpsManager
 
-    inline val appWidgetManager
-        @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-        get() = context.getSystemService(Context.APPWIDGET_SERVICE) as AppWidgetManager
+    @get:CheckResult
+    @get:RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    inline val appWidgetManager get() = context.getSystemService(Context.APPWIDGET_SERVICE) as AppWidgetManager
 
+    @get:CheckResult
     inline val audioManager get() = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
 
-    inline val batteryManager
-        @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-        get() = context.getSystemService(Context.BATTERY_SERVICE) as BatteryManager
+    @get:CheckResult
+    @get:RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    inline val batteryManager get() = context.getSystemService(Context.BATTERY_SERVICE) as BatteryManager
 
-    inline val biometricManager
-        @RequiresApi(Build.VERSION_CODES.Q)
-        get() = context.getSystemService(Context.BIOMETRIC_SERVICE) as BiometricManager
+    @get:CheckResult
+    @get:RequiresApi(Build.VERSION_CODES.Q)
+    inline val biometricManager get() = context.getSystemService(Context.BIOMETRIC_SERVICE) as BiometricManager
 
-    inline val bluetoothManager
-        @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
-        get() = context.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
+    @get:CheckResult
+    @get:RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
+    inline val bluetoothManager get() = context.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
 
-    inline val cameraManager
-        @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-        get() = context.getSystemService(Context.CAMERA_SERVICE) as CameraManager
+    @get:CheckResult
+    @get:RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    inline val cameraManager get() = context.getSystemService(Context.CAMERA_SERVICE) as CameraManager
 
-    inline val captioningManager
-        @RequiresApi(Build.VERSION_CODES.KITKAT)
-        get() = context.getSystemService(Context.CAPTIONING_SERVICE) as CaptioningManager
+    @get:CheckResult
+    @get:RequiresApi(Build.VERSION_CODES.KITKAT)
+    inline val captioningManager get() = context.getSystemService(Context.CAPTIONING_SERVICE) as CaptioningManager
 
-    inline val carrierConfigManager
-        @RequiresApi(Build.VERSION_CODES.M)
-        get() = context.getSystemService(Context.CARRIER_CONFIG_SERVICE) as CarrierConfigManager
+    @get:CheckResult
+    @get:RequiresApi(Build.VERSION_CODES.M)
+    inline val carrierConfigManager get() = context.getSystemService(Context.CARRIER_CONFIG_SERVICE) as CarrierConfigManager
 
-    inline val clipboardManager
-        @MainThread
-        get() = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+    @get:CheckResult
+    @get:MainThread
+    inline val clipboardManager get() = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
 
-    inline val companionDeviceManager
-        @RequiresApi(Build.VERSION_CODES.O)
-        get() = context.getSystemService(Context.COMPANION_DEVICE_SERVICE) as CompanionDeviceManager
+    @get:CheckResult
+    @get:RequiresApi(Build.VERSION_CODES.O)
+    inline val companionDeviceManager get() = context.getSystemService(Context.COMPANION_DEVICE_SERVICE) as CompanionDeviceManager
 
+    @get:CheckResult
     inline val connectivityManager get() = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
-    inline val consumerIrManager
-        @RequiresApi(Build.VERSION_CODES.KITKAT)
-        get() = context.getSystemService(Context.CONSUMER_IR_SERVICE) as ConsumerIrManager
+    @get:CheckResult
+    @get:RequiresApi(Build.VERSION_CODES.KITKAT)
+    inline val consumerIrManager get() = context.getSystemService(Context.CONSUMER_IR_SERVICE) as ConsumerIrManager
 
-    inline val crossProfileApps
-        @SuppressLint("ServiceCast") @RequiresApi(Build.VERSION_CODES.P)
-        get() = context.getSystemService(Context.CROSS_PROFILE_APPS_SERVICE) as CrossProfileApps
+    @get:CheckResult
+    @get:RequiresApi(Build.VERSION_CODES.P)
+    inline val crossProfileApps get() = context.getSystemService(Context.CROSS_PROFILE_APPS_SERVICE) as CrossProfileApps
 
     /**
      * Always `null` for instant apps. Should be non-null otherwise.
      */
+    @get:CheckResult
     inline val devicePolicyManager get() = context.getSystemService(Context.DEVICE_POLICY_SERVICE) as? DevicePolicyManager
 
-    inline val displayHashManager
-        @RequiresApi(Build.VERSION_CODES.S)
-        get() = context.getSystemService(Context.DISPLAY_HASH_SERVICE) as DisplayHashManager
+    @get:CheckResult
+    @get:RequiresApi(Build.VERSION_CODES.S)
+    inline val displayHashManager get() = context.getSystemService(Context.DISPLAY_HASH_SERVICE) as DisplayHashManager
 
-    inline val displayManager
-        @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
-        get() = context.getSystemService(Context.DISPLAY_SERVICE) as DisplayManager
+    @get:CheckResult
+    @get:RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
+    inline val displayManager get() = context.getSystemService(Context.DISPLAY_SERVICE) as DisplayManager
 
+    @get:CheckResult
     inline val downloadManager get() = context.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
 
-    inline val euiccManager
-        @RequiresApi(Build.VERSION_CODES.P)
-        get() = context.getSystemService(Context.EUICC_SERVICE) as EuiccManager
+    @get:CheckResult
+    @get:RequiresApi(Build.VERSION_CODES.P)
+    inline val euiccManager get() = context.getSystemService(Context.EUICC_SERVICE) as EuiccManager
 
-    inline val hardwarePropertiesManager
-        @RequiresApi(Build.VERSION_CODES.N)
-        get() = context.getSystemService(Context.HARDWARE_PROPERTIES_SERVICE) as HardwarePropertiesManager
+    @get:CheckResult
+    @get:RequiresApi(Build.VERSION_CODES.N)
+    inline val hardwarePropertiesManager get() = context.getSystemService(Context.HARDWARE_PROPERTIES_SERVICE) as HardwarePropertiesManager
 
+    @get:CheckResult
     inline val inputManager get() = context.getSystemService(Context.INPUT_SERVICE) as InputManager
 
+    @get:CheckResult
     inline val inputMethodManager get() = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 
-    inline val ipSecManager
-        @RequiresApi(Build.VERSION_CODES.P)
-        get() = context.getSystemService(Context.IPSEC_SERVICE) as IpSecManager
+    @get:CheckResult
+    @get:RequiresApi(Build.VERSION_CODES.P)
+    inline val ipSecManager get() = context.getSystemService(Context.IPSEC_SERVICE) as IpSecManager
 
-    inline val jobScheduler
-        @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-        get() = context.getSystemService(Context.JOB_SCHEDULER_SERVICE) as JobScheduler
+    @get:CheckResult
+    @get:RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    inline val jobScheduler get() = context.getSystemService(Context.JOB_SCHEDULER_SERVICE) as JobScheduler
 
+    @get:CheckResult
     inline val keyguardManager get() = context.getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
 
-    inline val launcherApps
-        @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-        get() = context.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
+    @get:CheckResult
+    @get:RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    inline val launcherApps get() = context.getSystemService(Context.LAUNCHER_APPS_SERVICE) as LauncherApps
 
+    @get:CheckResult
     inline val layoutInflater get() = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
-    inline val localeManager
-        @RequiresApi(Build.VERSION_CODES.TIRAMISU)
-        get() = context.getSystemService(Context.LOCALE_SERVICE) as LocaleManager
+    @get:CheckResult
+    @get:RequiresApi(Build.VERSION_CODES.TIRAMISU)
+    inline val localeManager get() = context.getSystemService(Context.LOCALE_SERVICE) as LocaleManager
 
+    @get:CheckResult
     inline val locationManager get() = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
-    inline val mediaCommunicationManager
-        @RequiresApi(Build.VERSION_CODES.S)
-        get() = context.getSystemService(Context.MEDIA_COMMUNICATION_SERVICE) as MediaCommunicationManager
+    @get:CheckResult
+    @get:RequiresApi(Build.VERSION_CODES.S)
+    inline val mediaCommunicationManager get() = context.getSystemService(Context.MEDIA_COMMUNICATION_SERVICE) as MediaCommunicationManager
 
-    inline val mediaMetricsManager
-        @RequiresApi(Build.VERSION_CODES.S)
-        get() = context.getSystemService(Context.MEDIA_METRICS_SERVICE) as MediaMetricsManager
+    @get:CheckResult
+    @get:RequiresApi(Build.VERSION_CODES.S)
+    inline val mediaMetricsManager get() = context.getSystemService(Context.MEDIA_METRICS_SERVICE) as MediaMetricsManager
 
-    inline val mediaProjectionManager
-        @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-        get() = context.getSystemService(Context.MEDIA_PROJECTION_SERVICE) as MediaProjectionManager
+    @get:CheckResult
+    @get:RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    inline val mediaProjectionManager get() = context.getSystemService(Context.MEDIA_PROJECTION_SERVICE) as MediaProjectionManager
 
+    @get:CheckResult
     inline val mediaRouter get() = context.getSystemService(Context.MEDIA_ROUTER_SERVICE) as MediaRouter
 
-    inline val mediaSessionManager
-        @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-        get() = context.getSystemService(Context.MEDIA_SESSION_SERVICE) as MediaSessionManager
+    @get:CheckResult
+    @get:RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    inline val mediaSessionManager get() = context.getSystemService(Context.MEDIA_SESSION_SERVICE) as MediaSessionManager
 
-    inline val midiManager
-        @RequiresApi(Build.VERSION_CODES.M)
-        get() = context.getSystemService(Context.MIDI_SERVICE) as MidiManager
+    @get:CheckResult
+    @get:RequiresApi(Build.VERSION_CODES.M)
+    inline val midiManager get() = context.getSystemService(Context.MIDI_SERVICE) as MidiManager
 
-    inline val networkStatsManager
-        @RequiresApi(Build.VERSION_CODES.M)
-        get() = context.getSystemService(Context.NETWORK_STATS_SERVICE) as NetworkStatsManager
+    @get:CheckResult
+    @get:RequiresApi(Build.VERSION_CODES.M)
+    inline val networkStatsManager get() = context.getSystemService(Context.NETWORK_STATS_SERVICE) as NetworkStatsManager
 
+    @get:CheckResult
     inline val nfcManager get() = context.getSystemService(Context.NFC_SERVICE) as NfcManager
 
+    @get:CheckResult
     inline val notificationManager get() = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-    inline val nsdManager
-        @RequiresPermission(Manifest.permission.INTERNET)
-        get() = context.getSystemService(Context.NSD_SERVICE) as NsdManager
+    @get:CheckResult
+    @get:RequiresPermission(Manifest.permission.INTERNET)
+    inline val nsdManager get() = context.getSystemService(Context.NSD_SERVICE) as NsdManager
 
+    @get:CheckResult
     inline val powerManager get() = context.getSystemService(Context.POWER_SERVICE) as PowerManager
 
-    inline val printManager
-        @RequiresApi(Build.VERSION_CODES.KITKAT)
-        get() = context.getSystemService(Context.PRINT_SERVICE) as PrintManager
+    @get:CheckResult
+    @get:RequiresApi(Build.VERSION_CODES.KITKAT)
+    inline val printManager get() = context.getSystemService(Context.PRINT_SERVICE) as PrintManager
 
-    inline val restrictionsManager
-        @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-        get() = context.getSystemService(Context.RESTRICTIONS_SERVICE) as RestrictionsManager
+    @get:CheckResult
+    @get:RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    inline val restrictionsManager get() = context.getSystemService(Context.RESTRICTIONS_SERVICE) as RestrictionsManager
 
-    inline val roleManager
-        @RequiresApi(Build.VERSION_CODES.Q)
-        get() = context.getSystemService(Context.ROLE_SERVICE) as RoleManager
+    @get:CheckResult
+    @get:RequiresApi(Build.VERSION_CODES.Q)
+    inline val roleManager get() = context.getSystemService(Context.ROLE_SERVICE) as RoleManager
 
+    @get:CheckResult
     inline val searchManager get() = context.getSystemService(Context.SEARCH_SERVICE) as SearchManager
 
+    @get:CheckResult
     inline val sensorManager get() = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
     /**
      * Always `null` for instant apps. Should be non-null otherwise.
      */
-    inline val shortcutManager
-        @RequiresApi(Build.VERSION_CODES.N_MR1)
-        get() = context.getSystemService(Context.SHORTCUT_SERVICE) as? ShortcutManager
+    @get:CheckResult
+    @get:RequiresApi(Build.VERSION_CODES.N_MR1)
+    inline val shortcutManager get() = context.getSystemService(Context.SHORTCUT_SERVICE) as? ShortcutManager
 
+    @get:CheckResult
     inline val storageManager get() = context.getSystemService(Context.STORAGE_SERVICE) as StorageManager
 
-    inline val storageStatsManager
-        @RequiresApi(Build.VERSION_CODES.O)
-        get() = context.getSystemService(Context.STORAGE_STATS_SERVICE) as StorageStatsManager
+    @get:CheckResult
+    @get:RequiresApi(Build.VERSION_CODES.O)
+    inline val storageStatsManager get() = context.getSystemService(Context.STORAGE_STATS_SERVICE) as StorageStatsManager
 
-    inline val subscriptionManager
-        @RequiresApi(Build.VERSION_CODES.LOLLIPOP_MR1)
-        get() = context.getSystemService(Context.TELEPHONY_SUBSCRIPTION_SERVICE) as SubscriptionManager
+    @get:CheckResult
+    @get:RequiresApi(Build.VERSION_CODES.LOLLIPOP_MR1)
+    inline val subscriptionManager get() = context.getSystemService(Context.TELEPHONY_SUBSCRIPTION_SERVICE) as SubscriptionManager
 
-    inline val systemHealthManager
-        @RequiresApi(Build.VERSION_CODES.N)
-        get() = context.getSystemService(Context.SYSTEM_HEALTH_SERVICE) as SystemHealthManager
+    @get:CheckResult
+    @get:RequiresApi(Build.VERSION_CODES.N)
+    inline val systemHealthManager get() = context.getSystemService(Context.SYSTEM_HEALTH_SERVICE) as SystemHealthManager
 
-    inline val telecomManager
-        @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-        get() = context.getSystemService(Context.TELECOM_SERVICE) as TelecomManager
+    @get:CheckResult
+    @get:RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    inline val telecomManager get() = context.getSystemService(Context.TELECOM_SERVICE) as TelecomManager
 
+    @get:CheckResult
     inline val telephonyManager get() = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
 
-    inline val textClassificationManager
-        @RequiresApi(Build.VERSION_CODES.O)
-        get() = context.getSystemService(Context.TEXT_CLASSIFICATION_SERVICE) as TextClassificationManager
+    @get:CheckResult
+    @get:RequiresApi(Build.VERSION_CODES.O)
+    inline val textClassificationManager get() = context.getSystemService(Context.TEXT_CLASSIFICATION_SERVICE) as TextClassificationManager
 
+    @get:CheckResult
     inline val textServicesManager get() = context.getSystemService(Context.TEXT_SERVICES_MANAGER_SERVICE) as TextServicesManager
 
-    inline val tvInputManager
-        @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-        get() = context.getSystemService(Context.TV_INPUT_SERVICE) as? TvInputManager
+    @get:CheckResult
+    @get:RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    inline val tvInputManager get() = context.getSystemService(Context.TV_INPUT_SERVICE) as? TvInputManager
 
-    inline val tvInteractiveAppManager
-        @RequiresApi(Build.VERSION_CODES.TIRAMISU)
-        get() = context.getSystemService(Context.TV_INTERACTIVE_APP_SERVICE) as? TvInteractiveAppManager
+    @get:CheckResult
+    @get:RequiresApi(Build.VERSION_CODES.TIRAMISU)
+    inline val tvInteractiveAppManager get() = context.getSystemService(Context.TV_INTERACTIVE_APP_SERVICE) as? TvInteractiveAppManager
 
+    @get:CheckResult
     inline val uiModeManager get() = context.getSystemService(Context.UI_MODE_SERVICE) as UiModeManager
 
-    inline val usageStatsManager
-        @RequiresApi(Build.VERSION_CODES.LOLLIPOP_MR1)
-        get() = context.getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
+    @get:CheckResult
+    @get:RequiresApi(Build.VERSION_CODES.LOLLIPOP_MR1)
+    inline val usageStatsManager get() = context.getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
 
     /**
      * Always `null` for instant apps. Should be non-null otherwise.
      */
+    @get:CheckResult
     inline val usbManager get() = context.getSystemService(Context.USB_SERVICE) as? UsbManager
 
-    inline val userManager
-        @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
-        get() = context.getSystemService(Context.USER_SERVICE) as UserManager
+    @get:CheckResult
+    @get:RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
+    inline val userManager get() = context.getSystemService(Context.USER_SERVICE) as UserManager
 
-    inline val vibratorManager
-        @RequiresApi(Build.VERSION_CODES.S)
-        get() = context.getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager
+    @get:CheckResult
+    @get:RequiresApi(Build.VERSION_CODES.S)
+    inline val vibratorManager get() = context.getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager
 
-    inline val vpnManager
-        @RequiresApi(Build.VERSION_CODES.R)
-        get() = context.getSystemService(Context.VPN_MANAGEMENT_SERVICE) as VpnManager
+    @get:CheckResult
+    @get:RequiresApi(Build.VERSION_CODES.R)
+    inline val vpnManager get() = context.getSystemService(Context.VPN_MANAGEMENT_SERVICE) as VpnManager
 
     /**
      * Always `null` for instant apps. Should be non-null otherwise.
      */
+    @get:CheckResult
     inline val wallpaperManager get() = context.getSystemService(Context.WALLPAPER_SERVICE) as? WallpaperManager
 
-    inline val wifiAwareManager
-        @RequiresApi(Build.VERSION_CODES.O)
-        get() = context.getSystemService(Context.WIFI_AWARE_SERVICE) as? WifiAwareManager
+    @get:CheckResult
+    @get:RequiresApi(Build.VERSION_CODES.O)
+    inline val wifiAwareManager get() = context.getSystemService(Context.WIFI_AWARE_SERVICE) as? WifiAwareManager
 
     /**
      * Always `null` for instant apps. Should be non-null otherwise.
      */
+    @get:CheckResult
     inline val wifiManager get() = context.applicationContext.getSystemService(Context.WIFI_SERVICE) as? WifiManager
 
     /**
      * Always `null` for instant apps. Should be non-null otherwise.
      */
+    @get:CheckResult
     inline val wifiP2pManager get() = context.getSystemService(Context.WIFI_P2P_SERVICE) as? WifiP2pManager
 
-    inline val wifiRttManager
-        @RequiresApi(Build.VERSION_CODES.P)
-        get() = context.getSystemService(Context.WIFI_RTT_RANGING_SERVICE) as? WifiRttManager
+    @get:CheckResult
+    @get:RequiresApi(Build.VERSION_CODES.P)
+    inline val wifiRttManager get() = context.getSystemService(Context.WIFI_RTT_RANGING_SERVICE) as? WifiRttManager
 
+    @get:CheckResult
     inline val windowManager get() = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
 
 }
 
 inline val Context.systemServices get() = ServiceProvider(this)
 
+@get:CheckResult
 inline val Context.activityManager get() = getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
 
+@get:CheckResult
 inline val Context.alarmManager get() = getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
+@get:CheckResult
 inline val Context.audioManager get() = getSystemService(Context.AUDIO_SERVICE) as AudioManager
 
-inline val Context.batteryManager
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    get() = getSystemService(Context.BATTERY_SERVICE) as BatteryManager
+@get:CheckResult
+@get:RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+inline val Context.batteryManager get() = getSystemService(Context.BATTERY_SERVICE) as BatteryManager
 
-inline val Context.biometricManager
-    @RequiresApi(Build.VERSION_CODES.Q)
-    get() = getSystemService(Context.BIOMETRIC_SERVICE) as BiometricManager
+@get:CheckResult
+@get:RequiresApi(Build.VERSION_CODES.Q)
+inline val Context.biometricManager get() = getSystemService(Context.BIOMETRIC_SERVICE) as BiometricManager
 
-inline val Context.bluetoothManager
-    @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
-    get() = getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
+@get:CheckResult
+@get:RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
+inline val Context.bluetoothManager get() = getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
 
-inline val Context.cameraManager
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    get() = getSystemService(Context.CAMERA_SERVICE) as CameraManager
+@get:CheckResult
+@get:RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+inline val Context.cameraManager get() = getSystemService(Context.CAMERA_SERVICE) as CameraManager
 
-inline val Context.clipboardManager
-    @MainThread
-    get() = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+@get:CheckResult
+@get:MainThread
+inline val Context.clipboardManager get() = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
 
+@get:CheckResult
 inline val Context.connectivityManager get() = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
+@get:CheckResult
 inline val Context.downloadManager get() = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
 
+@get:CheckResult
 inline val Context.inputMethodManager get() = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 
-inline val Context.jobScheduler
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    get() = getSystemService(Context.JOB_SCHEDULER_SERVICE) as JobScheduler
+@get:CheckResult
+@get:RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+inline val Context.jobScheduler get() = getSystemService(Context.JOB_SCHEDULER_SERVICE) as JobScheduler
 
+@get:CheckResult
 inline val Context.keyguardManager get() = getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
 
+@get:CheckResult
 inline val Context.layoutInflater get() = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
+@get:CheckResult
 inline val Context.locationManager get() = getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
+@get:CheckResult
 inline val Context.nfcManager get() = getSystemService(Context.NFC_SERVICE) as NfcManager
 
+@get:CheckResult
 inline val Context.notificationManager get() = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
+@get:CheckResult
 inline val Context.powerManager get() = getSystemService(Context.POWER_SERVICE) as PowerManager
 
+@get:CheckResult
 inline val Context.storageManager get() = getSystemService(Context.STORAGE_SERVICE) as StorageManager
 
+@get:CheckResult
 inline val Context.telephonyManager get() = getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
 
 /**
  * Always `null` for instant apps. Should be non-null otherwise.
  */
+@get:CheckResult
 inline val Context.wifiManager get() = applicationContext.getSystemService(Context.WIFI_SERVICE) as? WifiManager
 
+@get:CheckResult
 inline val Context.windowManager get() = getSystemService(Context.WINDOW_SERVICE) as WindowManager
 

@@ -26,6 +26,7 @@ import android.view.DragEvent
 import android.view.View
 import android.view.View.DragShadowBuilder
 import android.view.inputmethod.InputMethodManager
+import androidx.annotation.CheckResult
 import androidx.annotation.Px
 import androidx.annotation.RequiresApi
 import androidx.annotation.StringRes
@@ -91,6 +92,7 @@ inline fun <T : View> T.setVerticalPadding(@Px value: Int): T {
  * @see View.requestFocus
  * @see View.clearFocus
  */
+@get:CheckResult
 inline var View.focus: Boolean
     get() = hasFocus()
     set(value) {
@@ -100,6 +102,7 @@ inline var View.focus: Boolean
 /**
  * `true` if the current view is the currently active view for the input method.
  */
+@get:CheckResult
 inline val View.inputActive get() = context.inputMethodManager.isActive(this)
 
 /**

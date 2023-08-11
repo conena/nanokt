@@ -76,6 +76,7 @@ inline fun getPlayStoreUriForDeveloper(
  * @param packageName The unique application id for the desired application.
  * @return The created [Uri].
  */
+@CheckResult
 inline fun getTestTrackWebsiteUriForApp(packageName: String): Uri {
     return Uri.Builder()
         .scheme("https")

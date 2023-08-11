@@ -38,6 +38,7 @@ inline fun CharSequence.toEditable(): Editable = Editable.Factory.getInstance().
  * does not contain a reserved character ('/' or 'NUL') and is not larger than 255 bytes (UTF-8).
  * @return True if the name is valid, false otherwise.
  */
+@CheckResult
 fun String.isValidFileName(): Boolean {
     return this != "" && !contains('/') && !contains('\u0000') && encodeToByteArray().size <= 255
 }

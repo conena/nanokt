@@ -21,12 +21,14 @@
 package com.conena.nanokt.android.os
 
 import android.annotation.SuppressLint
+import androidx.annotation.CheckResult
 
 /**
  * Retrieve values from the system properties store.
  * @param key The key or name of the property.
  * @return The value of the property as string or `null` if no value was found for the given property.
  */
+@CheckResult
 @SuppressLint("PrivateApi")
 inline fun getSystemProperty(key: String): String? {
     return try {
@@ -42,4 +44,5 @@ inline fun getSystemProperty(key: String): String? {
 /**
  * `true` if the current device is running [MIUI](https://global.miui.com)
  */
+@CheckResult
 inline fun isMiui() = getSystemProperty("ro.miui.ui.version.code") != null

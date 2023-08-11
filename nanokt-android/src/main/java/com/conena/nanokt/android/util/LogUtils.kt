@@ -21,6 +21,7 @@
 package com.conena.nanokt.android.util
 
 import android.util.Log
+import androidx.annotation.CheckResult
 
 /**
  * Write a message with level [Log.VERBOSE] to the logcat's main buffer.
@@ -80,6 +81,7 @@ inline fun logFatal(message: String, tag: String = generateLogTag()) {
  * @return A string suitable as tag for logcat entries.
  * The string consists of the file name and the line in which this method was called.
  */
+@CheckResult
 inline fun generateLogTag(): String {
     val st = Thread.currentThread().stackTrace[2]
     val line = ":${st.lineNumber}"

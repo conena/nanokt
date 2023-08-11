@@ -22,6 +22,7 @@ package com.conena.nanokt.android.service
 
 import android.os.Build
 import android.service.quicksettings.Tile
+import androidx.annotation.CheckResult
 import androidx.annotation.RequiresApi
 import kotlin.contracts.InvocationKind
 import kotlin.contracts.contract
@@ -29,23 +30,23 @@ import kotlin.contracts.contract
 /**
  * `true` if the tile is in [Tile.STATE_ACTIVE].
  */
-inline val Tile.isActive: Boolean
-    @RequiresApi(Build.VERSION_CODES.N)
-    get() = state == Tile.STATE_ACTIVE
+@get:CheckResult
+@get:RequiresApi(Build.VERSION_CODES.N)
+inline val Tile.isActive: Boolean get() = state == Tile.STATE_ACTIVE
 
 /**
  * `true` if the tile is in [Tile.STATE_INACTIVE].
  */
-inline val Tile.isInactive: Boolean
-    @RequiresApi(Build.VERSION_CODES.N)
-    get() = state == Tile.STATE_INACTIVE
+@get:CheckResult
+@get:RequiresApi(Build.VERSION_CODES.N)
+inline val Tile.isInactive: Boolean get() = state == Tile.STATE_INACTIVE
 
 /**
  * `true` if the tile is not in state [Tile.STATE_UNAVAILABLE].
  */
-inline val Tile.isAvailable: Boolean
-    @RequiresApi(Build.VERSION_CODES.N)
-    get() = state != Tile.STATE_UNAVAILABLE
+@get:CheckResult
+@get:RequiresApi(Build.VERSION_CODES.N)
+inline val Tile.isAvailable: Boolean get() = state != Tile.STATE_UNAVAILABLE
 
 /**
  * Invokes [Tile.updateTile] on the receiver after [action] was invoked.

@@ -55,6 +55,7 @@ import com.conena.nanokt.annotations.ExperimentalNanoKtApi
 /**
  * The application label of this context's package.
  */
+@get:CheckResult
 inline val Context.applicationLabel: String get() = applicationInfo.loadLabel(packageManager).toString()
 
 /**
@@ -62,6 +63,7 @@ inline val Context.applicationLabel: String get() = applicationInfo.loadLabel(pa
  * @throws IllegalStateException In case the [PackageInfo] is not found.
  * This should never happen, but for the sake of completeness it is documented.
  */
+@get:CheckResult
 @get:Throws(IllegalStateException::class)
 inline val Context.packageInfo: PackageInfo
     get() {
@@ -78,6 +80,7 @@ inline val Context.packageInfo: PackageInfo
  * @see ClipData.Item.coerceToText
  * @see ClipboardManager.getPrimaryClipDataItem
  */
+@get:CheckResult
 inline var Context.clipboardTextContent: String?
     get() = clipboardManager.getPrimaryClipDataItem()?.coerceToText(this)?.toString()
     set(value) = clipboardManager.setPrimaryClip(text = value ?: "")
@@ -86,6 +89,7 @@ inline var Context.clipboardTextContent: String?
  * `true` if the app is currently at the top of the screen that the user is interacting with.
  * @see RunningAppProcessInfo.IMPORTANCE_FOREGROUND
  */
+@get:CheckResult
 inline val Context.isAppInForeground: Boolean
     get() {
         return activityManager.runningAppProcesses.orEmpty().any { process ->
@@ -96,6 +100,7 @@ inline val Context.isAppInForeground: Boolean
 /**
  * The current configuration for the application's package resources instance.
  */
+@get:CheckResult
 inline val Context.configuration: Configuration get() = resources.configuration
 
 /**
@@ -106,6 +111,7 @@ inline val Context.configuration: Configuration get() = resources.configuration
  * AndroidX preferences library.
  * @see Context.getSharedPreferences
  */
+@get:CheckResult
 inline val Context.defaultSharedPreferences: SharedPreferences
     get() = getSharedPreferences("${packageName}_preferences", Context.MODE_PRIVATE)
 
