@@ -82,7 +82,8 @@ inline fun logFatal(message: String, tag: String = generateLogTag()) {
  * The string consists of the file name and the line in which this method was called.
  */
 @CheckResult
-inline fun generateLogTag(): String {
+@PublishedApi
+internal inline fun generateLogTag(): String {
     val st = Thread.currentThread().stackTrace[2]
     val line = ":${st.lineNumber}"
     return if (st.fileName.length > (23 - line.length)) {
