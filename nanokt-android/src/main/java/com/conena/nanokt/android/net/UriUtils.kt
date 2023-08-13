@@ -22,67 +22,79 @@ package com.conena.nanokt.android.net
 
 import android.net.Uri
 import androidx.annotation.CheckResult
+import com.conena.nanokt.annotations.ExperimentalNanoKtApi
 import java.net.MalformedURLException
 import java.net.URI
 import java.net.URISyntaxException
 import java.net.URL
 
 /**
- * Builds an [Uri] to show the application with [packageName] in the Google Play Store.
- * @param packageName The unique application id for the desired application.
- * @param referrer Value for the referrer parameter in the URI. The value is encoded by the function.
- * If null, no referrer is added.
- * @param webLink `true` to get a web uri (play.google.com) instead of an uri to open the Play Store App.
- * @return The created [Uri].
+ * The UriCreator functions are used internally by NanoKt.
+ * They are placed in this object because only very few developers need them directly.
+ * The usage is experimental because the object solution is not optimal.
+ * It will be resolved as soon as statics are available in Kotlin.
  */
-@CheckResult
-inline fun getPlayStoreUriForApp(
-    packageName: String,
-    referrer: String? = null,
-    webLink: Boolean = false
-): Uri {
-    return Uri.Builder()
-        .scheme(if (webLink) "https" else "market")
-        .authority(if (webLink) "play.google.com" else "details")
-        .path(if (webLink) "store/apps/details" else null)
-        .appendQueryParameter("id", packageName)
-        .apply {
-            if (referrer != null) appendQueryParameter("referrer", referrer)
-        }
-        .build()
-}
+@ExperimentalNanoKtApi
+object UriCreator {
 
-/**
- * Builds an [Uri] to show the developer with [developerName] in the Google Play Store.
- * @param developerName The unique developer id for the desired developer account.
- * @param webLink `true` to get a web uri (play.google.com) instead of an uri to open the Play Store App.
- * @return The created [Uri].
- */
-@CheckResult
-inline fun getPlayStoreUriForDeveloper(
-    developerName: String,
-    webLink: Boolean = false
-): Uri {
-    return Uri.Builder()
-        .scheme(if (webLink) "https" else "market")
-        .authority(if (webLink) "play.google.com" else "developer")
-        .path(if (webLink) "store/apps/developer" else null)
-        .appendQueryParameter("id", developerName)
-        .build()
-}
+    /**
+     * Builds an [Uri] to show the application with [packageName] in the Google Play Store.
+     * @param packageName The unique application id for the desired application.
+     * @param referrer Value for the referrer parameter in the URI. The value is encoded by the function.
+     * If null, no referrer is added.
+     * @param webLink `true` to get a web uri (play.google.com) instead of an uri to open the Play Store App.
+     * @return The created [Uri].
+     */
+    @CheckResult
+    inline fun getPlayStoreUriForApp(
+        packageName: String,
+        referrer: String? = null,
+        webLink: Boolean = false
+    ): Uri {
+        return Uri.Builder()
+            .scheme(if (webLink) "https" else "market")
+            .authority(if (webLink) "play.google.com" else "details")
+            .path(if (webLink) "store/apps/details" else null)
+            .appendQueryParameter("id", packageName)
+            .apply {
+                if (referrer != null) appendQueryParameter("referrer", referrer)
+            }
+            .build()
+    }
 
-/**
- * Builds an [Uri] to show the Google Play test-track join page for the application with [packageName].
- * @param packageName The unique application id for the desired application.
- * @return The created [Uri].
- */
-@CheckResult
-inline fun getTestTrackWebsiteUriForApp(packageName: String): Uri {
-    return Uri.Builder()
-        .scheme("https")
-        .authority("play.google.com")
-        .path("apps/testing/$packageName")
-        .build()
+    /**
+     * Builds an [Uri] to show the developer with [developerName] in the Google Play Store.
+     * @param developerName The unique developer id for the desired developer account.
+     * @param webLink `true` to get a web uri (play.google.com) instead of an uri to open the Play Store App.
+     * @return The created [Uri].
+     */
+    @CheckResult
+    inline fun getPlayStoreUriForDeveloper(
+        developerName: String,
+        webLink: Boolean = false
+    ): Uri {
+        return Uri.Builder()
+            .scheme(if (webLink) "https" else "market")
+            .authority(if (webLink) "play.google.com" else "developer")
+            .path(if (webLink) "store/apps/developer" else null)
+            .appendQueryParameter("id", developerName)
+            .build()
+    }
+
+    /**
+     * Builds an [Uri] to show the Google Play test-track join page for the application with [packageName].
+     * @param packageName The unique application id for the desired application.
+     * @return The created [Uri].
+     */
+    @CheckResult
+    inline fun getTestTrackWebsiteUriForApp(packageName: String): Uri {
+        return Uri.Builder()
+            .scheme("https")
+            .authority("play.google.com")
+            .path("apps/testing/$packageName")
+            .build()
+    }
+
 }
 
 /**

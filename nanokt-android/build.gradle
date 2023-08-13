@@ -31,6 +31,7 @@ android {
     }
     kotlin.sourceSets.configureEach {
         languageSettings.optIn("kotlin.contracts.ExperimentalContracts")
+        languageSettings.optIn("com.conena.nanokt.annotations.ExperimentalNanoKtApi")
     }
 }
 

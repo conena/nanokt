@@ -29,6 +29,7 @@ import android.net.Uri
 import android.os.Bundle
 import androidx.annotation.CheckResult
 import com.conena.nanokt.android.net.MimeType
+import com.conena.nanokt.annotations.ExperimentalNanoKtApi
 
 /**
  * Wrap the current intent into a new [Intent.ACTION_CHOOSER] intent.
@@ -44,6 +45,7 @@ inline fun Intent.chooser(title: CharSequence? = null): Intent = Intent.createCh
  * @param actions The intent actions to match against.
  * @return the created intent filter.
  */
+@ExperimentalNanoKtApi
 @CheckResult
 inline fun createIntentFilter(vararg actions: String): IntentFilter {
     val filter = IntentFilter()
@@ -88,6 +90,7 @@ inline fun Intent.setPackageUri(packageName: String): Intent {
  * @param attachment A content URI holding a stream of data to send.
  * @return The created intent.
  */
+@ExperimentalNanoKtApi
 @CheckResult
 inline fun createSendIntent(
     subject: String? = null,
@@ -109,6 +112,7 @@ inline fun createSendIntent(
  * @param attachment A content URI holding a stream of data to send.
  * @return The created intent.
  */
+@ExperimentalNanoKtApi
 @CheckResult
 inline fun createMailSendIntent(
     subject: String? = null,
