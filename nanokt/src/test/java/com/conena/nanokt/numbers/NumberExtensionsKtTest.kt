@@ -15,7 +15,7 @@
  *
  */
 
-package com.conena.nanokt
+package com.conena.nanokt.numbers
 
 import org.junit.Assert.*
 

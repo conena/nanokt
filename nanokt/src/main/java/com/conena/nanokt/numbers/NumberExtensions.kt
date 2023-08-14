@@ -17,7 +17,7 @@
 
 @file:Suppress("NOTHING_TO_INLINE", "unused")
 
-package com.conena.nanokt
+package com.conena.nanokt.numbers
 
 /**
  * @param flag The flag to check.
