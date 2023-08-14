@@ -58,76 +58,76 @@ inline fun Long.getBitFlags(): Array<Long> {
 }
 
 /**
- * @return `null` if the Long is zero. Otherwise the Long is returned.
+ * @return `null` if the receiver is zero. Otherwise the receiver is returned.
  */
 inline fun Long.zeroAsNull() = if (this == 0L) null else this
 
 /**
- * @return 0 if the Long is `null`. Otherwise the Long is returned.
+ * @return 0 if the receiver is `null`. Otherwise the receiver is returned.
  */
 inline fun Long?.nullAsZero() = this ?: 0L
 
 /**
- * @return `null` if the Long is negative. Otherwise the Long is returned.
+ * @return `null` if the receiver is negative. Otherwise the receiver is returned.
  */
 inline fun Long.negativeAsNull() = if (this < 0L) null else this
 
 /**
- * @return 0 if the Long is negative. Otherwise the Long is returned.
+ * @return 0 if the receiver is negative. Otherwise the receiver is returned.
  */
 inline fun Long.negativeAsZero() = if (this < 0L) 0L else this
 
 /**
- * @return `null` if the Long is positive. Otherwise the Long is returned.
+ * @return `null` if the receiver is positive. Otherwise the receiver is returned.
  */
 inline fun Long.positiveAsNull() = if (this > 0L) null else this
 
 /**
- * @return 0 if the Long is positive. Otherwise the Long is returned.
+ * @return 0 if the receiver is positive. Otherwise the receiver is returned.
  */
 inline fun Long.positiveAsZero() = if (this > 0L) 0L else this
 
 /**
- * @return `true` if the Long is not `null` and negative.
+ * @return `true` if the receiver is not `null` and negative.
  */
 inline fun Long?.isNegative() = this != null && this < 0L
 
 /**
- * @return `true` if the Long is not `null` and positive.
+ * @return `true` if the receiver is not `null` and positive.
  */
 inline fun Long?.isPositive() = this != null && this > 0L
 
 /**
- * @return `true` it the Long is zero.
+ * @return `true` it the receiver is zero.
  */
 inline fun Long?.isZero() = this == 0L
 
 /**
- * @return `true` if the Long is not negative.
+ * @return `true` if the receiver is not negative.
  */
 inline fun Long?.isNotNegative() = this == null || this >= 0L
 
 /**
- * @return `true` if the Long is not positive.
+ * @return `true` if the receiver is not positive.
  */
 inline fun Long?.isNotPositive() = this == null || this <= 0L
 
 /**
- * @return `true` it the Long is not zero.
+ * @return `true` it the receiver is not zero.
  */
 inline fun Long?.isNotZero() = this != 0L
 
 /**
- * @return `true` if the Long is `null` or negative.
+ * @return `true` if the receiver is `null` or negative.
  */
 inline fun Long?.isNullOrNegative() = this == null || this < 0L
 
 /**
- * @return `true` if the Long is `null` or positive.
+ * @return `true` if the receiver is `null` or positive.
  */
 inline fun Long?.isNullOrPositive() = this == null || this > 0L
 
 /**
- * @return `true` it the Long is `null` or zero.
+ * @return `true` it the receiver is `null` or zero.
  */
 inline fun Long?.isNullOrZero() = this == null || this == 0L
