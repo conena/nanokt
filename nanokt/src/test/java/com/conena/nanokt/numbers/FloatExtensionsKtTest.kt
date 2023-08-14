@@ -68,8 +68,6 @@ class FloatExtensionsKtTest {
 
     @Test
     fun isNegative() {
-        val nullValue: Float? = null
-        Assert.assertFalse(nullValue.isNegative())
         Assert.assertFalse(0.0f.isNegative())
         Assert.assertFalse(0.1f.isNegative())
         Assert.assertTrue((-0.1f).isNegative())
@@ -77,8 +75,6 @@ class FloatExtensionsKtTest {
 
     @Test
     fun isPositive() {
-        val nullValue: Float? = null
-        Assert.assertFalse(nullValue.isPositive())
         Assert.assertFalse(0.0f.isPositive())
         Assert.assertTrue(0.1f.isPositive())
         Assert.assertFalse((-0.1f).isPositive())
@@ -86,8 +82,6 @@ class FloatExtensionsKtTest {
 
     @Test
     fun isZero() {
-        val nullValue: Float? = null
-        Assert.assertFalse(nullValue.isZero())
         Assert.assertTrue(0.0f.isZero())
         Assert.assertFalse(0.1f.isZero())
         Assert.assertFalse((-0.1f).isZero())
@@ -95,8 +89,6 @@ class FloatExtensionsKtTest {
 
     @Test
     fun isNotNegative() {
-        val nullValue: Float? = null
-        Assert.assertTrue(nullValue.isNotNegative())
         Assert.assertTrue(0.0f.isNotNegative())
         Assert.assertTrue(0.1f.isNotNegative())
         Assert.assertFalse((-0.1f).isNotNegative())
@@ -104,8 +96,6 @@ class FloatExtensionsKtTest {
 
     @Test
     fun isNotPositive() {
-        val nullValue: Float? = null
-        Assert.assertTrue(nullValue.isNotPositive())
         Assert.assertTrue(0.0f.isNotPositive())
         Assert.assertFalse(0.1f.isNotPositive())
         Assert.assertTrue((-0.1f).isNotPositive())
@@ -113,8 +103,6 @@ class FloatExtensionsKtTest {
 
     @Test
     fun isNotZero() {
-        val nullValue: Float? = null
-        Assert.assertTrue(nullValue.isNotZero())
         Assert.assertFalse(0.0f.isNotZero())
         Assert.assertTrue(0.1f.isNotZero())
         Assert.assertTrue((-0.1f).isNotZero())

@@ -50,34 +50,34 @@ inline fun Double.positiveAsNull() = if (this > 0.0) null else this
 inline fun Double.positiveAsZero() = if (this > 0.0) 0.0 else this
 
 /**
- * @return `true` if the receiver is not `null` and negative.
+ * @return `true` if the receiver is negative.
  */
-inline fun Double?.isNegative() = this != null && this < 0.0
+inline fun Double.isNegative() = this < 0.0
 
 /**
- * @return `true` if the receiver is not `null` and positive.
+ * @return `true` if the receiver is positive.
  */
-inline fun Double?.isPositive() = this != null && this > 0.0
+inline fun Double.isPositive() = this > 0.0
 
 /**
  * @return `true` it the receiver is zero.
  */
-inline fun Double?.isZero() = this == 0.0
+inline fun Double.isZero() = this == 0.0
 
 /**
  * @return `true` if the receiver is not negative.
  */
-inline fun Double?.isNotNegative() = this == null || this >= 0.0
+inline fun Double.isNotNegative() = this >= 0.0
 
 /**
  * @return `true` if the receiver is not positive.
  */
-inline fun Double?.isNotPositive() = this == null || this <= 0.0
+inline fun Double.isNotPositive() = this <= 0.0
 
 /**
  * @return `true` it the receiver is not zero.
  */
-inline fun Double?.isNotZero() = this != 0.0
+inline fun Double.isNotZero() = this != 0.0
 
 /**
  * @return `true` if the receiver is `null` or negative.

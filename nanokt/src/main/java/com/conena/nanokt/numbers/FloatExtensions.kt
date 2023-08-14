@@ -50,34 +50,34 @@ inline fun Float.positiveAsNull() = if (this > 0f) null else this
 inline fun Float.positiveAsZero() = if (this > 0f) 0f else this
 
 /**
- * @return `true` if the receiver is not `null` and negative.
+ * @return `true` if the receiver is negative.
  */
-inline fun Float?.isNegative() = this != null && this < 0f
+inline fun Float.isNegative() = this < 0f
 
 /**
- * @return `true` if the receiver is not `null` and positive.
+ * @return `true` if the receiver is positive.
  */
-inline fun Float?.isPositive() = this != null && this > 0f
+inline fun Float.isPositive() = this > 0f
 
 /**
  * @return `true` it the receiver is zero.
  */
-inline fun Float?.isZero() = this == 0f
+inline fun Float.isZero() = this == 0f
 
 /**
  * @return `true` if the receiver is not negative.
  */
-inline fun Float?.isNotNegative() = this == null || this >= 0f
+inline fun Float.isNotNegative() = this >= 0f
 
 /**
  * @return `true` if the receiver is not positive.
  */
-inline fun Float?.isNotPositive() = this == null || this <= 0f
+inline fun Float.isNotPositive() = this <= 0f
 
 /**
  * @return `true` it the receiver is not zero.
  */
-inline fun Float?.isNotZero() = this != 0f
+inline fun Float.isNotZero() = this != 0f
 
 /**
  * @return `true` if the receiver is `null` or negative.

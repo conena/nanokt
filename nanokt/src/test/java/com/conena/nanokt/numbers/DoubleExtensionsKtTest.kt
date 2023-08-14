@@ -68,8 +68,6 @@ class DoubleExtensionsKtTest {
 
     @Test
     fun isNegative() {
-        val nullValue: Double? = null
-        Assert.assertFalse(nullValue.isNegative())
         Assert.assertFalse(0.0.isNegative())
         Assert.assertFalse(0.1.isNegative())
         Assert.assertTrue((-0.1).isNegative())
@@ -77,8 +75,6 @@ class DoubleExtensionsKtTest {
 
     @Test
     fun isPositive() {
-        val nullValue: Double? = null
-        Assert.assertFalse(nullValue.isPositive())
         Assert.assertFalse(0.0.isPositive())
         Assert.assertTrue(0.1.isPositive())
         Assert.assertFalse((-0.1).isPositive())
@@ -86,8 +82,6 @@ class DoubleExtensionsKtTest {
 
     @Test
     fun isZero() {
-        val nullValue: Double? = null
-        Assert.assertFalse(nullValue.isZero())
         Assert.assertTrue(0.0.isZero())
         Assert.assertFalse(0.1.isZero())
         Assert.assertFalse((-0.1).isZero())
@@ -95,8 +89,6 @@ class DoubleExtensionsKtTest {
 
     @Test
     fun isNotNegative() {
-        val nullValue: Double? = null
-        Assert.assertTrue(nullValue.isNotNegative())
         Assert.assertTrue(0.0.isNotNegative())
         Assert.assertTrue(0.1.isNotNegative())
         Assert.assertFalse((-0.1).isNotNegative())
@@ -104,8 +96,6 @@ class DoubleExtensionsKtTest {
 
     @Test
     fun isNotPositive() {
-        val nullValue: Double? = null
-        Assert.assertTrue(nullValue.isNotPositive())
         Assert.assertTrue(0.0.isNotPositive())
         Assert.assertFalse(0.1.isNotPositive())
         Assert.assertTrue((-0.1).isNotPositive())
@@ -113,8 +103,6 @@ class DoubleExtensionsKtTest {
 
     @Test
     fun isNotZero() {
-        val nullValue: Double? = null
-        Assert.assertTrue(nullValue.isNotZero())
         Assert.assertFalse(0.0.isNotZero())
         Assert.assertTrue(0.1.isNotZero())
         Assert.assertTrue((-0.1).isNotZero())

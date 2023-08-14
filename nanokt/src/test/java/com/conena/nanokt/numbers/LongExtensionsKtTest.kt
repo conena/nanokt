@@ -153,8 +153,6 @@ class LongExtensionsKtTest {
 
     @Test
     fun isNegative() {
-        val nullValue: Long? = null
-        Assert.assertFalse(nullValue.isNegative())
         Assert.assertFalse(0L.isNegative())
         Assert.assertFalse(1L.isNegative())
         Assert.assertTrue((-1L).isNegative())
@@ -162,8 +160,6 @@ class LongExtensionsKtTest {
 
     @Test
     fun isPositive() {
-        val nullValue: Long? = null
-        Assert.assertFalse(nullValue.isPositive())
         Assert.assertFalse(0L.isPositive())
         Assert.assertTrue(1L.isPositive())
         Assert.assertFalse((-1L).isPositive())
@@ -171,8 +167,6 @@ class LongExtensionsKtTest {
 
     @Test
     fun isZero() {
-        val nullValue: Long? = null
-        Assert.assertFalse(nullValue.isZero())
         Assert.assertTrue(0L.isZero())
         Assert.assertFalse(1L.isZero())
         Assert.assertFalse((-1L).isZero())
@@ -180,8 +174,6 @@ class LongExtensionsKtTest {
 
     @Test
     fun isNotNegative() {
-        val nullValue: Long? = null
-        Assert.assertTrue(nullValue.isNotNegative())
         Assert.assertTrue(0L.isNotNegative())
         Assert.assertTrue(1L.isNotNegative())
         Assert.assertFalse((-1L).isNotNegative())
@@ -189,8 +181,6 @@ class LongExtensionsKtTest {
 
     @Test
     fun isNotPositive() {
-        val nullValue: Long? = null
-        Assert.assertTrue(nullValue.isNotPositive())
         Assert.assertTrue(0L.isNotPositive())
         Assert.assertFalse(1L.isNotPositive())
         Assert.assertTrue((-1L).isNotPositive())
@@ -198,8 +188,6 @@ class LongExtensionsKtTest {
 
     @Test
     fun isNotZero() {
-        val nullValue: Long? = null
-        Assert.assertTrue(nullValue.isNotZero())
         Assert.assertFalse(0L.isNotZero())
         Assert.assertTrue(1L.isNotZero())
         Assert.assertTrue((-1L).isNotZero())

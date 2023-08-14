@@ -88,34 +88,34 @@ inline fun Int.positiveAsNull() = if (this > 0) null else this
 inline fun Int.positiveAsZero() = if (this > 0) 0 else this
 
 /**
- * @return `true` if the receiver is not `null` and negative.
+ * @return `true` if the receiver is negative.
  */
-inline fun Int?.isNegative() = this != null && this < 0
+inline fun Int.isNegative() = this < 0
 
 /**
- * @return `true` if the receiver is not `null` and positive.
+ * @return `true` if the receiver is positive.
  */
-inline fun Int?.isPositive() = this != null && this > 0
+inline fun Int.isPositive() = this > 0
 
 /**
  * @return `true` it the receiver is zero.
  */
-inline fun Int?.isZero() = this == 0
+inline fun Int.isZero() = this == 0
 
 /**
  * @return `true` if the receiver is not negative.
  */
-inline fun Int?.isNotNegative() = this == null || this >= 0
+inline fun Int.isNotNegative() = this >= 0
 
 /**
  * @return `true` if the receiver is not positive.
  */
-inline fun Int?.isNotPositive() = this == null || this <= 0
+inline fun Int.isNotPositive() = this <= 0
 
 /**
  * @return `true` it the receiver is not zero.
  */
-inline fun Int?.isNotZero() = this != 0
+inline fun Int.isNotZero() = this != 0
 
 /**
  * @return `true` if the receiver is `null` or negative.

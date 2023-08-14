@@ -153,8 +153,6 @@ class IntExtensionsKtTest {
 
     @Test
     fun isNegative() {
-        val nullValue: Int? = null
-        assertFalse(nullValue.isNegative())
         assertFalse(0.isNegative())
         assertFalse(1.isNegative())
         assertTrue((-1).isNegative())
@@ -162,8 +160,6 @@ class IntExtensionsKtTest {
 
     @Test
     fun isPositive() {
-        val nullValue: Int? = null
-        assertFalse(nullValue.isPositive())
         assertFalse(0.isPositive())
         assertTrue(1.isPositive())
         assertFalse((-1).isPositive())
@@ -171,8 +167,6 @@ class IntExtensionsKtTest {
 
     @Test
     fun isZero() {
-        val nullValue: Int? = null
-        assertFalse(nullValue.isZero())
         assertTrue(0.isZero())
         assertFalse(1.isZero())
         assertFalse((-1).isZero())
@@ -180,8 +174,6 @@ class IntExtensionsKtTest {
 
     @Test
     fun isNotNegative() {
-        val nullValue: Int? = null
-        assertTrue(nullValue.isNotNegative())
         assertTrue(0.isNotNegative())
         assertTrue(1.isNotNegative())
         assertFalse((-1).isNotNegative())
@@ -189,8 +181,6 @@ class IntExtensionsKtTest {
 
     @Test
     fun isNotPositive() {
-        val nullValue: Int? = null
-        assertTrue(nullValue.isNotPositive())
         assertTrue(0.isNotPositive())
         assertFalse(1.isNotPositive())
         assertTrue((-1).isNotPositive())
@@ -198,8 +188,6 @@ class IntExtensionsKtTest {
 
     @Test
     fun isNotZero() {
-        val nullValue: Int? = null
-        assertTrue(nullValue.isNotZero())
         assertFalse(0.isNotZero())
         assertTrue(1.isNotZero())
         assertTrue((-1).isNotZero())

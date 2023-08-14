@@ -88,34 +88,34 @@ inline fun Long.positiveAsNull() = if (this > 0L) null else this
 inline fun Long.positiveAsZero() = if (this > 0L) 0L else this
 
 /**
- * @return `true` if the receiver is not `null` and negative.
+ * @return `true` if the receiver is negative.
  */
-inline fun Long?.isNegative() = this != null && this < 0L
+inline fun Long.isNegative() = this < 0L
 
 /**
- * @return `true` if the receiver is not `null` and positive.
+ * @return `true` if the receiver is positive.
  */
-inline fun Long?.isPositive() = this != null && this > 0L
+inline fun Long.isPositive() = this > 0L
 
 /**
  * @return `true` it the receiver is zero.
  */
-inline fun Long?.isZero() = this == 0L
+inline fun Long.isZero() = this == 0L
 
 /**
  * @return `true` if the receiver is not negative.
  */
-inline fun Long?.isNotNegative() = this == null || this >= 0L
+inline fun Long.isNotNegative() = this >= 0L
 
 /**
  * @return `true` if the receiver is not positive.
  */
-inline fun Long?.isNotPositive() = this == null || this <= 0L
+inline fun Long.isNotPositive() = this <= 0L
 
 /**
  * @return `true` it the receiver is not zero.
  */
-inline fun Long?.isNotZero() = this != 0L
+inline fun Long.isNotZero() = this != 0L
 
 /**
  * @return `true` if the receiver is `null` or negative.
