@@ -51,3 +51,45 @@ inline fun IntentFilter.addActions(vararg actions: String): IntentFilter {
     }
     return this
 }
+
+/**
+ * Add the given [categories] to the intent filter.
+ * @param categories The categories to add.
+ * @return The receiver object, for chaining multiple calls into a single statement.
+ * @see IntentFilter.addCategory
+ */
+inline fun IntentFilter.addCategories(vararg categories: String): IntentFilter {
+    for (category in categories) {
+        addCategory(category)
+    }
+    return this
+}
+
+/**
+ * Add the given [dataSchemes] to the intent filter.
+ * @param dataSchemes The data scheme to add.
+ * @return The receiver object, for chaining multiple calls into a single statement.
+ * @see IntentFilter.addDataScheme
+ */
+inline fun IntentFilter.addDataSchemes(vararg dataSchemes: String): IntentFilter {
+    for (dataScheme in dataSchemes) {
+        addDataScheme(dataScheme)
+    }
+    return this
+}
+
+/**
+ * Add the given [dataTypes] to the intent filter.
+ * @param dataTypes The data types to add.
+ * @return The receiver object, for chaining multiple calls into a single statement.
+ * @throws IntentFilter.MalformedMimeTypeException If any of the given MIME types is
+ * syntactically incorrect.
+ * @see IntentFilter.addDataType
+ */
+@Throws(IntentFilter.MalformedMimeTypeException::class)
+inline fun IntentFilter.addDataTypes(vararg dataTypes: String): IntentFilter {
+    for (dataType in dataTypes) {
+        addDataType(dataType)
+    }
+    return this
+}
