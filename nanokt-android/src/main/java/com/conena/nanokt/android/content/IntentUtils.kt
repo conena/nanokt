@@ -24,7 +24,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
 import android.content.Intent
-import android.content.IntentFilter
 import android.net.Uri
 import android.os.Bundle
 import androidx.annotation.CheckResult
@@ -40,34 +39,6 @@ import com.conena.nanokt.annotations.ExperimentalNanoKtApi
 @CheckResult
 inline fun Intent.chooser(title: CharSequence? = null): Intent = Intent.createChooser(this, title)
 
-/**
- * Create a new intent filter with multiple actions
- * @param actions The intent actions to match against.
- * @return the created intent filter.
- */
-@ExperimentalNanoKtApi
-@CheckResult
-inline fun createIntentFilter(vararg actions: String): IntentFilter {
-    val filter = IntentFilter()
-    for (action in actions) {
-        filter.addAction(action)
-    }
-    return filter
-}
-
-/**
- * Add the given [actions] to the intent filter.
- * @param actions The actions to add.
- * @return The receiver object, for chaining multiple calls.
- * into a single statement.
- * @see IntentFilter.addAction
- */
-inline fun IntentFilter.addActions(vararg actions: String): IntentFilter {
-    for (action in actions) {
-        addAction(action)
-    }
-    return this
-}
 
 /**
  * Set the data of the intent to an uri with the scheme "package"
