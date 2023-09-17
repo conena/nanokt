@@ -159,9 +159,9 @@ I'm leaving out the non-NanoKt version for space reasons. However, the pain shou
 // Start an activity of your app
 startActivity<MainActivity>()
 // Show the details page of your app in the system settings
-openAppSettings()
+startAppSettings()
 // Show the notification settings of your app in the system settings
-openAppSettings(action = Settings.ACTION_APP_NOTIFICATION_SETTINGS)
+startAppSettings(action = Settings.ACTION_APP_NOTIFICATION_SETTINGS)
 // Direct a user to the beta test of your app
 showTestTrackInPlayStore(packageName = "con.conena.navigation.gesture.control")
 // Open a website

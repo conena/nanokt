@@ -116,7 +116,7 @@ inline val Context.defaultSharedPreferences: SharedPreferences
     get() = getSharedPreferences("${packageName}_preferences", Context.MODE_PRIVATE)
 
 /**
- * Opens various settings screens.
+ * Opens various settings activities.
  * If invoked on a non-activity context [Intent.FLAG_ACTIVITY_NEW_TASK] is added automatically.
  * @param action An action to open a settings screen. Some examples are listed below.
  * @param intentEditor Edit the created [Intent] before it is used to start the activity.
@@ -143,7 +143,7 @@ inline val Context.defaultSharedPreferences: SharedPreferences
  * @see Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS
  * @see Settings.ACTION_INTERNAL_STORAGE_SETTINGS
  */
-inline fun Context.openSettings(
+inline fun Context.startSettings(
     action: String = Settings.ACTION_SETTINGS,
     intentEditor: Intent.() -> Unit = {}
 ): Result<Unit> {
@@ -157,7 +157,7 @@ inline fun Context.openSettings(
 }
 
 /**
- * Opens various settings screens for an application.
+ * Opens various settings activities for an application.
  * If invoked on a non-activity context [Intent.FLAG_ACTIVITY_NEW_TASK] is added automatically.
  * @param action One of the actions below to get to a specific settings screen.
  * @param packageName The package name for which the settings page should be displayed.
@@ -188,7 +188,7 @@ inline fun Context.openSettings(
  * @see Settings.ACTION_REQUEST_SET_AUTOFILL_SERVICE
  */
 @SuppressLint("InlinedApi")
-inline fun Context.openAppSettings(
+inline fun Context.startAppSettings(
     action: String = Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
     packageName: String = getPackageName(),
     setPackageUri: Boolean = action == Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
@@ -219,7 +219,7 @@ inline fun Context.openAppSettings(
  * You can use [Result.onFailure] for error handling.
  */
 @RequiresApi(Build.VERSION_CODES.O)
-inline fun Context.openAppNotificationChannelSettings(
+inline fun Context.startAppNotificationChannelSettings(
     channelId: String,
     intentEditor: Intent.() -> Unit = {}
 ): Result<Unit> {
