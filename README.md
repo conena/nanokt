@@ -165,7 +165,7 @@ openAppSettings(action = Settings.ACTION_APP_NOTIFICATION_SETTINGS)
 // Direct a user to the beta test of your app
 showTestTrackInPlayStore(packageName = "con.conena.navigation.gesture.control")
 // Open a website
-openWebsite(url = "https://github.com/conena/nanokt").onFailure {
+startBrowser(url = "https://github.com/conena/nanokt").onFailure {
     toastShort("Go get a browser!")
 }
 // Share text

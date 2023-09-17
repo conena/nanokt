@@ -463,7 +463,7 @@ inline fun Context.showTestTrackInPlayStore(
         callsInPlace(intentEditor, InvocationKind.AT_LEAST_ONCE)
     }
     return showAppInPlayStoreApp(packageName = packageName, intentEditor = intentEditor).onFailure {
-        return openWebsite(
+        return startBrowser(
             url = UriCreator.getTestTrackWebsiteUriForApp(packageName = packageName),
             intentEditor = intentEditor
         )
@@ -489,7 +489,7 @@ inline fun Context.showTestTrackInPlayStoreWebsite(
     contract {
         callsInPlace(intentEditor, InvocationKind.EXACTLY_ONCE)
     }
-    return openWebsite(
+    return startBrowser(
         url = UriCreator.getTestTrackWebsiteUriForApp(packageName = packageName),
         intentEditor = intentEditor
     )
@@ -634,7 +634,7 @@ internal inline fun Context.showDeveloperInPlayStoreInternal(
  * In case of an error the exception is encapsulated in the [Result].
  * You can use [Result.onFailure] for error handling.
  */
-inline fun Context.openWebsite(url: Uri, intentEditor: Intent.() -> Unit = {}): Result<Unit> {
+inline fun Context.startBrowser(url: Uri, intentEditor: Intent.() -> Unit = {}): Result<Unit> {
     contract {
         callsInPlace(intentEditor, InvocationKind.EXACTLY_ONCE)
     }
@@ -654,7 +654,7 @@ inline fun Context.openWebsite(url: Uri, intentEditor: Intent.() -> Unit = {}): 
  * In case of an error the exception is encapsulated in the [Result].
  * You can use [Result.onFailure] for error handling.
  */
-inline fun Context.openWebsite(url: String, intentEditor: Intent.() -> Unit = {}): Result<Unit> {
+inline fun Context.startBrowser(url: String, intentEditor: Intent.() -> Unit = {}): Result<Unit> {
     contract {
         callsInPlace(intentEditor, InvocationKind.EXACTLY_ONCE)
     }
