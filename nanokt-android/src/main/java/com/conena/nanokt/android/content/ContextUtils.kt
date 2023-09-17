@@ -114,8 +114,15 @@ inline val Context.defaultSharedPreferences: SharedPreferences
     get() = getSharedPreferences("${packageName}_preferences", Context.MODE_PRIVATE)
 
 /**
- * Opens various settings screens for the current application.
+ * Opens various settings screens for an application.
  * @param action One of the actions below to get to a specific settings screen.
+ * @param packageName The package name for which the settings page should be displayed.
+ * By default, the package name is determined from the calling context.
+ * @param setPackageUri For some actions like [Settings.ACTION_APPLICATION_DETAILS_SETTINGS]
+ * it is not enough to specify the package name in the Intent Extras.
+ * It must be supplied as a data Uri. Set this parameter to true to do this.
+ * See the documentation for each action to find out if the Uri is required or not.
+ * @param intentEditor Edit the created [Intent] before it is used to start the activity.
  * @return A [Result] object that indicates the result of the action.
  * In case of an error the exception is encapsulated in the [Result].
  * You can use [Result.onFailure] for error handling.
@@ -137,13 +144,19 @@ inline val Context.defaultSharedPreferences: SharedPreferences
  */
 @SuppressLint("InlinedApi")
 inline fun Context.openAppSettings(
-    action: String = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+    action: String = Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+    packageName: String = getPackageName(),
+    setPackageUri: Boolean = action == Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+    intentEditor: Intent.() -> Unit = {}
 ): Result<Unit> {
     return startActivityCatching(
         intent = Intent(action)
-            .setPackageUri(packageName)
             .putExtra(Settings.EXTRA_APP_PACKAGE, packageName)
             .putExtra(Intent.EXTRA_PACKAGE_NAME, packageName)
+            .apply {
+                if (setPackageUri) setPackageUri(packageName)
+                intentEditor()
+            }
     )
 }
 
