@@ -196,16 +196,21 @@ inline fun Context.openAppSettings(
 /**
  * Open the app notification channel settings for a specific channel
  * @param channelId The ID of the channel for which the settings are to be displayed.
+ * @param intentEditor Edit the created [Intent] before it is used to start the activity.
  * @return A [Result] object that indicates the result of the action.
  * In case of an error the exception is encapsulated in the [Result].
  * You can use [Result.onFailure] for error handling.
  */
 @RequiresApi(Build.VERSION_CODES.O)
-inline fun Context.openAppNotificationChannelSettings(channelId: String): Result<Unit> {
+inline fun Context.openAppNotificationChannelSettings(
+    channelId: String,
+    intentEditor: Intent.() -> Unit = {}
+): Result<Unit> {
     return startActivityCatching(
         intent = Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS)
             .putExtra(Settings.EXTRA_APP_PACKAGE, packageName)
             .putExtra(Settings.EXTRA_CHANNEL_ID, channelId)
+            .apply(intentEditor)
     )
 }
 
