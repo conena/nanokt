@@ -114,6 +114,39 @@ inline val Context.defaultSharedPreferences: SharedPreferences
     get() = getSharedPreferences("${packageName}_preferences", Context.MODE_PRIVATE)
 
 /**
+ * Opens various settings screens.
+ * @param action An action to open a settings screen. Some examples are listed below.
+ * @param intentEditor Edit the created [Intent] before it is used to start the activity.
+ * @return A [Result] object that indicates the result of the action.
+ * In case of an error the exception is encapsulated in the [Result].
+ * You can use [Result.onFailure] for error handling.
+ * @see Settings.ACTION_SETTINGS
+ * @see Settings.ACTION_WIRELESS_SETTINGS
+ * @see Settings.ACTION_AIRPLANE_MODE_SETTINGS
+ * @see Settings.ACTION_ACCESSIBILITY_SETTINGS
+ * @see Settings.ACTION_USAGE_ACCESS_SETTINGS
+ * @see Settings.ACTION_SECURITY_SETTINGS
+ * @see Settings.ACTION_PRIVACY_SETTINGS
+ * @see Settings.ACTION_VPN_SETTINGS
+ * @see Settings.ACTION_WIFI_SETTINGS
+ * @see Settings.ACTION_BLUETOOTH_SETTINGS
+ * @see Settings.ACTION_DATE_SETTINGS
+ * @see Settings.ACTION_SOUND_SETTINGS
+ * @see Settings.ACTION_DISPLAY_SETTINGS
+ * @see Settings.ACTION_AUTO_ROTATE_SETTINGS
+ * @see Settings.ACTION_APPLICATION_SETTINGS
+ * @see Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS
+ * @see Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS
+ * @see Settings.ACTION_INTERNAL_STORAGE_SETTINGS
+ */
+inline fun Context.openSettings(
+    action: String = Settings.ACTION_SETTINGS,
+    intentEditor: Intent.() -> Unit = {}
+): Result<Unit> {
+    return startActivityCatching(intent = Intent(action).apply(intentEditor))
+}
+
+/**
  * Opens various settings screens for an application.
  * @param action One of the actions below to get to a specific settings screen.
  * @param packageName The package name for which the settings page should be displayed.
