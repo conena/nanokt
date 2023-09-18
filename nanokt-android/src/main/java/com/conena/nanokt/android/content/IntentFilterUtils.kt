@@ -21,23 +21,7 @@
 package com.conena.nanokt.android.content
 
 import android.content.IntentFilter
-import androidx.annotation.CheckResult
-import com.conena.nanokt.annotations.ExperimentalNanoKtApi
 
-/**
- * Create a new intent filter with multiple actions.
- * @param actions The intent actions to match against.
- * @return the created intent filter.
- */
-@ExperimentalNanoKtApi
-@CheckResult
-inline fun createIntentFilter(vararg actions: String): IntentFilter {
-    val filter = IntentFilter()
-    for (action in actions) {
-        filter.addAction(action)
-    }
-    return filter
-}
 
 /**
  * Add the given [actions] to the intent filter.
