@@ -31,6 +31,61 @@ import com.conena.nanokt.android.net.MimeType
 import com.conena.nanokt.annotations.ExperimentalNanoKtApi
 
 /**
+ * The IntentCompanion functions are used internally by NanoKt.
+ * They are placed in this object because only very few developers need them directly.
+ * The usage is experimental because the object solution is not optimal.
+ * It will be resolved as soon as statics are available in Kotlin.
+ */
+@ExperimentalNanoKtApi
+object IntentCompanion {
+
+    /**
+     * Create an [Intent] to share plain text and/or an attachment.
+     * How the individual parameters are interpreted depends on the application that is started with the intent.
+     * @param subject The subject to send.
+     * @param text The text to send.
+     * @param attachment A content URI holding a stream of data to send.
+     * @return The created intent.
+     */
+    @CheckResult
+    inline fun createSendIntent(
+        subject: String? = null,
+        text: String? = null,
+        attachment: Uri? = null
+    ): Intent {
+        val intent = Intent(Intent.ACTION_SEND).setType(MimeType.PLAIN_TEXT)
+        if (subject != null) intent.putExtra(Intent.EXTRA_SUBJECT, subject)
+        if (text != null) intent.putExtra(Intent.EXTRA_TEXT, text)
+        if (attachment != null) intent.putExtra(Intent.EXTRA_STREAM, attachment)
+        return intent
+    }
+
+    /**
+     * Create an [Intent] to start a mail application.
+     * @param subject The subject of the mail.
+     * @param body The body of the mail.
+     * @param recipient The recipient's mail address.
+     * @param attachment A content URI holding a stream of data to send.
+     * @return The created intent.
+     */
+    @CheckResult
+    inline fun createMailSendIntent(
+        subject: String? = null,
+        body: String? = null,
+        recipient: String? = null,
+        attachment: Uri? = null
+    ): Intent {
+        val intent = Intent(Intent.ACTION_SEND).setType(MimeType.MAIL_RFC822)
+        if (recipient != null) intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(recipient))
+        if (subject != null) intent.putExtra(Intent.EXTRA_SUBJECT, subject)
+        if (body != null) intent.putExtra(Intent.EXTRA_TEXT, body)
+        if (attachment != null) intent.putExtra(Intent.EXTRA_STREAM, attachment)
+        return intent
+    }
+
+}
+
+/**
  * Wrap the current intent into a new [Intent.ACTION_CHOOSER] intent.
  * @param title Optional title that will be displayed in the chooser. This does not work with actions
  * [Intent.ACTION_SEND] and [Intent.ACTION_SEND_MULTIPLE].
@@ -51,52 +106,6 @@ inline fun Intent.chooser(title: CharSequence? = null): Intent = Intent.createCh
 inline fun Intent.setPackageUri(packageName: String): Intent {
     data = Uri.fromParts("package", packageName, null)
     return this
-}
-
-/**
- * Create an [Intent] to share plain text and/or an attachment.
- * How the individual parameters are interpreted depends on the application that is started with the intent.
- * @param subject The subject to send.
- * @param text The text to send.
- * @param attachment A content URI holding a stream of data to send.
- * @return The created intent.
- */
-@ExperimentalNanoKtApi
-@CheckResult
-inline fun createSendIntent(
-    subject: String? = null,
-    text: String? = null,
-    attachment: Uri? = null
-): Intent {
-    val intent = Intent(Intent.ACTION_SEND).setType(MimeType.PLAIN_TEXT)
-    if (subject != null) intent.putExtra(Intent.EXTRA_SUBJECT, subject)
-    if (text != null) intent.putExtra(Intent.EXTRA_TEXT, text)
-    if (attachment != null) intent.putExtra(Intent.EXTRA_STREAM, attachment)
-    return intent
-}
-
-/**
- * Create an [Intent] to start a mail application.
- * @param subject The subject of the mail.
- * @param body The body of the mail.
- * @param recipient The recipient's mail address.
- * @param attachment A content URI holding a stream of data to send.
- * @return The created intent.
- */
-@ExperimentalNanoKtApi
-@CheckResult
-inline fun createMailSendIntent(
-    subject: String? = null,
-    body: String? = null,
-    recipient: String? = null,
-    attachment: Uri? = null
-): Intent {
-    val intent = Intent(Intent.ACTION_SEND).setType(MimeType.MAIL_RFC822)
-    if (recipient != null) intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(recipient))
-    if (subject != null) intent.putExtra(Intent.EXTRA_SUBJECT, subject)
-    if (body != null) intent.putExtra(Intent.EXTRA_TEXT, body)
-    if (attachment != null) intent.putExtra(Intent.EXTRA_STREAM, attachment)
-    return intent
 }
 
 /**

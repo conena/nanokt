@@ -688,7 +688,7 @@ inline fun Context.share(
         callsInPlace(intentEditor, InvocationKind.EXACTLY_ONCE)
     }
     return startActivityCatchingWithIntentEditor(
-        intent = createSendIntent(
+        intent = IntentCompanion.createSendIntent(
             subject = subject,
             text = text,
             attachment = attachment
@@ -721,7 +721,7 @@ inline fun Context.share(
         callsInPlace(intentEditor, InvocationKind.EXACTLY_ONCE)
     }
     return startActivityCatchingWithIntentEditor(
-        intent = createSendIntent(
+        intent = IntentCompanion.createSendIntent(
             subject = getStringOrNull(subject),
             text = getStringOrNull(text),
             attachment = attachment
@@ -754,7 +754,7 @@ inline fun Context.startMailApplication(
         callsInPlace(intentEditor, InvocationKind.EXACTLY_ONCE)
     }
     return startActivityCatchingWithIntentEditor(
-        intent = createMailSendIntent(
+        intent = IntentCompanion.createMailSendIntent(
             subject = subject,
             body = body,
             recipient = recipient,
