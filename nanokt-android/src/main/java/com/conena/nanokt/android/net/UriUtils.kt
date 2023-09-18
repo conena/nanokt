@@ -29,13 +29,13 @@ import java.net.URISyntaxException
 import java.net.URL
 
 /**
- * The UriCreator functions are used internally by NanoKt.
+ * The UriCompanion functions are used internally by NanoKt.
  * They are placed in this object because only very few developers need them directly.
  * The usage is experimental because the object solution is not optimal.
  * It will be resolved as soon as statics are available in Kotlin.
  */
 @ExperimentalNanoKtApi
-object UriCreator {
+object UriCompanion {
 
     /**
      * Builds an [Uri] to show the application with [packageName] in the Google Play Store.

@@ -35,7 +35,7 @@ class UriUtilsTest {
     @Test
     fun getPlayStoreUriForApp_web() {
         val expected = "https://play.google.com/store/apps/details?id=com.conena.navigation.gesture.control"
-        val result = UriCreator.getPlayStoreUriForApp(
+        val result = UriCompanion.getPlayStoreUriForApp(
             packageName = "com.conena.navigation.gesture.control",
             webLink = true
         )
@@ -45,7 +45,7 @@ class UriUtilsTest {
     @Test
     fun getPlayStoreUriForApp_web_ref() {
         val expected = "https://play.google.com/store/apps/details?id=com.conena.navigation.gesture.control&referrer=$referrerEncoded"
-        val result = UriCreator.getPlayStoreUriForApp(
+        val result = UriCompanion.getPlayStoreUriForApp(
             packageName = "com.conena.navigation.gesture.control",
             referrer = referrerDecoded,
             webLink = true
@@ -56,7 +56,7 @@ class UriUtilsTest {
     @Test
     fun getPlayStoreUriForApp_market() {
         val expected = "market://details?id=com.conena.navigation.gesture.control"
-        val result = UriCreator.getPlayStoreUriForApp(
+        val result = UriCompanion.getPlayStoreUriForApp(
             packageName = "com.conena.navigation.gesture.control"
         )
         assertThat(result.toString()).isEqualTo(expected)
@@ -65,7 +65,7 @@ class UriUtilsTest {
     @Test
     fun getPlayStoreUriForApp_market_ref() {
         val expected = "market://details?id=com.conena.navigation.gesture.control&referrer=$referrerEncoded"
-        val result = UriCreator.getPlayStoreUriForApp(
+        val result = UriCompanion.getPlayStoreUriForApp(
             packageName = "com.conena.navigation.gesture.control",
             referrer = referrerDecoded
         )
@@ -75,14 +75,14 @@ class UriUtilsTest {
     @Test
     fun getTestTrackWebsiteUriForApp() {
         val expected = "https://play.google.com/apps/testing/com.conena.navigation.gesture.control"
-        val result = UriCreator.getTestTrackWebsiteUriForApp(packageName = "com.conena.navigation.gesture.control")
+        val result = UriCompanion.getTestTrackWebsiteUriForApp(packageName = "com.conena.navigation.gesture.control")
         assertThat(result.toString()).isEqualTo(expected)
     }
 
     @Test
     fun getPlayStoreUriForDeveloper_web() {
         val expected = "https://play.google.com/store/apps/developer?id=Conena"
-        val result = UriCreator.getPlayStoreUriForDeveloper(
+        val result = UriCompanion.getPlayStoreUriForDeveloper(
             developerName = "Conena",
             webLink = true
         )
@@ -92,7 +92,7 @@ class UriUtilsTest {
     @Test
     fun getPlayStoreUriForDeveloper_market() {
         val expected = "market://developer?id=Conena"
-        val result = UriCreator.getPlayStoreUriForDeveloper(
+        val result = UriCompanion.getPlayStoreUriForDeveloper(
             developerName = "Conena"
         )
         assertThat(result.toString()).isEqualTo(expected)

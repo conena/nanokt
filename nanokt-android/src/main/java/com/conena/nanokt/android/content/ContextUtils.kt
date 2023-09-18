@@ -46,7 +46,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.IconCompat
 import androidx.core.net.toUri
-import com.conena.nanokt.android.net.UriCreator
+import com.conena.nanokt.android.net.UriCompanion
 import com.conena.nanokt.android.util.isColorTypeCompat
 import com.conena.nanokt.annotations.ExperimentalNanoKtApi
 import kotlin.contracts.InvocationKind
@@ -453,7 +453,7 @@ inline fun Context.showDeveloperInPlayStore(
  * @return A [Result] object that indicates the result of the action.
  * In case of an error the exception is encapsulated in the [Result].
  * You can use [Result.onFailure] for error handling.
- * @see UriCreator.getTestTrackWebsiteUriForApp
+ * @see UriCompanion.getTestTrackWebsiteUriForApp
  */
 inline fun Context.showTestTrackInPlayStore(
     packageName: String = this.packageName,
@@ -464,7 +464,7 @@ inline fun Context.showTestTrackInPlayStore(
     }
     return showAppInPlayStoreApp(packageName = packageName, intentEditor = intentEditor).onFailure {
         return startBrowser(
-            url = UriCreator.getTestTrackWebsiteUriForApp(packageName = packageName),
+            url = UriCompanion.getTestTrackWebsiteUriForApp(packageName = packageName),
             intentEditor = intentEditor
         )
     }
@@ -480,7 +480,7 @@ inline fun Context.showTestTrackInPlayStore(
  * @return A [Result] object that indicates the result of the action.
  * In case of an error the exception is encapsulated in the [Result].
  * You can use [Result.onFailure] for error handling.
- * @see UriCreator.getTestTrackWebsiteUriForApp
+ * @see UriCompanion.getTestTrackWebsiteUriForApp
  */
 inline fun Context.showTestTrackInPlayStoreWebsite(
     packageName: String = this.packageName,
@@ -490,7 +490,7 @@ inline fun Context.showTestTrackInPlayStoreWebsite(
         callsInPlace(intentEditor, InvocationKind.EXACTLY_ONCE)
     }
     return startBrowser(
-        url = UriCreator.getTestTrackWebsiteUriForApp(packageName = packageName),
+        url = UriCompanion.getTestTrackWebsiteUriForApp(packageName = packageName),
         intentEditor = intentEditor
     )
 }
@@ -578,7 +578,7 @@ internal inline fun Context.showAppInPlayStoreInternal(
     return startActivityCatchingWithIntentEditor(
         intent = Intent(
             Intent.ACTION_VIEW,
-            UriCreator.getPlayStoreUriForApp(
+            UriCompanion.getPlayStoreUriForApp(
                 packageName = packageName,
                 referrer = referrer,
                 webLink = openWeb
@@ -615,7 +615,7 @@ internal inline fun Context.showDeveloperInPlayStoreInternal(
     return startActivityCatchingWithIntentEditor(
         intent = Intent(
             Intent.ACTION_VIEW,
-            UriCreator.getPlayStoreUriForDeveloper(
+            UriCompanion.getPlayStoreUriForDeveloper(
                 developerName = developerName,
                 webLink = openWeb
             )
