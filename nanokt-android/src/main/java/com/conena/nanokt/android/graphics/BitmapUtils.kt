@@ -21,6 +21,7 @@
 package com.conena.nanokt.android.graphics
 
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import kotlin.contracts.InvocationKind
 import kotlin.contracts.contract
 
@@ -38,4 +39,25 @@ inline fun <R> Bitmap.use(block: (Bitmap) -> R): R {
     } finally {
         recycle()
     }
+}
+
+/**
+ * Decode a byte array of compressed image data to a [Bitmap].
+ * @param offset Offset in the receiver to start parsing.
+ * @param length The number of bytes to parse.
+ * @param options Options that control down sampling and whether the image should be completely decoded.
+ * @return The decoded bitmap, or null if the receiver could not be decoded or the option
+ * [BitmapFactory.Options.inJustDecodeBounds] was set.
+ * @throws IllegalArgumentException In case of incompatible options.
+ * See [BitmapFactory.decodeByteArray] for details.
+ * @throws IndexOutOfBoundsException If offset or length are negative
+ * or more bytes are to be read than the receiver is long (taking into account the offset)
+ */
+@Throws(IllegalArgumentException::class, ArrayIndexOutOfBoundsException::class)
+inline fun ByteArray.decodeToBitmap(
+    offset: Int = 0,
+    length: Int = size,
+    options: BitmapFactory.Options? = null
+): Bitmap? {
+    return BitmapFactory.decodeByteArray(this, offset, length, options)
 }
