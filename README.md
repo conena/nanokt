@@ -121,24 +121,20 @@ You want to display the Playstore page of another app (e.g. paid version, plugin
 
 Solution without NanoKt
 ```kotlin
-val appUri = Uri.Builder()
-    .scheme("market")
-    .authority("details")
-    .appendQueryParameter("id", "com.conena.logcat.reader")
-    .build()
-val appIntent = Intent(Intent.ACTION_VIEW, appUri)
+val intent = Intent(
+    Intent.ACTION_VIEW,
+    Uri.Builder()
+        .scheme("https")
+        .authority("play.google.com")
+        .path("store/apps/details")
+        .appendQueryParameter("id", "com.conena.logcat.reader")
+        .build()
+).setPackage("com.android.vending")
 try {
     try {
-        startActivity(appIntent)
+        startActivity(intent)
     } catch (_: ActivityNotFoundException) {
-        val webUri = Uri.Builder()
-            .scheme("https")
-            .authority("play.google.com")
-            .path("store/apps/details")
-            .appendQueryParameter("id", "com.conena.logcat.reader")
-            .build()
-        val webIntent = Intent(Intent.ACTION_VIEW, webUri)
-        startActivity(webIntent)
+        startActivity(intent.setPackage(null))
     }
 } catch (_: ActivityNotFoundException) {
     Toast.makeText(this, "Neither Google Play nor browser installed.", Toast.LENGTH_SHORT).show()
