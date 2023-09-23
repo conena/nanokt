@@ -165,11 +165,11 @@ startBrowser(url = "https://github.com/conena/nanokt").onFailure {
     toastShort("Go get a browser!")
 }
 // Share text
-share(text = "12345679")
+startSendActivityChooser(text = "12345679")
 // More complex share operation
-share(subject = "subject", text = "text", attachment = attachmentUri)
+startSendActivityChooser(subject = "subject", text = "text", attachment = attachmentUri)
 // Share with mail
-startMailApplication(subject = "subject", body = "text", attachment = attachmentUri).onFailure {
+startSendMailActivity(subject = "subject", body = "text", attachment = attachmentUri).onFailure {
     toastShort("No mail application installed")
 }
 ```

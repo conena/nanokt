@@ -499,25 +499,29 @@ inline fun Context.startBrowser(url: String, intentEditor: Intent.() -> Unit = {
 
 /**
  * Share plain text and/or an attachment.
- * How the individual parameters are interpreted depends on the application that the user
+ * How the individual parameters are interpreted depends on the activity that the user
  * selects to handle the intent.
  * If invoked on a non-activity context [Intent.FLAG_ACTIVITY_NEW_TASK] is added automatically.
  * @param subject The subject to send.
  * @param text The text to send.
  * @param attachment A content URI holding a stream of data to send.
- * @param intentEditor Edit the created [Intent] before it is used to start the activity.
+ * @param intentEditor Edit the created [Intent] before it is used to create the chooser.
  * Errors occurring in the [intentEditor] are thrown further and not encapsulated in the [Result].
+ * @param chooserIntentEditor Edit the created chooser [Intent] before it is used to start the chooser.
+ * Errors occurring in the [chooserIntentEditor] are thrown further and not encapsulated in the [Result].
  * @return A [Result] object that indicates the result of the action.
  * In case of an error the exception is encapsulated in the [Result].
  * You can use [Result.onFailure] for error handling.
  */
-inline fun Context.share(
+inline fun Context.startSendActivityChooser(
     subject: String? = null,
     text: String? = null,
     attachment: Uri? = null,
+    chooserIntentEditor: Intent.() -> Unit = {},
     intentEditor: Intent.() -> Unit = {}
 ): Result<Unit> {
     contract {
+        callsInPlace(chooserIntentEditor, InvocationKind.AT_MOST_ONCE)
         callsInPlace(intentEditor, InvocationKind.EXACTLY_ONCE)
     }
     return startActivityCatchingWithIntentEditor(
@@ -525,46 +529,49 @@ inline fun Context.share(
             subject = subject,
             text = text,
             attachment = attachment
-        ),
-        intentEditor = intentEditor
+        ).apply(intentEditor).chooser(),
+        intentEditor = chooserIntentEditor
     )
 }
 
 /**
  * Share plain text and/or an attachment.
- * How the individual parameters are interpreted depends on the application that the user
+ * How the individual parameters are interpreted depends on the activity that the user
  * selects to handle the intent.
  * If invoked on a non-activity context [Intent.FLAG_ACTIVITY_NEW_TASK] is added automatically.
  * @param subject The string resource of the subject to send.
  * @param text The string resource of the text to send.
  * @param attachment A content URI holding a stream of data to send.
- * @param intentEditor Edit the created [Intent] before it is used to start the activity.
+ * @param intentEditor Edit the created [Intent] before it is used to create the chooser.
  * Errors occurring in the [intentEditor] are thrown further and not encapsulated in the [Result].
+ * @param chooserIntentEditor Edit the created chooser [Intent] before it is used to start the chooser.
+ * Errors occurring in the [chooserIntentEditor] are thrown further and not encapsulated in the [Result].
  * @return A [Result] object that indicates the result of the action.
  * In case of an error the exception is encapsulated in the [Result].
  * You can use [Result.onFailure] for error handling.
  */
-inline fun Context.share(
+inline fun Context.startSendActivityChooser(
     @StringRes subject: Int? = null,
     @StringRes text: Int? = null,
     attachment: Uri? = null,
+    chooserIntentEditor: Intent.() -> Unit = {},
     intentEditor: Intent.() -> Unit = {}
 ): Result<Unit> {
     contract {
+        callsInPlace(chooserIntentEditor, InvocationKind.AT_MOST_ONCE)
         callsInPlace(intentEditor, InvocationKind.EXACTLY_ONCE)
     }
-    return startActivityCatchingWithIntentEditor(
-        intent = IntentCompanion.createSendIntent(
-            subject = getStringOrNull(subject),
-            text = getStringOrNull(text),
-            attachment = attachment
-        ),
+    return startSendActivityChooser(
+        subject = getStringOrNull(subject),
+        text = getStringOrNull(text),
+        attachment = attachment,
+        chooserIntentEditor = chooserIntentEditor,
         intentEditor = intentEditor
     )
 }
 
 /**
- * Start a mail application.
+ * Start the user's default mail client to create a new mail.
  * If invoked on a non-activity context [Intent.FLAG_ACTIVITY_NEW_TASK] is added automatically.
  * @param subject The subject of the mail.
  * @param body The body of the mail.
@@ -576,7 +583,7 @@ inline fun Context.share(
  * In case of an error the exception is encapsulated in the [Result].
  * You can use [Result.onFailure] for error handling.
  */
-inline fun Context.startMailApplication(
+inline fun Context.startSendMailActivity(
     subject: String? = null,
     body: String? = null,
     recipient: String? = null,
