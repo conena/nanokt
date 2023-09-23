@@ -311,317 +311,150 @@ internal inline fun Context.startActivityCatchingWithIntentEditor(
 
 /**
  * Opens the Play Store overview page for the given app.
- * In the first step, it tries to start the Play Store app on the device.
- * If this is not successful, an attempt is made to open the Play Store in the browser.
- * If this also fails, the exception is encapsulated in the returned [Result].
  * If invoked on a non-activity context [Intent.FLAG_ACTIVITY_NEW_TASK] is added automatically.
  * @param packageName The unique application id for the desired application.
  * @param referrer Value for the referrer parameter in the URI. The value is encoded by the function.
  * If null, no referrer is added.
+ * @param browserAsFallback `true` to try opening the Play Store in the browser (or any other app
+ * that can handle the intent) if opening the Play Store app was unsuccessful.
  * @param intentEditor Edit the created [Intent] before it is used to start the activity.
  * Errors occurring in the [intentEditor] are thrown further and not encapsulated in the [Result].
  * @return A [Result] object that indicates the result of the action.
  * In case of an error the exception is encapsulated in the [Result].
  * You can use [Result.onFailure] for error handling.
- * @see showAppInPlayStoreApp
- * @see showAppInPlayStoreWebsite
  */
-inline fun Context.showAppInPlayStore(
+inline fun Context.startPlayStoreForApp(
     packageName: String = this.packageName,
     referrer: String? = null,
+    browserAsFallback: Boolean = true,
     intentEditor: Intent.() -> Unit = {}
 ): Result<Unit> {
     contract {
         callsInPlace(intentEditor, InvocationKind.AT_LEAST_ONCE)
     }
-    return showAppInPlayStoreApp(
-        packageName = packageName,
-        referrer = referrer,
-        intentEditor = intentEditor
-    ).onFailure {
-        return showAppInPlayStoreWebsite(
-            packageName = packageName,
-            referrer = referrer,
-            intentEditor = intentEditor
-        )
-    }
-}
-
-/**
- * Opens the Play Store overview page for the given app in the user's default web browser.
- * If this fails, the error is encapsulated in the returned [Result].
- * If invoked on a non-activity context [Intent.FLAG_ACTIVITY_NEW_TASK] is added automatically.
- * @param packageName The unique application id for the desired application.
- * @param referrer Value for the referrer parameter in the URI. The value is encoded by the function.
- * If null, no referrer is added.
- * @param intentEditor Edit the created [Intent] before it is used to start the activity.
- * Errors occurring in the [intentEditor] are thrown further and not encapsulated in the [Result].
- * @return A [Result] object that indicates the result of the action.
- * In case of an error the exception is encapsulated in the [Result].
- * You can use [Result.onFailure] for error handling.
- * @see showAppInPlayStoreApp
- * @see showAppInPlayStore
- */
-inline fun Context.showAppInPlayStoreWebsite(
-    packageName: String = this.packageName,
-    referrer: String? = null,
-    intentEditor: Intent.() -> Unit = {}
-): Result<Unit> {
-    contract {
-        callsInPlace(intentEditor, InvocationKind.EXACTLY_ONCE)
-    }
-    return showAppInPlayStoreInternal(
-        packageName = packageName,
-        referrer = referrer,
-        openWeb = true,
-        intentEditor = intentEditor
-    )
-}
-
-/**
- * Opens the Play Store overview page for the given app in the Play Store app.
- * If this fails, the exception is encapsulated in the returned [Result].
- * If invoked on a non-activity context [Intent.FLAG_ACTIVITY_NEW_TASK] is added automatically.
- * @param packageName The unique application id for the desired application.
- * @param referrer Value for the referrer parameter in the URI. The value is encoded by the function.
- * If null, no referrer is added.
- * @param intentEditor Edit the created [Intent] before it is used to start the activity.
- * Errors occurring in the [intentEditor] are thrown further and not encapsulated in the [Result].
- * @return A [Result] object that indicates the result of the action.
- * In case of an error the exception is encapsulated in the [Result].
- * You can use [Result.onFailure] for error handling.
- * @see showAppInPlayStoreWebsite
- * @see showAppInPlayStore
- */
-inline fun Context.showAppInPlayStoreApp(
-    packageName: String = this.packageName,
-    referrer: String? = null,
-    intentEditor: Intent.() -> Unit = {}
-): Result<Unit> {
-    contract {
-        callsInPlace(intentEditor, InvocationKind.EXACTLY_ONCE)
-    }
-    return showAppInPlayStoreInternal(
-        packageName = packageName,
-        referrer = referrer,
+    return startPlayStoreInternal(
+        uri = UriCompanion.createPlayStoreUriForApp(packageName = packageName, referrer = referrer),
+        browserAsFallback = browserAsFallback,
         intentEditor = intentEditor
     )
 }
 
 /**
  * Opens the Play Store overview page for the given developer.
- * In the first step, it tries to start the Play Store app on the device.
- * If this is not successful, an attempt is made to open the Play Store in the browser.
- * If this also fails, the exception is encapsulated in the returned [Result].
  * If invoked on a non-activity context [Intent.FLAG_ACTIVITY_NEW_TASK] is added automatically.
  * @param developerName The unique developer id.
+ * @param browserAsFallback `true` to try opening the Play Store in the browser (or any other app
+ * that can handle the intent) if opening the Play Store app was unsuccessful.
  * @param intentEditor Edit the created [Intent] before it is used to start the activity.
  * Errors occurring in the [intentEditor] are thrown further and not encapsulated in the [Result].
  * @return A [Result] object that indicates the result of the action.
  * In case of an error the exception is encapsulated in the [Result].
  * You can use [Result.onFailure] for error handling.
- * @see showDeveloperInPlayStoreApp
- * @see showDeveloperInPlayStoreWebsite
  */
-inline fun Context.showDeveloperInPlayStore(
+inline fun Context.startPlayStoreForDeveloper(
     developerName: String,
+    browserAsFallback: Boolean = true,
     intentEditor: Intent.() -> Unit = {}
 ): Result<Unit> {
     contract {
         callsInPlace(intentEditor, InvocationKind.AT_LEAST_ONCE)
     }
-    return showDeveloperInPlayStoreApp(
-        developerName = developerName,
+    return startPlayStoreInternal(
+        uri = UriCompanion.createPlayStoreUriForDeveloper(developerName = developerName),
+        browserAsFallback = browserAsFallback,
+        intentEditor = intentEditor
+    )
+}
+
+/**
+ * Internal method to start the Google Play Store.
+ * If this fails, the exception is encapsulated in the returned [Result].
+ * If invoked on a non-activity context [Intent.FLAG_ACTIVITY_NEW_TASK] is added automatically.
+ * @param uri The [Uri] for the launch intent.
+ * @param browserAsFallback `true` to start the intent without the specified Play Store package
+ * if the start with the specified package fails.
+ * @param intentEditor Edit the created [Intent] before it is used to start the activity.
+ * Errors occurring in the [intentEditor] are thrown further and not encapsulated in the [Result].
+ * @return A [Result] object that indicates the result of the action.
+ * In case of an error the exception is encapsulated in the [Result].
+ * You can use [Result.onFailure] for error handling.
+ */
+@PublishedApi
+internal inline fun Context.startPlayStoreInternal(
+    uri: Uri,
+    browserAsFallback: Boolean = true,
+    intentEditor: Intent.() -> Unit = {}
+): Result<Unit> {
+    contract {
+        callsInPlace(intentEditor, InvocationKind.AT_LEAST_ONCE)
+    }
+    val intent = Intent(Intent.ACTION_VIEW, uri).setPackage("com.android.vending")
+    return startActivityCatchingWithIntentEditor(
+        intent = intent,
         intentEditor = intentEditor
     ).onFailure {
-        return showDeveloperInPlayStoreWebsite(
-            developerName = developerName,
-            intentEditor = intentEditor
-        )
+        if (browserAsFallback) {
+            return startActivityCatchingWithIntentEditor(
+                intent = intent.setPackage(null),
+                intentEditor = intentEditor
+            )
+        }
     }
 }
 
 /**
- * Displays the test track for an app in Google Play. In the first step,
- * an attempt is made to open the details page on the Play Store app.
- * If this fails, the testing page is opened in the browser.
- * If this also fails, the exception is encapsulated in the returned [Result].
+ * Displays the test track for an app in Google Play.
+ * Note: For opening the Play Store app, this is currently not different from displaying the app
+ * overview page.
  * If invoked on a non-activity context [Intent.FLAG_ACTIVITY_NEW_TASK] is added automatically.
  * @param packageName The unique application id for the desired application.
+ * @param startBrowser `true` to open the browser instead of the app. Open Play Store app (`false`)
+ * is default.
+ * @param useFallback `true` to also try the other method (browser or app) if the primary method
+ * was not successful. If startBrowser is `true`, the app is opened as fallback and vice versa.
  * @param intentEditor Edit the created [Intent] before it is used to start the activity.
  * Errors occurring in the [intentEditor] are thrown further and not encapsulated in the [Result].
  * @return A [Result] object that indicates the result of the action.
  * In case of an error the exception is encapsulated in the [Result].
  * You can use [Result.onFailure] for error handling.
- * @see UriCompanion.getTestTrackWebsiteUriForApp
+ * @see UriCompanion.createPlayStoreTestTrackUriForApp
  */
-inline fun Context.showTestTrackInPlayStore(
+inline fun Context.startPlayStoreForTestTrack(
     packageName: String = this.packageName,
+    startBrowser: Boolean = false,
+    useFallback: Boolean = true,
     intentEditor: Intent.() -> Unit = {}
 ): Result<Unit> {
     contract {
         callsInPlace(intentEditor, InvocationKind.AT_LEAST_ONCE)
     }
-    return showAppInPlayStoreApp(packageName = packageName, intentEditor = intentEditor).onFailure {
+    if (startBrowser) {
         return startBrowser(
-            url = UriCompanion.getTestTrackWebsiteUriForApp(packageName = packageName),
+            url = UriCompanion.createPlayStoreTestTrackUriForApp(packageName = packageName),
             intentEditor = intentEditor
-        )
+        ).onFailure {
+            if (useFallback) {
+                return startPlayStoreForApp(
+                    packageName = packageName,
+                    browserAsFallback = false,
+                    intentEditor = intentEditor
+                )
+            }
+        }
+    } else {
+        return startPlayStoreForApp(
+            packageName = packageName,
+            browserAsFallback = false,
+            intentEditor = intentEditor
+        ).onFailure {
+            if (useFallback) {
+                return startBrowser(
+                    url = UriCompanion.createPlayStoreTestTrackUriForApp(packageName = packageName),
+                    intentEditor = intentEditor
+                )
+            }
+        }
     }
-}
-
-/**
- * Opens the Play Store testing page for the given [packageName] in the user's default web browser.
- * If this fails, the exception is encapsulated in the returned [Result].
- * If invoked on a non-activity context [Intent.FLAG_ACTIVITY_NEW_TASK] is added automatically.
- * @param packageName The unique application id for the desired application.
- * @param intentEditor Edit the created [Intent] before it is used to start the activity.
- * Errors occurring in the [intentEditor] are thrown further and not encapsulated in the [Result].
- * @return A [Result] object that indicates the result of the action.
- * In case of an error the exception is encapsulated in the [Result].
- * You can use [Result.onFailure] for error handling.
- * @see UriCompanion.getTestTrackWebsiteUriForApp
- */
-inline fun Context.showTestTrackInPlayStoreWebsite(
-    packageName: String = this.packageName,
-    intentEditor: Intent.() -> Unit = {}
-): Result<Unit> {
-    contract {
-        callsInPlace(intentEditor, InvocationKind.EXACTLY_ONCE)
-    }
-    return startBrowser(
-        url = UriCompanion.getTestTrackWebsiteUriForApp(packageName = packageName),
-        intentEditor = intentEditor
-    )
-}
-
-/**
- * Opens the Play Store overview page for the given developer in the user's default web browser.
- * If this fails, the exception is encapsulated in the [Result].
- * If invoked on a non-activity context [Intent.FLAG_ACTIVITY_NEW_TASK] is added automatically.
- * @param developerName The unique developer id.
- * @param intentEditor Edit the created [Intent] before it is used to start the activity.
- * Errors occurring in the [intentEditor] are thrown further and not encapsulated in the [Result].
- * @return A [Result] object that indicates the result of the action.
- * In case of an error the exception is encapsulated in the [Result].
- * You can use [Result.onFailure] for error handling.
- * @see showDeveloperInPlayStoreApp
- * @see showDeveloperInPlayStore
- */
-inline fun Context.showDeveloperInPlayStoreWebsite(
-    developerName: String,
-    intentEditor: Intent.() -> Unit = {}
-): Result<Unit> {
-    contract {
-        callsInPlace(intentEditor, InvocationKind.EXACTLY_ONCE)
-    }
-    return showDeveloperInPlayStoreInternal(
-        developerName = developerName,
-        openWeb = true,
-        intentEditor = intentEditor
-    )
-}
-
-/**
- * Opens the Play Store overview page for the given developer in the Play Store app.
- * If this fails, the exception is encapsulated in the returned [Result].
- * If invoked on a non-activity context [Intent.FLAG_ACTIVITY_NEW_TASK] is added automatically.
- * @param developerName The unique developer id.
- * @param intentEditor Edit the created [Intent] before it is used to start the activity.
- * Errors occurring in the [intentEditor] are thrown further and not encapsulated in the [Result].
- * @return A [Result] object that indicates the result of the action.
- * In case of an error the exception is encapsulated in the [Result].
- * You can use [Result.onFailure] for error handling.
- * @see showDeveloperInPlayStoreWebsite
- * @see showDeveloperInPlayStore
- */
-inline fun Context.showDeveloperInPlayStoreApp(
-    developerName: String,
-    intentEditor: Intent.() -> Unit = {}
-): Result<Unit> {
-    contract {
-        callsInPlace(intentEditor, InvocationKind.EXACTLY_ONCE)
-    }
-    return showDeveloperInPlayStoreInternal(
-        developerName = developerName,
-        intentEditor = intentEditor
-    )
-}
-
-/**
- * Opens the Play Store overview page for the given app.
- * If this fails, the exception is encapsulated in the returned [Result].
- * If invoked on a non-activity context [Intent.FLAG_ACTIVITY_NEW_TASK] is added automatically.
- * @param packageName The unique application id for the desired application.
- * @param referrer Value for the referrer parameter in the URI. The value is encoded by the function.
- * If null, no referrer is added.
- * @param openWeb `true` to open the user's default browser instead of the Play Store app.
- * @param intentEditor Edit the created [Intent] before it is used to start the activity.
- * Errors occurring in the [intentEditor] are thrown further and not encapsulated in the [Result].
- * @return A [Result] object that indicates the result of the action.
- * In case of an error the exception is encapsulated in the [Result].
- * You can use [Result.onFailure] for error handling.
- * @see showAppInPlayStore
- * @see showAppInPlayStoreApp
- * @see showAppInPlayStoreWebsite
- */
-@PublishedApi
-internal inline fun Context.showAppInPlayStoreInternal(
-    packageName: String,
-    referrer: String?,
-    openWeb: Boolean = false,
-    intentEditor: Intent.() -> Unit = {}
-): Result<Unit> {
-    contract {
-        callsInPlace(intentEditor, InvocationKind.EXACTLY_ONCE)
-    }
-    return startActivityCatchingWithIntentEditor(
-        intent = Intent(
-            Intent.ACTION_VIEW,
-            UriCompanion.getPlayStoreUriForApp(
-                packageName = packageName,
-                referrer = referrer,
-                webLink = openWeb
-            )
-        ),
-        intentEditor = intentEditor
-    )
-}
-
-/**
- * Opens the Play Store overview page for the given developer.
- * If this fails, the exception is encapsulated in the returned [Result].
- * If invoked on a non-activity context [Intent.FLAG_ACTIVITY_NEW_TASK] is added automatically.
- * @param developerName  The unique developer id.
- * @param openWeb `true` to open the user's default browser instead of the Play Store app.
- * @param intentEditor Edit the created [Intent] before it is used to start the activity.
- * Errors occurring in the [intentEditor] are thrown further and not encapsulated in the [Result].
- * @return A [Result] object that indicates the result of the action.
- * In case of an error the exception is encapsulated in the [Result].
- * You can use [Result.onFailure] for error handling.
- * @see showAppInPlayStore
- * @see showAppInPlayStoreApp
- * @see showAppInPlayStoreWebsite
- */
-@PublishedApi
-internal inline fun Context.showDeveloperInPlayStoreInternal(
-    developerName: String,
-    openWeb: Boolean = false,
-    intentEditor: Intent.() -> Unit = {}
-): Result<Unit> {
-    contract {
-        callsInPlace(intentEditor, InvocationKind.EXACTLY_ONCE)
-    }
-    return startActivityCatchingWithIntentEditor(
-        intent = Intent(
-            Intent.ACTION_VIEW,
-            UriCompanion.getPlayStoreUriForDeveloper(
-                developerName = developerName,
-                webLink = openWeb
-            )
-        ),
-        intentEditor = intentEditor
-    )
 }
 
 /**

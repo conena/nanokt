@@ -163,7 +163,7 @@ startAppSettings()
 // Show the notification settings of your app in the system settings
 startAppSettings(action = Settings.ACTION_APP_NOTIFICATION_SETTINGS)
 // Direct a user to the beta test of your app
-showTestTrackInPlayStore(packageName = "con.conena.navigation.gesture.control")
+startPlayStoreForTestTrack(packageName = "con.conena.navigation.gesture.control")
 // Open a website
 startBrowser(url = "https://github.com/conena/nanokt").onFailure {
     toastShort("Go get a browser!")

@@ -42,19 +42,14 @@ object UriCompanion {
      * @param packageName The unique application id for the desired application.
      * @param referrer Value for the referrer parameter in the URI. The value is encoded by the function.
      * If null, no referrer is added.
-     * @param webLink `true` to get a web uri (play.google.com) instead of an uri to open the Play Store App.
      * @return The created [Uri].
      */
     @CheckResult
-    inline fun getPlayStoreUriForApp(
-        packageName: String,
-        referrer: String? = null,
-        webLink: Boolean = false
-    ): Uri {
+    inline fun createPlayStoreUriForApp(packageName: String, referrer: String? = null): Uri {
         return Uri.Builder()
-            .scheme(if (webLink) "https" else "market")
-            .authority(if (webLink) "play.google.com" else "details")
-            .path(if (webLink) "store/apps/details" else null)
+            .scheme("https")
+            .authority("play.google.com")
+            .path("store/apps/details")
             .appendQueryParameter("id", packageName)
             .apply {
                 if (referrer != null) appendQueryParameter("referrer", referrer)
@@ -65,18 +60,14 @@ object UriCompanion {
     /**
      * Builds an [Uri] to show the developer with [developerName] in the Google Play Store.
      * @param developerName The unique developer id for the desired developer account.
-     * @param webLink `true` to get a web uri (play.google.com) instead of an uri to open the Play Store App.
      * @return The created [Uri].
      */
     @CheckResult
-    inline fun getPlayStoreUriForDeveloper(
-        developerName: String,
-        webLink: Boolean = false
-    ): Uri {
+    inline fun createPlayStoreUriForDeveloper(developerName: String, ): Uri {
         return Uri.Builder()
-            .scheme(if (webLink) "https" else "market")
-            .authority(if (webLink) "play.google.com" else "developer")
-            .path(if (webLink) "store/apps/developer" else null)
+            .scheme("https")
+            .authority("play.google.com")
+            .path("store/apps/developer")
             .appendQueryParameter("id", developerName)
             .build()
     }
@@ -87,7 +78,7 @@ object UriCompanion {
      * @return The created [Uri].
      */
     @CheckResult
-    inline fun getTestTrackWebsiteUriForApp(packageName: String): Uri {
+    inline fun createPlayStoreTestTrackUriForApp(packageName: String): Uri {
         return Uri.Builder()
             .scheme("https")
             .authority("play.google.com")
