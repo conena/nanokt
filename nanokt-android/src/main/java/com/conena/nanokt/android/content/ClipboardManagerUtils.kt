@@ -15,7 +15,7 @@
  *
  */
 
-@file:JvmName(name = "ClipboardUtils")
+@file:JvmName(name = "ClipboardManagerUtils")
 @file:Suppress("NOTHING_TO_INLINE", "unused")
 
 package com.conena.nanokt.android.content

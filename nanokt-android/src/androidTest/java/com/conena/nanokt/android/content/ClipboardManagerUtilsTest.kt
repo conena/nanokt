@@ -28,7 +28,7 @@ import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Test
 
-class ClipboardUtilsTest {
+class ClipboardManagerUtilsTest {
 
     private lateinit var instrumentation: Instrumentation
     private lateinit var context: Context
