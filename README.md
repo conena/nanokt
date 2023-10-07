@@ -19,13 +19,13 @@ repositories {
 
 dependencies {
     // Extensions for Android
-    implementation 'com.conena.nanokt:nanokt-android:1.0.0-beta05'
+    implementation 'com.conena.nanokt:nanokt-android:1.0.0-beta06'
     // Pure Kotlin Extensions
-    implementation 'com.conena.nanokt:nanokt:1.0.0-beta05'
+    implementation 'com.conena.nanokt:nanokt:1.0.0-beta06'
     // Extensions for the Java standard library
-    implementation 'com.conena.nanokt:nanokt-jvm:1.0.0-beta05'
+    implementation 'com.conena.nanokt:nanokt-jvm:1.0.0-beta06'
     // Extensions for threads in Android. Not needed if you use coroutines
-    implementation 'com.conena.nanokt:nanokt-android-threads:1.0.0-beta05'
+    implementation 'com.conena.nanokt:nanokt-android-threads:1.0.0-beta06'
 }
 ```
 
