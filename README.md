@@ -143,7 +143,7 @@ try {
 
 Solution with NanoKt
 ```kotlin
-showAppInPlayStore(packageName = "com.conena.logcat.reader").onFailure {
+startPlayStoreForApp(packageName = "com.conena.logcat.reader").onFailure {
     toastShort("Neither Google Play nor browser installed.")
 }
 ```
