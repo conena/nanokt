@@ -112,7 +112,7 @@ val isAirplaneModeEnabled = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JEL
 
 Solution with NanoKt
 ```kotlin
-val isAirplaneModeEnabled = settings.airplaneModeEnabled
+val isAirplaneModeEnabled = settings.isAirplaneModeEnabled
 ```
 Via the extension property "settings" NanoKt provides a variety of system settings to read and convenient methods to easily load additional settings as needed.
 

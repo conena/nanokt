@@ -42,7 +42,7 @@ value class NanoKtSettingsProvider @PublishedApi internal constructor(
      * `true` if USB-Debugging is enabled on the device.
      */
     @get:CheckResult
-    inline val adbEnabled: Boolean
+    inline val isAdbEnabled: Boolean
         get() {
             return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
                 getGlobalIntOrNull(Settings.Global.ADB_ENABLED) == 1
@@ -56,7 +56,7 @@ value class NanoKtSettingsProvider @PublishedApi internal constructor(
      * `true` if airplane mode is enabled on the device.
      */
     @get:CheckResult
-    inline val airplaneModeEnabled: Boolean
+    inline val isAirplaneModeEnabled: Boolean
         get() {
             return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
                 getGlobalIntOrNull(Settings.Global.AIRPLANE_MODE_ON) == 1
@@ -74,7 +74,7 @@ value class NanoKtSettingsProvider @PublishedApi internal constructor(
      * without knowing what it actually does.
      */
     @get:CheckResult
-    inline val alwaysFinishActivities: Boolean
+    inline val isAlwaysFinishActivities: Boolean
         get() {
             return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
                 getGlobalIntOrNull(Settings.Global.ALWAYS_FINISH_ACTIVITIES) == 1
@@ -88,7 +88,7 @@ value class NanoKtSettingsProvider @PublishedApi internal constructor(
      * `true` if bluetooth is enabled on the device.
      */
     @get:CheckResult
-    inline val bluetoothEnabled: Boolean
+    inline val isBluetoothEnabled: Boolean
         get() {
             return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
                 getGlobalIntOrNull(Settings.Global.BLUETOOTH_ON) == 1
@@ -102,7 +102,7 @@ value class NanoKtSettingsProvider @PublishedApi internal constructor(
      * `true` if data roaming is enabled on the device.
      */
     @get:CheckResult
-    inline val dataRoamingEnabled: Boolean
+    inline val isDataRoamingEnabled: Boolean
         get() {
             return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
                 getGlobalIntOrNull(Settings.Global.DATA_ROAMING) == 1
@@ -116,7 +116,7 @@ value class NanoKtSettingsProvider @PublishedApi internal constructor(
      * `true` if the developer options are enabled on the device.
      */
     @get:CheckResult
-    inline val developerOptionsEnabled: Boolean
+    inline val isDeveloperOptionsEnabled: Boolean
         @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
         get() = getGlobalIntOrNull(Settings.Global.DEVELOPMENT_SETTINGS_ENABLED) == 1
 
@@ -132,7 +132,7 @@ value class NanoKtSettingsProvider @PublishedApi internal constructor(
      * `true` if mobile data is enabled on the device.
      */
     @get:CheckResult
-    inline val mobileDataEnabled: Boolean
+    inline val isMobileDataEnabled: Boolean
         get() {
             return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
                 getGlobalIntOrNull("mobile_data") == 1
@@ -145,7 +145,7 @@ value class NanoKtSettingsProvider @PublishedApi internal constructor(
      * `true` if wifi is enabled on the device.
      */
     @get:CheckResult
-    inline val wifiEnabled: Boolean
+    inline val isWifiEnabled: Boolean
         get() {
             return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
                 getGlobalIntOrNull(Settings.Global.WIFI_ON) == 1
@@ -159,7 +159,7 @@ value class NanoKtSettingsProvider @PublishedApi internal constructor(
      * `true` if accessibility is enabled.
      */
     @get:CheckResult
-    inline val accessibilityEnabled get() = getSecureIntOrNull(Settings.Secure.ACCESSIBILITY_ENABLED) == 1
+    inline val isAccessibilityEnabled get() = getSecureIntOrNull(Settings.Secure.ACCESSIBILITY_ENABLED) == 1
 
     /**
      * The current screen brightness between 0 and 255.

@@ -93,7 +93,7 @@ inline fun <T : View> T.setVerticalPadding(@Px value: Int): T {
  * @see View.clearFocus
  */
 @get:CheckResult
-inline var View.focus: Boolean
+inline var View.hasFocusCompat: Boolean
     get() = hasFocus()
     set(value) {
         if (value) requestFocus() else clearFocus()
@@ -103,7 +103,7 @@ inline var View.focus: Boolean
  * `true` if the current view is the currently active view for the input method.
  */
 @get:CheckResult
-inline val View.inputActive get() = context.inputMethodManager.isActive(this)
+inline val View.isInputActive get() = context.inputMethodManager.isActive(this)
 
 /**
  * @param visible `true` to show the soft input method for the current view. `false` to hide it if it
