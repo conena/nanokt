@@ -149,6 +149,25 @@ inline fun View.setContentDescription(@StringRes resId: Int?) {
 }
 
 /**
+ * Same as [View.setStateDescription] but accepts a string resource.
+ * @param resId Describes the state of the view and is used for accessibility support.
+ * `null` restores the default behaviour.
+ */
+@RequiresApi(Build.VERSION_CODES.R)
+inline fun View.setStateDescription(@StringRes resId: Int?) {
+    stateDescription = if (resId == null) null else context.getString(resId)
+}
+
+/**
+ * Same as [View.setAccessibilityPaneTitle] but accepts a string resource.
+ * @param resId The title of the pane. `null` indicates that the receiver is not a pane.
+ */
+@RequiresApi(Build.VERSION_CODES.P)
+inline fun View.setAccessibilityPaneTitle(@StringRes resId: Int?) {
+    accessibilityPaneTitle = if (resId == null) null else context.getString(resId)
+}
+
+/**
  * Same as [View.setTooltipText] but accepts a string resource.
  * @param resId The tooltip text for the view.
  */
