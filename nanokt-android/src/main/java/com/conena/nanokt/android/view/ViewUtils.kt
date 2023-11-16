@@ -169,11 +169,11 @@ inline fun View.setAccessibilityPaneTitle(@StringRes resId: Int?) {
 
 /**
  * Same as [View.setTooltipText] but accepts a string resource.
- * @param resId The tooltip text for the view.
+ * @param resId The tooltip text for the view. `null` resets the tooltip text.
  */
 @RequiresApi(Build.VERSION_CODES.O)
-inline fun View.setTooltipText(@StringRes resId: Int) {
-    tooltipText = context.getString(resId)
+inline fun View.setTooltipText(@StringRes resId: Int?) {
+    tooltipText = if (resId == null) null else context.getString(resId)
 }
 
 /**
