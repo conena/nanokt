@@ -142,10 +142,10 @@ inline fun View.startDragAndDropCompat(
 
 /**
  * Same as [View.setContentDescription] but accepts a string resource.
- * @param resId The content description for the view.
+ * @param resId The content description for the view. `null` resets the content description.
  */
-inline fun View.setContentDescription(@StringRes resId: Int) {
-    contentDescription = context.getString(resId)
+inline fun View.setContentDescription(@StringRes resId: Int?) {
+    contentDescription = if (resId == null) null else context.getString(resId)
 }
 
 /**
