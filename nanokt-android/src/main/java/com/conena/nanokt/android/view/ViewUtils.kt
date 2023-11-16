@@ -30,6 +30,7 @@ import androidx.annotation.CheckResult
 import androidx.annotation.Px
 import androidx.annotation.RequiresApi
 import androidx.annotation.StringRes
+import androidx.appcompat.widget.TooltipCompat
 import com.conena.nanokt.android.content.inputMethodManager
 
 /**
@@ -168,12 +169,11 @@ inline fun View.setAccessibilityPaneTitle(@StringRes resId: Int?) {
 }
 
 /**
- * Same as [View.setTooltipText] but accepts a string resource.
+ * Same as [TooltipCompat.setTooltipText] but accepts a string resource.
  * @param resId The tooltip text for the view. `null` resets the tooltip text.
  */
-@RequiresApi(Build.VERSION_CODES.O)
 inline fun View.setTooltipText(@StringRes resId: Int?) {
-    tooltipText = if (resId == null) null else context.getString(resId)
+    TooltipCompat.setTooltipText(this, if (resId == null) null else context.getString(resId))
 }
 
 /**
