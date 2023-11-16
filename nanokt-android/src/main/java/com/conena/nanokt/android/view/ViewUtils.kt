@@ -169,11 +169,21 @@ inline fun View.setAccessibilityPaneTitle(@StringRes resId: Int?) {
 }
 
 /**
- * Same as [TooltipCompat.setTooltipText] but accepts a string resource.
- * @param resId The tooltip text for the view. `null` resets the tooltip text.
+ * Compatibility method to to emulate the behavior of [View.setTooltipText] prior to API level 26
+ * using [TooltipCompat]. On higher API levels this method just calls [View.setTooltipText].
+ * @param resId The tooltip text. `null` if no tooltip is required.
  */
-inline fun View.setTooltipText(@StringRes resId: Int?) {
+inline fun View.setTooltipTextCompat(@StringRes resId: Int?) {
     TooltipCompat.setTooltipText(this, if (resId == null) null else context.getString(resId))
+}
+
+/**
+ * Compatibility method to to emulate the behavior of [View.setTooltipText] prior to API level 26
+ * using [TooltipCompat]. On higher API levels this method just calls [View.setTooltipText].
+ * @param tooltipText The tooltip text. `null` if no tooltip is required.
+ */
+inline fun View.setTooltipTextCompat(tooltipText: CharSequence?) {
+    TooltipCompat.setTooltipText(this, tooltipText)
 }
 
 /**
