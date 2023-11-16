@@ -25,66 +25,88 @@ import androidx.annotation.CheckResult
 
 /**
  * Write a message with level [Log.VERBOSE] to the logcat's main buffer.
+ * Note: This method can not be inlined because [KT-8628](https://youtrack.jetbrains.com/issue/KT-8628)
+ * In addition, the line number determined via [generateLogTag] is incorrect
+ * if the calling function is an inline function.
  * @param message The log message.
  * @param tag The tag of the message.
  */
-inline fun logVerbose(message: String, tag: String = generateLogTag()) {
+fun logVerbose(message: String, tag: String = generateLogTag()) {
     Log.v(tag, message)
 }
 
 /**
  * Write a message with level [Log.DEBUG] to the logcat's main buffer.
+ * Note: This method can not be inlined because [KT-8628](https://youtrack.jetbrains.com/issue/KT-8628)
+ * In addition, the line number determined via [generateLogTag] is incorrect
+ * if the calling function is an inline function.
  * @param message The log message.
  * @param tag The tag of the message.
  */
-inline fun logDebug(message: String, tag: String = generateLogTag()) {
+fun logDebug(message: String, tag: String = generateLogTag()) {
     Log.d(tag, message)
 }
 
 /**
  * Write a message with level [Log.INFO] to the logcat's main buffer.
+ * Note: This method can not be inlined because [KT-8628](https://youtrack.jetbrains.com/issue/KT-8628)
+ * In addition, the line number determined via [generateLogTag] is incorrect
+ * if the calling function is an inline function.
  * @param message The log message.
  * @param tag The tag of the message.
  */
-inline fun logInfo(message: String, tag: String = generateLogTag()) {
+fun logInfo(message: String, tag: String = generateLogTag()) {
     Log.i(tag, message)
 }
 
 /**
  * Write a message with level [Log.WARN] to the logcat's main buffer.
+ * Note: This method can not be inlined because [KT-8628](https://youtrack.jetbrains.com/issue/KT-8628)
+ * In addition, the line number determined via [generateLogTag] is incorrect
+ * if the calling function is an inline function.
  * @param message The log message.
  * @param tag The tag of the message.
  */
-inline fun logWarn(message: String, tag: String = generateLogTag()) {
+fun logWarn(message: String, tag: String = generateLogTag()) {
     Log.w(tag, message)
 }
 
 /**
  * Write a message with level [Log.ERROR] to the logcat's main buffer.
+ * Note: This method can not be inlined because [KT-8628](https://youtrack.jetbrains.com/issue/KT-8628)
+ * In addition, the line number determined via [generateLogTag] is incorrect
+ * if the calling function is an inline function.
  * @param message The log message.
  * @param tag The tag of the message.
  */
-inline fun logError(message: String, tag: String = generateLogTag()) {
+fun logError(message: String, tag: String = generateLogTag()) {
     Log.e(tag, message)
 }
 
 /**
  * Write a message with level [Log.ASSERT] to the logcat's main buffer.
+ * Note: This method can not be inlined because [KT-8628](https://youtrack.jetbrains.com/issue/KT-8628)
+ * In addition, the line number determined via [generateLogTag] is incorrect
+ * if the calling function is an inline function.
  * @param message The log message.
  * @param tag The tag of the message.
  */
-inline fun logFatal(message: String, tag: String = generateLogTag()) {
+fun logFatal(message: String, tag: String = generateLogTag()) {
     Log.println(Log.ASSERT, tag, message)
 }
 
 /**
+ * Note: This method can not be inlined because [KT-8628](https://youtrack.jetbrains.com/issue/KT-8628)
+ * In addition, the determined line number is incorrect if called from an inline function.
  * @return A string suitable as tag for logcat entries.
  * The string consists of the file name and the line in which this method was called.
  */
 @CheckResult
 @PublishedApi
-internal inline fun generateLogTag(): String {
-    val st = Thread.currentThread().stackTrace[2]
+internal fun generateLogTag(): String {
+    // We have to ignore the first four elements, the first two are internal,
+    // the third is this method and the fourth is the log method that called this method.
+    val st = Thread.currentThread().stackTrace[4]
     val line = ":${st.lineNumber}"
     return if (st.fileName.length > (23 - line.length)) {
         st.fileName.take(21 - line.length) + ".." + line
