@@ -2,13 +2,49 @@
 
 Introducing NanoKt – an elegant and lightweight solution for streamlined Android development that offers an extensive collection of up-to-date extension functions covering many areas of the Android framework and the Java and Kotlin standard libraries. NanoKt will make your code more elegant, efficient and save you time in the process. Moreover, this is achieved without compromising performance, as almost all provided functions and properties are inlined at compile time.
 
-The library is also well-documented with KDoc and includes meaningful annotations in appropriate spots, making it very user-friendly and easy to get started with.
+**Why yet another extension library?**
 
-API breaking changes can still happen within the beta phase. From the first stable version on, NanoKt will follow the principle of semantic versioning. I plan to actively develop the library and gradually integrate it into all my apps. I'm already using it for several months in production for my app [Logcat Reader Professional][LRP link].
+NanoKt stands out by providing well-documented functions with recommended annotations for an AndroidX-like experience. The thoughtful structure and method naming, inspired by the Android framework, aims to eliminate redundant code without enforcing a one-size-fits-all framework. It is designed to integrate seamlessly into various Android projects. I've been using it for the entire - more than a year - beta phase in production for several of my apps (including [Logcat Reader Professional][LRP link]) and plan to actively develop it further and integrate it into all my projects.
 
-The library is divided into modules for pure Kotlin, Kotlin-JVM, and Kotlin-Android, making it compatible with a wide range of projects. I may even release a compatible version for Kotlin Multiplatform at a later date.
+The library is divided into modules for pure Kotlin, Kotlin-JVM, and Kotlin-Android, making it compatible with a wide range of projects. I plan to release a compatible version for Kotlin Multiplatform at a later date.
+
+# Table of contents
+
+- [Getting started](#getting-started)
+- [Examples](#examples)
+    - [Copying to the clipboard](#copying-to-the-clipboard)
+    - [Accessing system services](#accessing-system-services)
+    - [Reading configuration (e.g. night mode)](#reading-configuration-eg-night-mode)
+    - [Reading system settings (e.g. airplane mode)](#reading-system-settings-eg-airplane-mode))
+    - [Starting activities](#starting-activities)
+    - [Starting the Play Store](#starting-the-play-store)
+    - [Starting other apps (e.g. settings, mail client, etc.)](#starting-other-apps-eg-settings-mail-client-etc)
+    - [Conversion of complex units](#conversion-of-complex-units)
+    - [Working with SharedPreferences](#working-with-sharedpreferences)
+    - [Accessing theme attributes](#accessing-theme-attributes)
+    - [Working with bundles](#working-with-bundles)
+    - [Working with services](#working-with-services)
+    - [Working with views](#working-with-views)
+    - [Working with bitmaps](#working-with-bitmaps)
+    - [Encoding/Decoding Base64](#encodingdecoding-base64)
+    - [Debug logging](#debug-logging)
+    - [Other examples](#other-examples)
+- [Experimental parts of the library](#experimental-parts-of-the-library)
+- [Versioning](#versioning)
+- [FAQ](#faq)
+    - [Is Kotlin multiplatform support planned?](#is-kotlin-multiplatform-support-planned)
+    - [Will there be a version for Kotlin coroutines?](#will-there-be-a-version-for-kotlin-coroutines)
+    - [Will there be a version for Jetpack Compose?](#will-there-be-a-version-for-jetpack-compose)
+    - [Will there be a version for Library xy?](#will-there-be-a-version-for-library-xy)
+- [Contribution](#contribution)
+- [License](#license)
 
 # Getting started
+[![Maven Central](https://img.shields.io/maven-central/v/com.conena.nanokt/nanokt)](https://mvnrepository.com/artifact/com.conena.nanokt/nanokt-android)
+[![API](https://img.shields.io/badge/Min%20API-16-orange)](https://developer.android.com/about/versions/jelly-bean#android-4.1)
+[![API](https://img.shields.io/badge/Compiled%20API-33-orange)](https://developer.android.com/about/versions/13)
+[![GitHub followers](https://img.shields.io/github/followers/SageDroid.svg?style=social&label=Follow&maxAge=2592000)](https://github.com/SageDroid)
+[![GitHub stars](https://img.shields.io/github/stars/conena/nanokt?style=social&label=Star&maxAge=2592000)](https://github.com/conena/nanokt/)
 
 To start using NanoKt in your project, add the appropriate dependencies to your build.gradle file.
 
@@ -58,8 +94,14 @@ clipboardManager.setPrimaryClip(text = textToCopy, isSensitive = true) {
 ```
 The example takes into account the [current recommendations on user feedback when copying text to the clipboard][clipboard feedback], as well as the changes in Android 13. The trailing lambda with the toast is only invoked on devices with Android versions below Android 13.
 
-### System services
-You may wonder where the clipboard manager comes from in the first example. NanoKt makes all available services available as context extension properties. Frequently used services are available directly in the context, less frequently used services have to be called via a systemServices extension. Additionally, you don't have to worry about nullability because NanoKt takes care of that.
+### Accessing system services
+You may wonder where the clipboard manager comes from in the first example. A brief look at the source code provides the answer.
+```kotlin
+@get:CheckResult
+@get:MainThread
+inline val Context.clipboardManager get() = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+```
+NanoKt makes all available services available as context extension properties. Frequently used services are available directly in the context, less frequently used services have to be called via a systemServices extension. Since the ClipboardManager can only be obtained on the MainThread, this is indicated with an annotation so that you receive a warning in your IDE if you use it incorrectly. Additionally, you don't have to worry about nullability because NanoKt takes care of that.
 
 ```kotlin
 // Examples for commonly used services
@@ -75,7 +117,7 @@ context.systemServices.printManager
 context.systemServices.devicePolicyManager?.storageEncryptionStatus
 ```
 
-### Check for Night mode
+### Reading configuration (e.g. night mode)
 Solution without NanoKt
 ```kotlin
 val nightMode = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -88,10 +130,26 @@ val nightMode = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
 
 Solution with NanoKt
 ```kotlin
-val nightMode = resources.configuration.isNightModeActiveCompat
+// configuration is an extension on Context
+val nightMode = configuration.isNightModeActiveCompat
 ```
 
-### Check if airplane mode is enabled
+Further examples of available configuration extensions:
+```kotlin
+val isTablet = configuration.isTablet()
+val isLargeTablet = configuration.isTablet(requireXLarge = true)
+val isCar = configuration.isCar
+val isTelevision = configuration.isTelevision
+val isWatch = configuration.isWatch
+val isVrHeadset = configuration.isVrHeadset
+val isLongScreen = configuration.isLongScreen
+val isLandscape = configuration.isLandscape
+val isPortrait = configuration.isPortrait
+val isLtrLayout = configuration.isLtrLayout
+val isRtlLayout = configuration.isRtlLayout
+```
+
+### Reading system settings (e.g. airplane mode)
 Solution without NanoKt
 ```kotlin
 val isAirplaneModeEnabled = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
@@ -114,10 +172,46 @@ Solution with NanoKt
 ```kotlin
 val isAirplaneModeEnabled = settings.isAirplaneModeEnabled
 ```
-Via the extension property "settings" NanoKt provides a variety of system settings to read and convenient methods to easily load additional settings as needed.
 
-### Open another app in the Playstore
-You want to display the Playstore page of another app (e.g. paid version, plugin, etc.). If the Playstore cannot be opened, the Playstore should be displayed in the browser.
+Via the Context extension property "settings" NanoKt provides a variety of system settings to read and convenient functions to easily load additional settings as needed.
+
+```kotlin
+val isUSBDebuggingEnabled = settings.isAdbEnabled
+val isBluetoothEnabled = settings.isBluetoothEnabled
+val isDataRoamingEnabled = settings.isDataRoamingEnabled
+val areDeveloperOptionsEnabled = settings.isDeveloperOptionsEnabled
+val deviceName = settings.deviceName
+val isMobileDataEnabled = settings.isMobileDataEnabled
+val isWifiEnabled = settings.isWifiEnabled
+val currentBrightness = settings.screenBrightness
+
+settings.getGlobalIntOrNull(name = settingName)
+settings.getSystemIntOrNull(name = settingName)
+settings.getSecureIntOrNull(name = settingName)
+...
+```
+
+### Starting activities
+Tired of the same old routine, rewriting activity-starting code and worrying about forgetting essential flags like FLAG_ACTIVITY_NEW_TASK? With NanoKt, this problem is a thing of the past because the new task flag is added automatically when called from a non-activity context.
+
+```kotlin
+// start an activity
+context.startActivity<MyActivity>()
+// start an activity with options
+context.startActivity<MyActivity>(options = startOptions)
+// start an activity with a custom intent
+startActivity<MyActivity>() {
+    putExtra(SOME_BUNDLE_EXTRA, "extra")
+    // Set flags with extension properties
+    isNewTask = true
+    isClearTop = true
+}
+// Only a flag necessary?
+context.startActivity<MyActivity>(intentEditor = Intent::setClearTop)
+```
+
+### Starting the Play Store
+When opening the Play Store (e.g. for reviews, paid version), many developers make the mistake of not specifying the package in the intent. As a result, the user may end up in another app (e.g. third-party store) where your app does not even exist. NanoKt makes it as easy as possible for you.
 
 Solution without NanoKt
 ```kotlin
@@ -147,19 +241,36 @@ startPlayStoreForApp(packageName = "com.conena.logcat.reader").onFailure {
     toastShort("Neither Google Play nor browser installed.")
 }
 ```
-NanoKt offers various methods that significantly simplify the opening of other activities. Another feature that becomes clear here is the use of the Kotlin Result API which allows for very elegant error handling. Interesting to note that the above code would not work if executed in a context other than an Activity. The NanoKt example still works because the Intent.FLAG_ACTIVITY_NEW_TASK flag is automatically set if the method is not called from an Activity. This applies to most NanoKt methods that start activities.
+Other examples
+```
+// Start Play Store for the current app, ignore errors
+startPlayStoreForApp()
+// Start Play Store with referrer
+startPlayStoreForApp(
+    packageName = "com.conena.logcat.reader.ultra",
+    referrer = "utm_source=nanoktIsEpic"
+)
+// Show all of your apps
+startPlayStoreForDeveloper(developerName = "Conena")
 
-### Other activity-related examples
+```
+NanoKt offers various functions that significantly simplify the opening of other activities. Another feature that becomes clear here is the use of the Kotlin Result API which allows for very elegant error handling. Interesting to note that the first code would not work if executed in a context other than an Activity. The NanoKt example still works because the Intent.FLAG_ACTIVITY_NEW_TASK flag is automatically set if the method is not called from an Activity. This applies to most NanoKt functions that start activities.
+
+### Starting other apps (e.g. settings, mail client, etc.)
 I'm leaving out the non-NanoKt version for space reasons. However, the pain should be known to every Android developer.
 ```kotlin
-// Start an activity of your app
-startActivity<MainActivity>()
 // Show the details page of your app in the system settings
 startAppSettings()
 // Show the notification settings of your app in the system settings
 startAppSettings(action = Settings.ACTION_APP_NOTIFICATION_SETTINGS)
-// Direct a user to the beta test of your app
-startPlayStoreForTestTrack(packageName = "con.conena.navigation.gesture.control")
+// Start various system settings
+startSettings(action = Settings.ACTION_WIFI_SETTINGS)
+// You can always modify the intent
+startSettings(action = Settings.ACTION_WIFI_SETTINGS) {
+    putExtra(SOME_BUNDLE_EXTRA, "extra")
+    // Set flags with extension properties
+    isNewTask = true
+}
 // Open a website
 startBrowser(url = "https://github.com/conena/nanokt").onFailure {
     toastShort("Go get a browser!")
@@ -168,11 +279,12 @@ startBrowser(url = "https://github.com/conena/nanokt").onFailure {
 startSendActivityChooser(text = "12345679")
 // More complex share operation
 startSendActivityChooser(subject = "subject", text = "text", attachment = attachmentUri)
-// Share with mail
+// Start mail client
 startSendMailActivity(subject = "subject", body = "text", attachment = attachmentUri).onFailure {
     toastShort("No mail application installed")
 }
 ```
+
 ### Conversion of complex units
 ```kotlin
 val eightDp = 8.dpInPx
@@ -183,9 +295,13 @@ val eightSpAlternative = 8.spToPx()
 val eightSpAlternative2 = 8.toPx(TypedValue.COMPLEX_UNIT_SP)
 ```
 
-### Read and write with SharedPreferences
+### Working with SharedPreferences
+The standard solution for accessing the default SharedPreferences is often to include the AndroidX Preference Library, even though you don't need it for anything else. From now on, you can do it with NanoKt, as the default SharedPreferences are available via an Context extension property - without any additional dependency.
 ```kotlin
-val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+val sharedPreferences = context.defaultSharedPreferences
+```
+NanoKt also provides an elegant solution for quickly writing and reading single values.
+```kotlin
 // Write a single value and apply
 sharedPreferences.put("key", "Value")
 sharedPreferences.put("key", true)
@@ -196,16 +312,23 @@ sharedPreferences.remove("key")
 sharedPreferences.getStringOrNull("key")
 sharedPreferences.getBooleanOrNull("key")
 sharedPreferences.getIntOrNull("key")
+```
+Other helpful functions for advanced use cases complete the spectrum of provided functions.
+```kotlin
 // Get a mutable string set that you can modify safely
 sharedPreferences.getMutableStringSetOrNull("key")
 // Invert a boolean value
 sharedPreferences.invertBoolean("key")
+// Invert a boolean value, set it to true if it does not yet exist.
+sharedPreferences.invertBoolean(key = "key", defaultValue = true)
 // The number of entries
 sharedPreferences.size
+// Delete all entries
+sharedPreferences.clear()
 ```
 
-### Load resources from the current theme
-NanoKt provides simple methods to load colors, ColorStateLists, Integers, Strings, Booleans or TypedValue objects from the current theme.
+### Accessing theme attributes
+NanoKt provides simple functions to load colors, ColorStateLists, Integers, Strings, Booleans or TypedValue objects from the current theme.
 
 Solution without NanoKt
 ```kotlin
@@ -248,13 +371,131 @@ val uri = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
     bundle.getParcelable("key") as? Uri?
 }
 ```
-
 Solution with NanoKt
 ```kotlin
 val uri = bundle.getOrNull<Uri>("key")
 ```
+
+### Working with services
+A lot has changed in recent years, especially when working with foreground services. Some methods are deprecated or still too new to be used at all API levels. Wouldn't it be nice to have some handy functions that take the boiler plate code off your hands?
+
+```kotlin
+// Start a service
+context.startService<MyService>()
+// Start a foreground service
+context.startForegroundServiceCompat(intent = serviceIntent)
+context.startForegroundServiceCompat<MyService>()
+// Bind a service
+context.bindService<MyService>(connection = myConnection)
+
+// Stop a foreground service
+service.stopForegroundCompat(notificationBehavior = Service.STOP_FOREGROUND_REMOVE)
+service.stopForegroundAndRemoveNotification()
+service.stopForegroundAndDetachNotification()
+```
+
+### Working with views
+There are various view extensions for frequently occurring tasks.
+
+```kotlin
+// Set visibility
+view.setVisible()
+View.setInvisible()
+view.setGone()
+// Visible based on condition or gone
+view.setVisibleIf(condition = someCondition)
+// Visible based on condition or invisible
+view.setVisibleIf(condition = someCondition, otherwise = View.INVISIBLE)
+
+// Set padding
+view.setHorizontalPadding(value = 14.dpInPx)
+view.setVerticalPadding(value = 14.dpInPx)
+
+// Request focus
+view.hasFocusCompat = true
+
+// Handle input
+val inputActive = view.isInputActive
+view.setSoftInputVisibility(visible = true)
+
+// Start drag and drop
+view.startDragAndDropCompat()
+
+// Set tooltips
+view.setTooltipTextCompat(resId = R.string.my_tooltip)
+view.setTooltipTextCompat(tooltipText = "tooltip")
+```
+If you are currently making your app compliant with the European Accessibility Act, you may have noticed that some methods related to accessibility features do not accept string resources. NanoKt fixes this.
+```kotlin
+view.setContentDescription(resId = R.string.desc)
+view.setStateDescription(resId = R.string.desc)
+view.setAccessibilityPaneTitle(resId = R.string.title)
+```
+Further examples for TextViews:
+```kotlin
+// Get/Set the text style
+textView.textStyle = Typeface.NORMAL
+// Clear the text
+textView.clear()
+// Clear an error
+textView.clearError()
+// Set an error with resources
+textView.setError(resId = R.string.error, iconResId = R.drawable.error)
+```
+
+### Working with bitmaps
+```kotlin
+// Never forget recycling a bitmap again
+someBitmap.use { bitmap ->
+    // Do something with the bitmap
+}
+// The bitmap is recycled!
+
+// Decode a bitmap
+val bitmap = byteArray.decodeToBitmap()
+// Decode a bitmap with options
+val bitmap = byteArray.decodeToBitmap(
+    offset = someOffset,
+    length = someLength,
+    options: BitmapFactory.Options? = someOptions
+)
+```
+
+### Encoding/Decoding Base64
+```kotlin
+// Base64-encode
+val base64Encoded = "NanoKt is cool!".encodeBase64()
+// Base64-encode with options
+val base64Encoded = "NanoKt is cool!".encodeBase64(
+    charset = Charsets.UTF_8,
+    urlSafe = false,
+    wrap = false,
+    padding = true,
+    crlf = false
+)
+// Base64-decode
+val base64Decoded = "TmFub0t0IGlzIGNvb2wh".decodeBase64()
+// Base64-decode with options
+val base64Decoded = "TmFub0t0IGlzIGNvb2wh".decodeBase64(
+    charset = Charsets.UTF_8,
+    urlSafe = false
+)
+```
+### Debug logging
+NanoKt offers handy logging functions that automatically create a tag based on the file and line number.
+
+```kotlin
+logDebug("I love NanoKt")
+logWarn("I love NanoKt")
+logError("I love NanoKt")
+// Example Output:
+// MainActivity.kt:17 D I love NanoKt
+// MainActivity.kt:18 W I love NanoKt
+// MainActivity.kt:19 E I love NanoKt
+```
+
 ### Other examples
-The examples shown were only a small selection of the available methods. Some more examples are listed here and you can explore a large number of other methods by browsing the repository.
+The examples shown were only a small selection of the available functions. Some more examples are listed here and you can explore a large number of other functions by browsing the repository.
 
 ```kotlin
 // Create a DocumentFile from a single uri
@@ -265,20 +506,10 @@ val folder = documentUri.toDocumentTreeOrNull(context)
 // Check if a string is valid android/linux file name
 val valid = "someFile.txt".isValidFileName()
 
-// Base64-encode strings
-val base64Encoded = "NanoKt is cool!".encodeBase64()
-// Base64-decode strings
-val base64Decoded = "TmFub0t0IGlzIGNvb2wh".decodeBase64()
-
 // SparseArray utils
 val sparseArray = sparseArrayOf(0 to "First", 1 to "Second")
 val asMap = sparseArray.toHashMap()
 val asList = sparseArray.toArrayList()
-
-// View utils
-view.setVisibleIf(condition = true)
-view.setVisibleIf(condition = true, otherwise = View.INVISIBLE)
-view.startDragAndDropCompat()
 
 // ... and many more
 ```
@@ -291,9 +522,45 @@ kotlin.sourceSets.all {
 }
 ```
 
+# Versioning
+
+The version numbering follows a structured approach based on the nature of changes introduced:
+
+**Major Versions (1.0.0):**
+
+- Published for significant new features or extensive breaking changes.
+- Mandatory to review the changelog thoroughly before updating to ensure seamless transition.
+
+**Minor Versions (1.1.0):**
+
+- Released for new functionalities or minor breaking changes, typically easy to address or affecting a limited user base.
+- This includes expected and necessary adjustments in Android development (e.g., higher Kotlin/AndroidX/SDK versions).
+- It is recommended to consult the changelog prior to updating for a smoother experience.
+
+**Fix Versions (1.0.1):**
+
+- Deployed when addressing bug fixes.
+- Upgrading to fix versions is straightforward and does not necessitate a detailed review of the changelog.
+
+**Please note that alpha and beta versions operate under different rules. Due to their developmental nature, breaking changes of any magnitude can occur at any time. Therefore, it is imperative to always refer to the changelog before updating.**
+
+# FAQ
+
+### Is Kotlin multiplatform support planned?
+Absolutely! While I can't provide a specific date, adding Kotlin multiplatform support is a goal I'm actively pursuing.
+
+### Will there be a version for Kotlin coroutines?
+Possibly. I haven't made a concrete decision yet, and development in this direction hasn't begun.
+
+### Will there be a version for Jetpack Compose?
+It's a possibility, but not something on my immediate to-do list. I'm regularly evaluating options, and if Jetpack Compose integration is in the cards, I'll share updates accordingly.
+
+### Will there be a version for Library xy?
+Most likely not. Maintaining quality and structure becomes challenging with an extensive array of modules for various independent libraries. As of now, I believe there are sufficient alternatives available.
+
 # Contribution
 
-Please feel free to open an issue or submit a pull request if you have any suggestions for improvement. When submitting a pull request, please confirm that you wrote the code yourself, waive any copyright rights, and agree that the code will be placed under the original license of the library.
+Please feel free to open an issue or submit a pull request if you have any suggestions for improvement. I recommend that you contact me before making major changes, so that your work is not in vain. When submitting a pull request, please confirm that you wrote the code yourself, waive any copyright rights, and agree that the code will be placed under the original license of the library.
 
 # License
 ```
