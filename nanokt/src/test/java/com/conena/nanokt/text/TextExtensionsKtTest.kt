@@ -18,7 +18,9 @@
 package com.conena.nanokt.text
 
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull
+import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class TextExtensionsKtTest {
@@ -94,6 +96,22 @@ class TextExtensionsKtTest {
     fun lastIndexOfOrNull_string() {
         assertEquals(11, "123456789123456789".lastIndexOfOrNull("34"))
         assertEquals(null, "123456789123456789".lastIndexOfOrNull("90"))
+    }
+
+    @Test
+    fun isEmptyOrBlank() {
+        assertTrue("".isEmptyOrBlank())
+        assertTrue(" ".isEmptyOrBlank())
+        assertTrue(System.lineSeparator().isEmptyOrBlank())
+        assertFalse(",".isEmptyOrBlank())
+    }
+
+    @Test
+    fun isNotEmptyOrBlank() {
+        assertFalse("".isNotEmptyOrBlank())
+        assertFalse(" ".isNotEmptyOrBlank())
+        assertFalse(System.lineSeparator().isNotEmptyOrBlank())
+        assertTrue(",".isNotEmptyOrBlank())
     }
 
 }

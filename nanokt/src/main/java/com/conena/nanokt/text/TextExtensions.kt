@@ -129,3 +129,17 @@ inline fun CharSequence.lastIndexOfOrNull(
     val result = lastIndexOf(string = string, startIndex = startIndex, ignoreCase = ignoreCase)
     return if (result == -1) null else result
 }
+
+/**
+ * @return `true` if this char sequence contains no characters or only whitespace characters.
+ */
+inline fun CharSequence.isEmptyOrBlank(): Boolean {
+    return isEmpty() || isBlank()
+}
+
+/**
+ * @return `true` if this char sequence contains characters other than whitespace characters.
+ */
+inline fun CharSequence.isNotEmptyOrBlank(): Boolean {
+    return !isEmptyOrBlank()
+}
