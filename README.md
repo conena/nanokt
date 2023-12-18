@@ -254,7 +254,7 @@ startPlayStoreForApp(
 startPlayStoreForDeveloper(developerName = "Conena")
 
 ```
-NanoKt offers various functions that significantly simplify the opening of other activities. Another feature that becomes clear here is the use of the Kotlin Result API which allows for very elegant error handling. Interesting to note that the first code would not work if executed in a context other than an Activity. The NanoKt example still works because the Intent.FLAG_ACTIVITY_NEW_TASK flag is automatically set if the method is not called from an Activity. This applies to most NanoKt functions that start activities.
+NanoKt offers various functions that significantly simplify the opening of other activities. Another feature that becomes clear here is the use of the Kotlin Result API which allows for very elegant error handling.
 
 ### Starting other apps (e.g. settings, mail client, etc.)
 I'm leaving out the non-NanoKt version for space reasons. However, the pain should be known to every Android developer.
@@ -495,7 +495,7 @@ logError("I love NanoKt")
 ```
 
 ### Other examples
-The examples shown were only a small selection of the available functions. Some more examples are listed here and you can explore a large number of other functions by browsing the repository.
+The examples show only a small selection of the available functions. Some more examples are listed here and you can explore a large number of other functions by browsing the repository.
 
 ```kotlin
 // Create a DocumentFile from a single uri
