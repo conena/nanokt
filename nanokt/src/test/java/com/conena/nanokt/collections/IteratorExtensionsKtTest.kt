@@ -18,6 +18,8 @@
 package com.conena.nanokt.collections
 
 import org.junit.Assert.assertArrayEquals
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNull
 import org.junit.Test
 
 class IteratorExtensionsKtTest {
@@ -29,6 +31,13 @@ class IteratorExtensionsKtTest {
         val iterator = list.iterator()
         while (iterator.hasNext()) iterator.removeIf(condition = iterator.next() % 2 == 0)
         assertArrayEquals(expectedList.toTypedArray(), list.toTypedArray())
+    }
+
+    @Test
+    fun nextOrNull() {
+        val iterator = listOf("Test").iterator()
+        assertEquals("Test", iterator.nextOrNull())
+        assertNull(iterator.nextOrNull())
     }
 
 }

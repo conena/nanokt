@@ -25,3 +25,10 @@ package com.conena.nanokt.collections
 inline fun <T> MutableIterator<T>.removeIf(condition: Boolean) {
     if (condition) remove()
 }
+
+/**
+ * @return The next element in the iteration or null if there is no next element.
+ */
+inline fun <T> Iterator<T>.nextOrNull(): T? {
+    return if (hasNext()) next() else null
+}
