@@ -94,6 +94,9 @@ inline fun <T : Any> T?.ifNull(block: () -> T): T {
  * Invokes [block] and swallows any [Throwable].
  */
 inline fun <T> runSilent(block: () -> T) {
+    contract {
+        callsInPlace(block, InvocationKind.EXACTLY_ONCE)
+    }
     try { block() } catch (_: Throwable) {}
 }
 
@@ -101,6 +104,9 @@ inline fun <T> runSilent(block: () -> T) {
  * Invokes [block] and returns the result or `null` if any [Throwable] was thrown.
  */
 inline fun <T> runSilentAndGet(block: () -> T): T? {
+    contract {
+        callsInPlace(block, InvocationKind.EXACTLY_ONCE)
+    }
     return try {
         block()
     } catch (_: Throwable) {
@@ -112,6 +118,9 @@ inline fun <T> runSilentAndGet(block: () -> T): T? {
  * Same as [apply] but swallows all throwables thrown in [block].
  */
 inline fun <T> T.applySilent(block: T.() -> Unit): T {
+    contract {
+        callsInPlace(block, InvocationKind.EXACTLY_ONCE)
+    }
     try {
         block()
     } catch (_: Throwable) {}
@@ -122,6 +131,9 @@ inline fun <T> T.applySilent(block: T.() -> Unit): T {
  * Same as [also] but swallows all throwables thrown in [block].
  */
 inline fun <T> T.alsoSilent(block: (T) -> Unit): T {
+    contract {
+        callsInPlace(block, InvocationKind.EXACTLY_ONCE)
+    }
     try {
         block(this)
     } catch (_: Throwable) {}

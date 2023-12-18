@@ -19,6 +19,9 @@
 
 package com.conena.nanokt
 
+import kotlin.contracts.InvocationKind
+import kotlin.contracts.contract
+
 /**
  * Prints the stack trace of the exception if the result is [Result.isFailure] to the standard
  * error output.
@@ -36,6 +39,9 @@ inline fun <T> Result<T>.printStackTraceOnFailure(): Result<T> {
  * otherwise it returns the current Result unchanged.
  */
 inline fun <T> Result<T>.mapFailure(transform: (Throwable) -> Throwable): Result<T> {
+    contract {
+        callsInPlace(transform, InvocationKind.AT_MOST_ONCE)
+    }
     return Result.failure(transform(exceptionOrNull() ?: return this))
 }
 
