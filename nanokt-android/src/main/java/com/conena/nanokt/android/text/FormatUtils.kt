@@ -26,11 +26,12 @@ import androidx.annotation.CheckResult
 import androidx.annotation.RequiresApi
 import com.conena.nanokt.annotations.ExperimentalNanoKtApi
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Locale
 
 /**
  * @param skeleton A skeleton similar to, and uses the same format characters as, a Unicode
- * [UTS#35 Pattern](http://www.unicode.org/reports/tr35/#Date_Format_Patterns).
+ * [UTS#35 Pattern](https://www.unicode.org/reports/tr35/tr35-dates.html#Date_Format_Patterns).
  * @param locale The locale into which the skeleton should be localized.
  * @return The best possible localized [SimpleDateFormat] of the given skeleton for the given locale.
  * @see DateFormat.getBestDateTimePattern
@@ -48,7 +49,7 @@ inline fun getSuitableDateTimeFormat(
 
 /**
  * @param skeleton A skeleton similar to, and uses the same format characters as, a Unicode
- * [UTS#35 Pattern](http://www.unicode.org/reports/tr35/#Date_Format_Patterns).
+ * [UTS#35 Pattern](https://www.unicode.org/reports/tr35/tr35-dates.html#Date_Format_Patterns).
  * @return The best possible localized [SimpleDateFormat] of the given skeleton for the receiver.
  */
 @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
@@ -64,7 +65,7 @@ inline fun Locale.getSuitableDateTimeFormat(skeleton: String): SimpleDateFormat 
  * In this case it is more effective to call [getSuitableDateTimeFormat], store the [SimpleDateFormat]
  * as variable and call [format] with it.
  * @param skeleton A skeleton similar to, and uses the same format characters as, a Unicode
- * [UTS#35 Pattern](http://www.unicode.org/reports/tr35/#Date_Format_Patterns).
+ * [UTS#35 Pattern](https://www.unicode.org/reports/tr35/tr35-dates.html#Date_Format_Patterns).
  * @param locale The locale into which the skeleton should be localized.
  * @return The date formatted with the best possible localized format of the given skeleton for the given locale.
  * @see Locale.getSuitableDateTimeFormat
