@@ -29,10 +29,11 @@ import androidx.annotation.CheckResult
  * In addition, the line number determined via [generateLogTag] is incorrect
  * if the calling function is an inline function.
  * @param message The log message.
+ * @param throwable Optionally a [Throwable] to log, otherwise `null`.
  * @param tag The tag of the message.
  */
-fun logVerbose(message: String, tag: String = generateLogTag()) {
-    Log.v(tag, message)
+fun logVerbose(message: String, throwable: Throwable? = null, tag: String = generateLogTag()) {
+    if (throwable == null) Log.v(tag, message) else Log.v(tag, message, throwable)
 }
 
 /**
@@ -41,10 +42,11 @@ fun logVerbose(message: String, tag: String = generateLogTag()) {
  * In addition, the line number determined via [generateLogTag] is incorrect
  * if the calling function is an inline function.
  * @param message The log message.
+ * @param throwable Optionally a [Throwable] to log, otherwise `null`.
  * @param tag The tag of the message.
  */
-fun logDebug(message: String, tag: String = generateLogTag()) {
-    Log.d(tag, message)
+fun logDebug(message: String, throwable: Throwable? = null, tag: String = generateLogTag()) {
+    if (throwable == null) Log.d(tag, message) else Log.d(tag, message, throwable)
 }
 
 /**
@@ -53,10 +55,11 @@ fun logDebug(message: String, tag: String = generateLogTag()) {
  * In addition, the line number determined via [generateLogTag] is incorrect
  * if the calling function is an inline function.
  * @param message The log message.
+ * @param throwable Optionally a [Throwable] to log, otherwise `null`.
  * @param tag The tag of the message.
  */
-fun logInfo(message: String, tag: String = generateLogTag()) {
-    Log.i(tag, message)
+fun logInfo(message: String, throwable: Throwable? = null, tag: String = generateLogTag()) {
+    if (throwable == null) Log.i(tag, message) else Log.i(tag, message, throwable)
 }
 
 /**
@@ -65,10 +68,11 @@ fun logInfo(message: String, tag: String = generateLogTag()) {
  * In addition, the line number determined via [generateLogTag] is incorrect
  * if the calling function is an inline function.
  * @param message The log message.
+ * @param throwable Optionally a [Throwable] to log, otherwise `null`.
  * @param tag The tag of the message.
  */
-fun logWarn(message: String, tag: String = generateLogTag()) {
-    Log.w(tag, message)
+fun logWarn(message: String, throwable: Throwable? = null, tag: String = generateLogTag()) {
+    if (throwable == null) Log.w(tag, message) else Log.w(tag, message, throwable)
 }
 
 /**
@@ -77,10 +81,11 @@ fun logWarn(message: String, tag: String = generateLogTag()) {
  * In addition, the line number determined via [generateLogTag] is incorrect
  * if the calling function is an inline function.
  * @param message The log message.
+ * @param throwable Optionally a [Throwable] to log, otherwise `null`.
  * @param tag The tag of the message.
  */
-fun logError(message: String, tag: String = generateLogTag()) {
-    Log.e(tag, message)
+fun logError(message: String, throwable: Throwable? = null, tag: String = generateLogTag()) {
+    if (throwable == null) Log.e(tag, message) else Log.e(tag, message, throwable)
 }
 
 /**
@@ -89,10 +94,15 @@ fun logError(message: String, tag: String = generateLogTag()) {
  * In addition, the line number determined via [generateLogTag] is incorrect
  * if the calling function is an inline function.
  * @param message The log message.
+ * @param throwable Optionally a [Throwable] to log, otherwise `null`.
  * @param tag The tag of the message.
  */
-fun logFatal(message: String, tag: String = generateLogTag()) {
-    Log.println(Log.ASSERT, tag, message)
+fun logFatal(message: String, throwable: Throwable? = null, tag: String = generateLogTag()) {
+    Log.println(
+        Log.ASSERT,
+        tag,
+        if (throwable == null) message else "$message\n${Log.getStackTraceString(throwable)}"
+    )
 }
 
 /**
