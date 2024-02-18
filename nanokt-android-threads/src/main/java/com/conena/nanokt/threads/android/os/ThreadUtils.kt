@@ -38,7 +38,7 @@ internal object NanoKtThreadUtilsCompanion {
  * Invokes [block] on the main thread.
  */
 inline fun runOnMainThread(@MainThread block: Runnable) {
-    if (Looper.myLooper() == Looper.getMainLooper()) {
+    if (isMainThread()) {
         block.run()
     } else {
         NanoKtThreadUtilsCompanion.mainHandler.post(block)
@@ -60,7 +60,7 @@ inline fun runOnMainThread(
  * Invokes the receiver on the main thread.
  */
 inline fun Function0<Unit>.invokeOnMainThread() {
-    if (Looper.myLooper() == Looper.getMainLooper()) {
+    if (isMainThread()) {
         invoke()
     } else {
         NanoKtThreadUtilsCompanion.mainHandler.post(this)
@@ -71,7 +71,7 @@ inline fun Function0<Unit>.invokeOnMainThread() {
  * Invokes the receiver on the main thread.
  */
 inline fun <P1> Function1<P1, Unit>.invokeOnMainThread(p1: P1) {
-    if (Looper.myLooper() == Looper.getMainLooper()) {
+    if (isMainThread()) {
         invoke(p1)
     } else {
         NanoKtThreadUtilsCompanion.mainHandler.post {
@@ -84,7 +84,7 @@ inline fun <P1> Function1<P1, Unit>.invokeOnMainThread(p1: P1) {
  * Invokes the receiver on the main thread.
  */
 inline fun <P1, P2> Function2<P1, P2, Unit>.invokeOnMainThread(p1: P1, p2: P2) {
-    if (Looper.myLooper() == Looper.getMainLooper()) {
+    if (isMainThread()) {
         invoke(p1, p2)
     } else {
         NanoKtThreadUtilsCompanion.mainHandler.post {
@@ -97,7 +97,7 @@ inline fun <P1, P2> Function2<P1, P2, Unit>.invokeOnMainThread(p1: P1, p2: P2) {
  * Invokes the receiver on the main thread.
  */
 inline fun <P1, P2, P3> Function3<P1, P2, P3, Unit>.invokeOnMainThread(p1: P1, p2: P2, p3: P3) {
-    if (Looper.myLooper() == Looper.getMainLooper()) {
+    if (isMainThread()) {
         invoke(p1, p2, p3)
     } else {
         NanoKtThreadUtilsCompanion.mainHandler.post {
@@ -110,7 +110,7 @@ inline fun <P1, P2, P3> Function3<P1, P2, P3, Unit>.invokeOnMainThread(p1: P1, p
  * Invokes the receiver on the main thread.
  */
 inline fun <P1, P2, P3, P4> Function4<P1, P2, P3, P4, Unit>.invokeOnMainThread(p1: P1, p2: P2, p3: P3, p4: P4) {
-    if (Looper.myLooper() == Looper.getMainLooper()) {
+    if (isMainThread()) {
         invoke(p1, p2, p3, p4)
     } else {
         NanoKtThreadUtilsCompanion.mainHandler.post {
@@ -123,11 +123,18 @@ inline fun <P1, P2, P3, P4> Function4<P1, P2, P3, P4, Unit>.invokeOnMainThread(p
  * Invokes the receiver on the main thread.
  */
 inline fun <P1, P2, P3, P4, P5> Function5<P1, P2, P3, P4, P5, Unit>.invokeOnMainThread(p1: P1, p2: P2, p3: P3, p4: P4, p5: P5) {
-    if (Looper.myLooper() == Looper.getMainLooper()) {
+    if (isMainThread()) {
         invoke(p1, p2, p3, p4, p5)
     } else {
         NanoKtThreadUtilsCompanion.mainHandler.post {
             invoke(p1, p2, p3, p4, p5)
         }
     }
+}
+
+/**
+ * @return `true` if this function is called on the main thread. False otherwise.
+ */
+inline fun isMainThread(): Boolean {
+    return Looper.myLooper() == Looper.getMainLooper()
 }
