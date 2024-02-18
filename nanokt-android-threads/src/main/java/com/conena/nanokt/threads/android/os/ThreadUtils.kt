@@ -138,3 +138,10 @@ inline fun <P1, P2, P3, P4, P5> Function5<P1, P2, P3, P4, P5, Unit>.invokeOnMain
 inline fun isMainThread(): Boolean {
     return Looper.myLooper() == Looper.getMainLooper()
 }
+
+/**
+ * @return `true` if the receiver is the main thread.
+ */
+inline fun Thread.isMainThread(): Boolean {
+    return equals(Looper.getMainLooper().thread)
+}
