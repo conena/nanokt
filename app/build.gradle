@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace 'com.conena.nanokt.android.sample'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.conena.nanokt.android.sample"
         minSdk 16
-        targetSdk 33
+        targetSdk 34
         versionCode 1
         versionName "1.0"
     }
