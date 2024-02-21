@@ -158,7 +158,7 @@ value class ServiceProvider @PublishedApi internal constructor(val context: Cont
 
     @get:CheckResult
     @get:RequiresApi(Build.VERSION_CODES.KITKAT)
-    inline val consumerIrManager get() = context.getSystemService(Context.CONSUMER_IR_SERVICE) as ConsumerIrManager
+    inline val consumerIrManager get() = context.getSystemService(Context.CONSUMER_IR_SERVICE) as? ConsumerIrManager
 
     @get:CheckResult
     @get:RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)

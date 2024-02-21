@@ -137,12 +137,6 @@ class ContextServiceUtilsTest {
         assertThat(context.systemServices.connectivityManager).isNotNull()
     }
 
-    @SdkSuppress(minSdkVersion = Build.VERSION_CODES.KITKAT)
-    @Test
-    fun consumerIrManager() {
-        assertThat(context.systemServices.consumerIrManager).isNotNull()
-    }
-
     @SdkSuppress(minSdkVersion = Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
     @Test
     fun credentialManager() {
