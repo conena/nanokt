@@ -1,20 +1,3 @@
-/*
- * Copyright (C) 2023 Fabian Andera
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- */
-
 @file:JvmName(name = "ContextServiceUtils")
 @file:Suppress("NOTHING_TO_INLINE", "unused")
 
@@ -26,6 +9,7 @@ import android.app.ActivityManager
 import android.app.AlarmManager
 import android.app.AppOpsManager
 import android.app.DownloadManager
+import android.app.GrammaticalInflectionManager
 import android.app.KeyguardManager
 import android.app.LocaleManager
 import android.app.NotificationManager
@@ -41,12 +25,16 @@ import android.app.usage.UsageStatsManager
 import android.appwidget.AppWidgetManager
 import android.bluetooth.BluetoothManager
 import android.companion.CompanionDeviceManager
+import android.companion.virtual.VirtualDeviceManager
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.RestrictionsManager
+import android.content.om.OverlayManager
 import android.content.pm.CrossProfileApps
 import android.content.pm.LauncherApps
 import android.content.pm.ShortcutManager
+import android.credentials.CredentialManager
+import android.devicelock.DeviceLockManager
 import android.hardware.ConsumerIrManager
 import android.hardware.SensorManager
 import android.hardware.biometrics.BiometricManager
@@ -54,6 +42,7 @@ import android.hardware.camera2.CameraManager
 import android.hardware.display.DisplayManager
 import android.hardware.input.InputManager
 import android.hardware.usb.UsbManager
+import android.health.connect.HealthConnectManager
 import android.location.LocationManager
 import android.media.AudioManager
 import android.media.MediaCommunicationManager
@@ -172,8 +161,16 @@ value class ServiceProvider @PublishedApi internal constructor(val context: Cont
     inline val consumerIrManager get() = context.getSystemService(Context.CONSUMER_IR_SERVICE) as ConsumerIrManager
 
     @get:CheckResult
+    @get:RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
+    inline val credentialManager get() = context.getSystemService(Context.CREDENTIAL_SERVICE) as CredentialManager
+
+    @get:CheckResult
     @get:RequiresApi(Build.VERSION_CODES.P)
     inline val crossProfileApps get() = context.getSystemService(Context.CROSS_PROFILE_APPS_SERVICE) as CrossProfileApps
+
+    @get:CheckResult
+    @get:RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
+    inline val deviceLockManager get() = context.getSystemService(Context.DEVICE_LOCK_SERVICE) as DeviceLockManager
 
     /**
      * Always `null` for instant apps. Should be non-null otherwise.
@@ -197,8 +194,16 @@ value class ServiceProvider @PublishedApi internal constructor(val context: Cont
     inline val euiccManager get() = context.getSystemService(Context.EUICC_SERVICE) as EuiccManager
 
     @get:CheckResult
+    @get:RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
+    inline val grammaticalInflectionManager get() = context.getSystemService(Context.GRAMMATICAL_INFLECTION_SERVICE) as GrammaticalInflectionManager
+
+    @get:CheckResult
     @get:RequiresApi(Build.VERSION_CODES.N)
     inline val hardwarePropertiesManager get() = context.getSystemService(Context.HARDWARE_PROPERTIES_SERVICE) as HardwarePropertiesManager
+
+    @get:CheckResult
+    @get:RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
+    inline val healthConnectManager get() = context.getSystemService(Context.HEALTHCONNECT_SERVICE) as HealthConnectManager
 
     @get:CheckResult
     inline val inputManager get() = context.getSystemService(Context.INPUT_SERVICE) as InputManager
@@ -267,6 +272,10 @@ value class ServiceProvider @PublishedApi internal constructor(val context: Cont
     @get:CheckResult
     @get:RequiresPermission(Manifest.permission.INTERNET)
     inline val nsdManager get() = context.getSystemService(Context.NSD_SERVICE) as NsdManager
+
+    @get:CheckResult
+    @get:RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
+    inline val overlayManager get() = context.getSystemService(Context.OVERLAY_SERVICE) as OverlayManager
 
     @get:CheckResult
     inline val powerManager get() = context.getSystemService(Context.POWER_SERVICE) as PowerManager
@@ -353,6 +362,10 @@ value class ServiceProvider @PublishedApi internal constructor(val context: Cont
     @get:CheckResult
     @get:RequiresApi(Build.VERSION_CODES.S)
     inline val vibratorManager get() = context.getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager
+
+    @get:CheckResult
+    @get:RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
+    inline val virtualDeviceManager get() = context.getSystemService(Context.VIRTUAL_DEVICE_SERVICE) as? VirtualDeviceManager
 
     @get:CheckResult
     @get:RequiresApi(Build.VERSION_CODES.R)

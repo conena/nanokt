@@ -143,10 +143,22 @@ class ContextServiceUtilsTest {
         assertThat(context.systemServices.consumerIrManager).isNotNull()
     }
 
+    @SdkSuppress(minSdkVersion = Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
+    @Test
+    fun credentialManager() {
+        assertThat(context.systemServices.credentialManager).isNotNull()
+    }
+
     @SdkSuppress(minSdkVersion = Build.VERSION_CODES.P)
     @Test
     fun crossProfileApps() {
         assertThat(context.systemServices.crossProfileApps).isNotNull()
+    }
+
+    @SdkSuppress(minSdkVersion = Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
+    @Test
+    fun deviceLockManager() {
+        assertThat(context.systemServices.deviceLockManager).isNotNull()
     }
 
     @Test
@@ -177,10 +189,22 @@ class ContextServiceUtilsTest {
         assertThat(context.systemServices.euiccManager).isNotNull()
     }
 
+    @SdkSuppress(minSdkVersion = Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
+    @Test
+    fun grammaticalInflectionManager() {
+        assertThat(context.systemServices.grammaticalInflectionManager).isNotNull()
+    }
+
     @SdkSuppress(minSdkVersion = Build.VERSION_CODES.N)
     @Test
     fun hardwarePropertiesManager() {
         assertThat(context.systemServices.hardwarePropertiesManager).isNotNull()
+    }
+
+    @SdkSuppress(minSdkVersion = Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
+    @Test
+    fun healthConnectManager() {
+        assertThat(context.systemServices.healthConnectManager).isNotNull()
     }
 
     @Test
@@ -286,6 +310,12 @@ class ContextServiceUtilsTest {
     @Test
     fun nsdManager() {
         assertThat(context.systemServices.nsdManager).isNotNull()
+    }
+
+    @SdkSuppress(minSdkVersion = Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
+    @Test
+    fun overlayManager() {
+        assertThat(context.systemServices.overlayManager).isNotNull()
     }
 
     @Test
