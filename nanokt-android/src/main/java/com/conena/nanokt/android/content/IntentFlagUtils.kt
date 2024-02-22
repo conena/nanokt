@@ -26,6 +26,20 @@ import androidx.annotation.CheckResult
 import androidx.annotation.RequiresApi
 
 /**
+ * True if [Intent.FLAG_ACTIVITY_CLEAR_TASK] is set.
+ */
+inline var Intent.isClearTask: Boolean
+    @CheckResult
+    get() = flags.and(Intent.FLAG_ACTIVITY_CLEAR_TASK) == Intent.FLAG_ACTIVITY_CLEAR_TASK
+    set(value) {
+        flags = if (value) {
+            flags.or(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        } else {
+            flags.and(Intent.FLAG_ACTIVITY_CLEAR_TASK.inv())
+        }
+    }
+
+/**
  * True if [Intent.FLAG_ACTIVITY_CLEAR_TOP] is set.
  */
 inline var Intent.isClearTop: Boolean
@@ -302,6 +316,15 @@ inline var Intent.isTaskOnHome: Boolean
             flags.and(Intent.FLAG_ACTIVITY_TASK_ON_HOME.inv())
         }
     }
+
+/**
+ * Set the flag [Intent.FLAG_ACTIVITY_CLEAR_TASK].
+ * @return The receiver object, for chaining multiple calls.
+ */
+inline fun Intent.setClearTask(): Intent {
+    addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+    return this
+}
 
 /**
  * Set the flag [Intent.FLAG_ACTIVITY_CLEAR_TOP].
