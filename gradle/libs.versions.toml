@@ -24,7 +24,7 @@ androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
-mavenPublish = { id = "com.vanniktech.maven.publish", version = "0.25.3" }
+mavenPublish = { id = "com.vanniktech.maven.publish", version = "0.27.0" }
 
 [bundles]
 # Not needed so far
