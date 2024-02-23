@@ -63,7 +63,7 @@ object UriCompanion {
      * @return The created [Uri].
      */
     @CheckResult
-    inline fun createPlayStoreUriForDeveloper(developerName: String, ): Uri {
+    inline fun createPlayStoreUriForDeveloper(developerName: String): Uri {
         return Uri.Builder()
             .scheme("https")
             .authority("play.google.com")
