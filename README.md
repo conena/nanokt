@@ -42,7 +42,7 @@ The library is divided into modules for pure Kotlin, Kotlin-JVM, and Kotlin-Andr
 # Getting started
 [![Maven Central](https://img.shields.io/maven-central/v/com.conena.nanokt/nanokt)](https://mvnrepository.com/artifact/com.conena.nanokt/nanokt-android)
 [![API](https://img.shields.io/badge/Min%20API-16-orange)](https://developer.android.com/about/versions/jelly-bean#android-4.1)
-[![API](https://img.shields.io/badge/Compiled%20API-33-orange)](https://developer.android.com/about/versions/13)
+[![API](https://img.shields.io/badge/Compiled%20API-34-orange)](https://developer.android.com/about/versions/14)
 [![GitHub followers](https://img.shields.io/github/followers/SageDroid.svg?style=social&label=Follow&maxAge=2592000)](https://github.com/SageDroid)
 [![GitHub stars](https://img.shields.io/github/stars/conena/nanokt?style=social&label=Star&maxAge=2592000)](https://github.com/conena/nanokt/)
 
