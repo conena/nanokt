@@ -58,6 +58,7 @@ inline fun Tile.update(
     contract {
         callsInPlace(action, InvocationKind.EXACTLY_ONCE)
     }
+    action()
     updateTile()
 }
 
