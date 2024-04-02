@@ -89,6 +89,30 @@ object UriCompanion {
 }
 
 /**
+ * Encodes the keys and values and then appends the [parameters] to the query string.
+ * @return The receiver object, for chaining multiple calls.
+ * @see Uri.Builder.appendQueryParameter
+ */
+inline fun Uri.Builder.appendQueryParameters(vararg parameters: Pair<String, String>): Uri.Builder {
+    parameters.forEach { (key, value) ->
+        appendQueryParameter(key, value)
+    }
+    return this
+}
+
+/**
+ * Encodes the keys and values and then appends the [parameters] to the query string.
+ * @return The receiver object, for chaining multiple calls.
+ * @see Uri.Builder.appendQueryParameter
+ */
+inline fun Uri.Builder.appendQueryParameters(parameters: Map<String, String>): Uri.Builder {
+    parameters.forEach { (key, value) ->
+        appendQueryParameter(key, value)
+    }
+    return this
+}
+
+/**
  * Convert an android [Uri] to a java [URI].
  * @return A java [URI] identical to the android [Uri].
  * @throws URISyntaxException If the given [Uri] violates RFC 2396.
