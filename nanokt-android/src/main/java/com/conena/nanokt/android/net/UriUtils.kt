@@ -22,7 +22,9 @@ package com.conena.nanokt.android.net
 
 import android.net.Uri
 import androidx.annotation.CheckResult
+import androidx.core.net.toFile
 import com.conena.nanokt.annotations.ExperimentalNanoKtApi
+import java.io.File
 import java.net.MalformedURLException
 import java.net.URI
 import java.net.URISyntaxException
@@ -179,3 +181,14 @@ inline fun URI.toAndroidUri(): Uri = Uri.parse(toString())
  */
 @CheckResult
 inline fun URL.toAndroidUri(): Uri = Uri.parse(toString())
+
+/**
+ * Creates a [File] from the given [Uri]. Unlike [Uri.toFile] this method does not throw exceptions.
+ * @return The [File] for the receiver. Null if the receiver scheme lacks the 'file' scheme
+ * or the file path.
+ * @see Uri.toFile
+ */
+@CheckResult
+inline fun Uri.toFileOrNull(): File? {
+    return if (scheme == "file") path?.let(::File) else null
+}
