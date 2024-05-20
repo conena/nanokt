@@ -19,6 +19,7 @@ package com.conena.nanokt.collections
 
 import org.junit.Assert.assertArrayEquals
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
@@ -86,6 +87,16 @@ class IterableExtensionsKtTest {
         val expectedSet2 = mutableSetOf("ABC", "BCD", "CDE", "DEF", "EFG", "FGH")
         assertTrue(set2.removeAllAndGet { it.contains('I') }.isEmpty())
         assertArrayEquals(expectedSet2.toTypedArray(), set2.toTypedArray())
+    }
+
+    @Test
+    fun toArrayList() {
+        val arrayList = testList.toArrayList()
+        assertArrayEquals(testList.toTypedArray(), arrayList.toTypedArray())
+        // Do not modify original list
+        arrayList.clear()
+        assertTrue(arrayList.isEmpty())
+        assertFalse(testList.isEmpty())
     }
 
 }

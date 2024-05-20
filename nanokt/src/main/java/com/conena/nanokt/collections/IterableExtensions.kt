@@ -78,3 +78,10 @@ inline fun <T> MutableIterable<T>.removeAllAndGet(predicate: (T) -> Boolean): Li
     }
     return removed
 }
+
+/**
+ * @return A new [ArrayList] with all elements of this collection.
+ */
+inline fun <T> Iterable<T>.toArrayList(): ArrayList<T> {
+    return if (this is Collection<T>) ArrayList(this) else toCollection(destination = ArrayList())
+}
