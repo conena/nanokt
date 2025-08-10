@@ -95,7 +95,7 @@ inline fun <T : Any> T?.ifNull(block: () -> T): T {
  */
 inline fun <T> runSilent(block: () -> T) {
     contract {
-        callsInPlace(block, InvocationKind.EXACTLY_ONCE)
+        callsInPlace(block, InvocationKind.AT_MOST_ONCE)
     }
     try { block() } catch (_: Throwable) {}
 }
@@ -105,7 +105,7 @@ inline fun <T> runSilent(block: () -> T) {
  */
 inline fun <T> runSilentAndGet(block: () -> T): T? {
     contract {
-        callsInPlace(block, InvocationKind.EXACTLY_ONCE)
+        callsInPlace(block, InvocationKind.AT_MOST_ONCE)
     }
     return try {
         block()
@@ -119,7 +119,7 @@ inline fun <T> runSilentAndGet(block: () -> T): T? {
  */
 inline fun <T> T.applySilent(block: T.() -> Unit): T {
     contract {
-        callsInPlace(block, InvocationKind.EXACTLY_ONCE)
+        callsInPlace(block, InvocationKind.AT_MOST_ONCE)
     }
     try {
         block()
@@ -132,7 +132,7 @@ inline fun <T> T.applySilent(block: T.() -> Unit): T {
  */
 inline fun <T> T.alsoSilent(block: (T) -> Unit): T {
     contract {
-        callsInPlace(block, InvocationKind.EXACTLY_ONCE)
+        callsInPlace(block, InvocationKind.AT_MOST_ONCE)
     }
     try {
         block(this)
