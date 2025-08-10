@@ -20,7 +20,7 @@
 package com.conena.nanokt.collections
 
 /**
- * @return `null` if the collection is empty or `null`. Otherwise the collection is returned.
+ * @return `null` if the collection is empty or `null`. Otherwise, the collection is returned.
  */
 inline fun <T> Collection<T>.emptyAsNull(): Collection<T>? = ifEmpty { null }
 
@@ -32,7 +32,7 @@ inline fun <reified T : Any> listOfInstanceOf(vararg elements: Any?): List<T> {
 }
 
 /**
- * @return A list containing [element] it it is of type [T]. Otherwise an empty list is returned.
+ * @return A list containing [element] if it is of type [T]. Otherwise, an empty list is returned.
  */
 inline fun <reified T : Any> listOfInstanceOf(element: Any?): List<T> {
     return if (element is T) listOf(element) else emptyList()

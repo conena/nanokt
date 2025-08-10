@@ -58,32 +58,32 @@ inline fun Int.getBitFlags(): Array<Int> {
 }
 
 /**
- * @return `null` if the receiver is zero. Otherwise the receiver is returned.
+ * @return `null` if the receiver is zero. Otherwise, the receiver is returned.
  */
 inline fun Int.zeroAsNull() = if (this == 0) null else this
 
 /**
- * @return 0 if the receiver is `null`. Otherwise the receiver is returned.
+ * @return 0 if the receiver is `null`. Otherwise, the receiver is returned.
  */
 inline fun Int?.nullAsZero() = this ?: 0
 
 /**
- * @return `null` if the receiver is negative. Otherwise the receiver is returned.
+ * @return `null` if the receiver is negative. Otherwise, the receiver is returned.
  */
 inline fun Int.negativeAsNull() = if (this < 0) null else this
 
 /**
- * @return 0 if the receiver is negative. Otherwise the receiver is returned.
+ * @return 0 if the receiver is negative. Otherwise, the receiver is returned.
  */
 inline fun Int.negativeAsZero() = if (this < 0) 0 else this
 
 /**
- * @return `null` if the receiver is positive. Otherwise the receiver is returned.
+ * @return `null` if the receiver is positive. Otherwise, the receiver is returned.
  */
 inline fun Int.positiveAsNull() = if (this > 0) null else this
 
 /**
- * @return 0 if the receiver is positive. Otherwise the receiver is returned.
+ * @return 0 if the receiver is positive. Otherwise, the receiver is returned.
  */
 inline fun Int.positiveAsZero() = if (this > 0) 0 else this
 

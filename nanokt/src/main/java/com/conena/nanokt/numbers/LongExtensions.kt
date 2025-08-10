@@ -58,32 +58,32 @@ inline fun Long.getBitFlags(): Array<Long> {
 }
 
 /**
- * @return `null` if the receiver is zero. Otherwise the receiver is returned.
+ * @return `null` if the receiver is zero. Otherwise, the receiver is returned.
  */
 inline fun Long.zeroAsNull() = if (this == 0L) null else this
 
 /**
- * @return 0 if the receiver is `null`. Otherwise the receiver is returned.
+ * @return 0 if the receiver is `null`. Otherwise, the receiver is returned.
  */
 inline fun Long?.nullAsZero() = this ?: 0L
 
 /**
- * @return `null` if the receiver is negative. Otherwise the receiver is returned.
+ * @return `null` if the receiver is negative. Otherwise, the receiver is returned.
  */
 inline fun Long.negativeAsNull() = if (this < 0L) null else this
 
 /**
- * @return 0 if the receiver is negative. Otherwise the receiver is returned.
+ * @return 0 if the receiver is negative. Otherwise, the receiver is returned.
  */
 inline fun Long.negativeAsZero() = if (this < 0L) 0L else this
 
 /**
- * @return `null` if the receiver is positive. Otherwise the receiver is returned.
+ * @return `null` if the receiver is positive. Otherwise, the receiver is returned.
  */
 inline fun Long.positiveAsNull() = if (this > 0L) null else this
 
 /**
- * @return 0 if the receiver is positive. Otherwise the receiver is returned.
+ * @return 0 if the receiver is positive. Otherwise, the receiver is returned.
  */
 inline fun Long.positiveAsZero() = if (this > 0L) 0L else this
 

@@ -29,7 +29,7 @@ import kotlin.contracts.contract
  * @param first First [block] parameter.
  * @param second Second [block] parameter.
  * @param block Invoked if [first] and [second] are non `null`.
- * @return `null` if either [first] or [second] is `null`. Otherwise the result of [block] is returned.
+ * @return `null` if either [first] or [second] is `null`. Otherwise, the result of [block] is returned.
  */
 inline fun <F, S, R> biLetNonNull(first: F?, second: S?, block: (F, S) -> R): R? {
     contract {
@@ -48,7 +48,7 @@ inline fun <F, S, R> biLetNonNull(first: F?, second: S?, block: (F, S) -> R): R?
  * @param second Second [block] parameter.
  * @param third Third [block] parameter.
  * @param block Invoked if [first], [second] and [third] are non `null`.
- * @return `null` if either [first], [second] or [third] is `null`. Otherwise the result of [block] is returned.
+ * @return `null` if either [first], [second] or [third] is `null`. Otherwise, the result of [block] is returned.
  */
 inline fun <F, S, T, R> triLetNonNull(first: F?, second: S?, third: T?, block: (F, S, T) -> R): R? {
     contract {

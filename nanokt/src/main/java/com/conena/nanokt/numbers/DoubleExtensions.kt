@@ -20,32 +20,32 @@
 package com.conena.nanokt.numbers
 
 /**
- * @return `null` if the receiver is zero. Otherwise the receiver is returned.
+ * @return `null` if the receiver is zero. Otherwise, the receiver is returned.
  */
 inline fun Double.zeroAsNull() = if (this == 0.0) null else this
 
 /**
- * @return 0 if the receiver is `null`. Otherwise the receiver is returned.
+ * @return 0 if the receiver is `null`. Otherwise, the receiver is returned.
  */
 inline fun Double?.nullAsZero() = this ?: 0.0
 
 /**
- * @return `null` if the receiver is negative. Otherwise the receiver is returned.
+ * @return `null` if the receiver is negative. Otherwise, the receiver is returned.
  */
 inline fun Double.negativeAsNull() = if (this < 0.0) null else this
 
 /**
- * @return 0 if the receiver is negative. Otherwise the receiver is returned.
+ * @return 0 if the receiver is negative. Otherwise, the receiver is returned.
  */
 inline fun Double.negativeAsZero() = if (this < 0.0) 0.0 else this
 
 /**
- * @return `null` if the receiver is positive. Otherwise the receiver is returned.
+ * @return `null` if the receiver is positive. Otherwise, the receiver is returned.
  */
 inline fun Double.positiveAsNull() = if (this > 0.0) null else this
 
 /**
- * @return 0 if the receiver is positive. Otherwise the receiver is returned.
+ * @return 0 if the receiver is positive. Otherwise, the receiver is returned.
  */
 inline fun Double.positiveAsZero() = if (this > 0.0) 0.0 else this
 
