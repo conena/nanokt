@@ -133,13 +133,21 @@ inline fun CharSequence.lastIndexOfOrNull(
 /**
  * @return `true` if this char sequence contains no characters or only whitespace characters.
  */
+@Deprecated(
+    message = "Use 'isBlank' instead.",
+    replaceWith = ReplaceWith(expression = "isBlank()"),
+)
 inline fun CharSequence.isEmptyOrBlank(): Boolean {
-    return isEmpty() || isBlank()
+    return isBlank()
 }
 
 /**
  * @return `true` if this char sequence contains characters other than whitespace characters.
  */
+@Deprecated(
+    message = "Use 'isNotBlank' instead.",
+    replaceWith = ReplaceWith(expression = "isNotBlank()"),
+)
 inline fun CharSequence.isNotEmptyOrBlank(): Boolean {
-    return !isEmptyOrBlank()
+    return isNotBlank()
 }
