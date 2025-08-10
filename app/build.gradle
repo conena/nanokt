@@ -17,7 +17,7 @@ android {
 
     defaultConfig {
         applicationId "com.conena.nanokt.android.sample"
-        minSdk 16
+        minSdk libs.versions.minSdk.get().toInteger()
         targetSdk 35
         versionCode 1
         versionName "1.0"
