@@ -13,7 +13,7 @@ kotlin {
 
 android {
     namespace 'com.conena.nanokt.android.sample'
-    compileSdk 34
+    compileSdk libs.versions.compileSdk.get().toInteger()
 
     defaultConfig {
         applicationId "com.conena.nanokt.android.sample"
