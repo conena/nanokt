@@ -16,7 +16,7 @@
  */
 
 @file:JvmName(name = "ColorUtils")
-@file:Suppress("NOTHING_TO_INLINE", "unused")
+@file:Suppress("NOTHING_TO_INLINE", "unused", "UseKtx")
 
 package com.conena.nanokt.android.graphics
 
