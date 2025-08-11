@@ -70,3 +70,31 @@ inline fun <T> MutableCollection<T>.addAllNotNull(elements: Iterable<T?>): Boole
         if (item != null && add(item)) added = true
     return added
 }
+
+/**
+ * Removes the first element from this list and returns that removed element.
+ * This method is required because [MutableList.removeFirst] and [MutableList.removeLast] can not be used when android
+ * compile sdk is set to 35+ and target sdk is below 35.
+ * [Behavior changes Android 15](https://developer.android.com/about/versions/15/behavior-changes-15?hl=en#openjdk-api-changes)
+ * [Google Issue tracker](https://issuetracker.google.com/issues/350432371)
+ * [Jetbrains Issue tracker](https://youtrack.jetbrains.com/issue/KT-71375)
+ * @return The removed element
+ * @throws NoSuchElementException If the list is empty.
+ */
+inline fun <T> MutableList<T>.removeFirstCompat(): T {
+    return if (isEmpty()) throw NoSuchElementException() else removeAt(index = 0)
+}
+
+/**
+ * Removes the last element from this list and returns that removed element.
+ * This method is required because [MutableList.removeFirst] and [MutableList.removeLast] can not be used when android
+ * compile sdk is set to 35+ and target sdk is below 35.
+ * [Behavior changes Android 15](https://developer.android.com/about/versions/15/behavior-changes-15?hl=en#openjdk-api-changes)
+ * [Google Issue tracker](https://issuetracker.google.com/issues/350432371)
+ * [Jetbrains Issue tracker](https://youtrack.jetbrains.com/issue/KT-71375)
+ * @return The removed element
+ * @throws NoSuchElementException If the list is empty.
+ */
+inline fun <T> MutableList<T>.removeLastCompat(): T {
+    return if (isEmpty()) throw NoSuchElementException() else removeAt(index = lastIndex)
+}

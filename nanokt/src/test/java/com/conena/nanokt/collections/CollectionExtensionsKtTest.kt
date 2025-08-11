@@ -133,4 +133,52 @@ class CollectionExtensionsKtTest {
         assertArrayEquals(expectedSet.toTypedArray(), set.toTypedArray())
     }
 
+    @Test
+    fun `removeFirstCompat - successfully removes and returns first element`() {
+        val list = mutableListOf("a", "b", "c")
+        val removedElement = list.removeFirstCompat()
+
+        assertEquals("a", removedElement)
+        assertEquals(listOf("b", "c"), list)
+    }
+
+    @Test
+    fun `removeFirstCompat - list with one element becomes empty`() {
+        val list = mutableListOf(2)
+        val removedElement = list.removeFirstCompat()
+
+        assertEquals(2, removedElement)
+        assertTrue(list.isEmpty())
+    }
+
+    @Test(expected = NoSuchElementException::class)
+    fun `removeFirstCompat - throws exception on empty list`() {
+        val emptyList = mutableListOf<Int>()
+        emptyList.removeFirstCompat()
+    }
+
+    @Test
+    fun `removeLastCompat - successfully removes and returns last element`() {
+        val list = mutableListOf("a", "b", "c")
+        val removedElement = list.removeLastCompat()
+
+        assertEquals("c", removedElement)
+        assertEquals(listOf("a", "b"), list)
+    }
+
+    @Test
+    fun `removeLastCompat - list with one element becomes empty`() {
+        val list = mutableListOf(2)
+        val removedElement = list.removeLastCompat()
+
+        assertEquals(2, removedElement)
+        assertTrue(list.isEmpty())
+    }
+
+    @Test(expected = NoSuchElementException::class)
+    fun `removeLastCompat - throws exception on empty list`() {
+        val emptyList = mutableListOf<Int>()
+        emptyList.removeLastCompat()
+    }
+
 }
