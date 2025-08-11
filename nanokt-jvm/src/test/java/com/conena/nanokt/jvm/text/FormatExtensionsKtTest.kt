@@ -17,10 +17,10 @@
 
 package com.conena.nanokt.jvm.text
 
-import org.junit.Assert.assertEquals
-import org.junit.Test
 import java.text.NumberFormat
-import java.util.Locale
+import java.util.*
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
 class FormatExtensionsKtTest {
 

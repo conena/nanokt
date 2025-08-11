@@ -17,11 +17,11 @@
 
 package com.conena.nanokt.jvm.io
 
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNull
-import org.junit.Test
 import java.io.BufferedReader
 import java.io.IOException
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertNull
 
 class IOExtensionsKtTest {
 

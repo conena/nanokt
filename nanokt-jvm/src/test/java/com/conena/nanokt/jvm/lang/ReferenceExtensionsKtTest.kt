@@ -17,8 +17,9 @@
 
 package com.conena.nanokt.jvm.lang
 
-import org.junit.Assert.assertSame
-import org.junit.Test
+import kotlin.test.Test
+import kotlin.test.assertSame
+
 
 class ReferenceExtensionsKtTest {
 

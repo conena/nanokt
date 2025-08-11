@@ -17,12 +17,13 @@
 
 package com.conena.nanokt.jvm.util
 
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertFalse
-import org.junit.Assert.assertNull
-import org.junit.Assert.assertThrows
-import org.junit.Assert.assertTrue
-import org.junit.Test
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
+import kotlin.test.assertFalse
+import kotlin.test.assertNull
+import kotlin.test.assertTrue
+
 
 class UUIDExtensionsKtTest {
 
@@ -75,7 +76,7 @@ class UUIDExtensionsKtTest {
     @Test
     fun `toUUID - invalid UUIDs`() {
         invalidUUIDs.forEach { uuid ->
-            assertThrows(IllegalArgumentException::class.java) {
+            assertFailsWith(IllegalArgumentException::class) {
                 uuid.toUUID()
             }
         }

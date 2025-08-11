@@ -17,8 +17,9 @@
 
 package com.conena.nanokt.jvm.net
 
-import org.junit.Assert.*
-import org.junit.Test
+import kotlin.test.Test
+import kotlin.test.assertEquals
+
 
 class URLExtensionsKtTest {
 

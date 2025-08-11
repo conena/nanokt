@@ -17,10 +17,11 @@
 
 package com.conena.nanokt.jvm.util
 
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNull
-import org.junit.Assert.assertThrows
-import org.junit.Test
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
+import kotlin.test.assertNull
+
 
 class RegexExtensionsKtTest {
 
@@ -38,7 +39,7 @@ class RegexExtensionsKtTest {
 
     @Test
     fun `toPatternOrNull - Invalid flag`() {
-        assertThrows(IllegalArgumentException::class.java) {
+        assertFailsWith(IllegalArgumentException::class) {
             "^test\$".toPatternOrNull(flags = -1)
         }
     }

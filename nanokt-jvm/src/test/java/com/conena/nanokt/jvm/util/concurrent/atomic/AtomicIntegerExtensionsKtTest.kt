@@ -1,8 +1,8 @@
 package com.conena.nanokt.jvm.util.concurrent.atomic
 
-import org.junit.Assert.assertEquals
-import org.junit.Test
 import java.util.concurrent.atomic.AtomicInteger
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
 class AtomicIntegerExtensionsKtTest {
 

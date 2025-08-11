@@ -1,9 +1,9 @@
 package com.conena.nanokt.jvm.util.concurrent.atomic
 
-import org.junit.Assert.assertFalse
-import org.junit.Assert.assertTrue
-import org.junit.Test
 import java.util.concurrent.atomic.AtomicBoolean
+import kotlin.test.Test
+import kotlin.test.assertFalse
+import kotlin.test.assertTrue
 
 class AtomicBooleanExtensionsKtTest {
 
