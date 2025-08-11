@@ -17,8 +17,13 @@
 
 package com.conena.nanokt
 
-import org.junit.Assert.*
-import org.junit.Test
+import org.junit.Assert.assertThrows
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertFalse
+import kotlin.test.assertNull
+import kotlin.test.assertSame
+import kotlin.test.assertTrue
 
 class GlobalExtensionsKtTest {
 
@@ -96,7 +101,9 @@ class GlobalExtensionsKtTest {
     @Test
     fun `castOrNull - cast works`() {
         val value: CharSequence = "Test"
-        assertSame(value, value.castOrNull<String>())
+        assertTrue {
+            value === value.castOrNull<String>()
+        }
     }
 
     @Test

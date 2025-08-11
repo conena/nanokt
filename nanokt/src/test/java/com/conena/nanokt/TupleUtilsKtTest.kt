@@ -17,10 +17,10 @@
 
 package com.conena.nanokt
 
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNotNull
-import org.junit.Assert.assertNull
-import org.junit.Test
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertNotNull
+import kotlin.test.assertNull
 
 class TupleUtilsKtTest {
 
@@ -37,7 +37,7 @@ class TupleUtilsKtTest {
 
         val vv = "First" toOrNull "Second"
         assertNotNull(vv)
-        assertEquals("First", vv?.first)
-        assertEquals("Second", vv?.second)
+        assertEquals("First", vv.first)
+        assertEquals("Second", vv.second)
     }
 }
