@@ -17,8 +17,12 @@
 
 package com.conena.nanokt.numbers
 
-import org.junit.Assert
-import org.junit.Test
+import kotlin.test.Test
+import kotlin.test.assertContentEquals
+import kotlin.test.assertEquals
+import kotlin.test.assertFalse
+import kotlin.test.assertNull
+import kotlin.test.assertTrue
 
 private const val FLAG_1 = 1L
 private const val FLAG_2 = 2L
@@ -32,23 +36,23 @@ class LongExtensionsKtTest {
     @Test
     fun isFlagSet() {
         var flags = 0L
-        Assert.assertFalse(flags.isFlagSet(FLAG_1))
-        Assert.assertFalse(flags.isFlagSet(FLAG_2))
-        Assert.assertFalse(flags.isFlagSet(FLAG_4))
-        Assert.assertFalse(flags.isFlagSet(FLAG_8))
-        Assert.assertFalse(flags.isFlagSet(FLAG_16))
+        assertFalse(flags.isFlagSet(FLAG_1))
+        assertFalse(flags.isFlagSet(FLAG_2))
+        assertFalse(flags.isFlagSet(FLAG_4))
+        assertFalse(flags.isFlagSet(FLAG_8))
+        assertFalse(flags.isFlagSet(FLAG_16))
         flags = flags or FLAG_1
-        Assert.assertTrue(flags.isFlagSet(FLAG_1))
-        Assert.assertFalse(flags.isFlagSet(FLAG_2))
-        Assert.assertFalse(flags.isFlagSet(FLAG_4))
-        Assert.assertFalse(flags.isFlagSet(FLAG_8))
-        Assert.assertFalse(flags.isFlagSet(FLAG_16))
+        assertTrue(flags.isFlagSet(FLAG_1))
+        assertFalse(flags.isFlagSet(FLAG_2))
+        assertFalse(flags.isFlagSet(FLAG_4))
+        assertFalse(flags.isFlagSet(FLAG_8))
+        assertFalse(flags.isFlagSet(FLAG_16))
         flags = flags or FLAG_16
-        Assert.assertTrue(flags.isFlagSet(FLAG_1))
-        Assert.assertFalse(flags.isFlagSet(FLAG_2))
-        Assert.assertFalse(flags.isFlagSet(FLAG_4))
-        Assert.assertFalse(flags.isFlagSet(FLAG_8))
-        Assert.assertTrue(flags.isFlagSet(FLAG_16))
+        assertTrue(flags.isFlagSet(FLAG_1))
+        assertFalse(flags.isFlagSet(FLAG_2))
+        assertFalse(flags.isFlagSet(FLAG_4))
+        assertFalse(flags.isFlagSet(FLAG_8))
+        assertTrue(flags.isFlagSet(FLAG_16))
     }
 
 
@@ -57,166 +61,166 @@ class LongExtensionsKtTest {
     fun addFlag() {
         var flags = 0L
         flags = flags.addFlag(FLAG_1)
-        Assert.assertTrue(flags.isFlagSet(FLAG_1))
-        Assert.assertFalse(flags.isFlagSet(FLAG_2))
-        Assert.assertFalse(flags.isFlagSet(FLAG_4))
-        Assert.assertFalse(flags.isFlagSet(FLAG_8))
-        Assert.assertFalse(flags.isFlagSet(FLAG_16))
+        assertTrue(flags.isFlagSet(FLAG_1))
+        assertFalse(flags.isFlagSet(FLAG_2))
+        assertFalse(flags.isFlagSet(FLAG_4))
+        assertFalse(flags.isFlagSet(FLAG_8))
+        assertFalse(flags.isFlagSet(FLAG_16))
         flags = flags.addFlag(FLAG_2)
-        Assert.assertTrue(flags.isFlagSet(FLAG_1))
-        Assert.assertTrue(flags.isFlagSet(FLAG_2))
-        Assert.assertFalse(flags.isFlagSet(FLAG_4))
-        Assert.assertFalse(flags.isFlagSet(FLAG_8))
-        Assert.assertFalse(flags.isFlagSet(FLAG_16))
+        assertTrue(flags.isFlagSet(FLAG_1))
+        assertTrue(flags.isFlagSet(FLAG_2))
+        assertFalse(flags.isFlagSet(FLAG_4))
+        assertFalse(flags.isFlagSet(FLAG_8))
+        assertFalse(flags.isFlagSet(FLAG_16))
         flags = flags.addFlag(FLAG_16)
-        Assert.assertTrue(flags.isFlagSet(FLAG_1))
-        Assert.assertTrue(flags.isFlagSet(FLAG_2))
-        Assert.assertFalse(flags.isFlagSet(FLAG_4))
-        Assert.assertFalse(flags.isFlagSet(FLAG_8))
-        Assert.assertTrue(flags.isFlagSet(FLAG_16))
+        assertTrue(flags.isFlagSet(FLAG_1))
+        assertTrue(flags.isFlagSet(FLAG_2))
+        assertFalse(flags.isFlagSet(FLAG_4))
+        assertFalse(flags.isFlagSet(FLAG_8))
+        assertTrue(flags.isFlagSet(FLAG_16))
     }
 
     @Test
     fun removeFlag() {
         var flags = 0b11111L
         flags = flags.removeFlag(FLAG_1)
-        Assert.assertFalse(flags.isFlagSet(FLAG_1))
-        Assert.assertTrue(flags.isFlagSet(FLAG_2))
-        Assert.assertTrue(flags.isFlagSet(FLAG_4))
-        Assert.assertTrue(flags.isFlagSet(FLAG_8))
-        Assert.assertTrue(flags.isFlagSet(FLAG_16))
+        assertFalse(flags.isFlagSet(FLAG_1))
+        assertTrue(flags.isFlagSet(FLAG_2))
+        assertTrue(flags.isFlagSet(FLAG_4))
+        assertTrue(flags.isFlagSet(FLAG_8))
+        assertTrue(flags.isFlagSet(FLAG_16))
         flags = flags.removeFlag(FLAG_2)
-        Assert.assertFalse(flags.isFlagSet(FLAG_1))
-        Assert.assertFalse(flags.isFlagSet(FLAG_2))
-        Assert.assertTrue(flags.isFlagSet(FLAG_4))
-        Assert.assertTrue(flags.isFlagSet(FLAG_8))
-        Assert.assertTrue(flags.isFlagSet(FLAG_16))
+        assertFalse(flags.isFlagSet(FLAG_1))
+        assertFalse(flags.isFlagSet(FLAG_2))
+        assertTrue(flags.isFlagSet(FLAG_4))
+        assertTrue(flags.isFlagSet(FLAG_8))
+        assertTrue(flags.isFlagSet(FLAG_16))
         flags = flags.removeFlag(FLAG_16)
-        Assert.assertFalse(flags.isFlagSet(FLAG_1))
-        Assert.assertFalse(flags.isFlagSet(FLAG_2))
-        Assert.assertTrue(flags.isFlagSet(FLAG_4))
-        Assert.assertTrue(flags.isFlagSet(FLAG_8))
-        Assert.assertFalse(flags.isFlagSet(FLAG_16))
+        assertFalse(flags.isFlagSet(FLAG_1))
+        assertFalse(flags.isFlagSet(FLAG_2))
+        assertTrue(flags.isFlagSet(FLAG_4))
+        assertTrue(flags.isFlagSet(FLAG_8))
+        assertFalse(flags.isFlagSet(FLAG_16))
     }
 
     @Test
     fun getBitFlags() {
         val exceptedFlags = arrayOf(0b10L, 0b100L, 0b10000L, 0b100000L)
         val resolvedFlags = 0b110110L.getBitFlags()
-        Assert.assertEquals(exceptedFlags.size, resolvedFlags.size)
-        Assert.assertArrayEquals(exceptedFlags, resolvedFlags)
+        assertEquals(exceptedFlags.size, resolvedFlags.size)
+        assertContentEquals(exceptedFlags, resolvedFlags)
     }
 
     @Test
     fun zeroAsNull() {
-        Assert.assertNull(0L.zeroAsNull())
-        Assert.assertEquals(1L, 1L.zeroAsNull())
-        Assert.assertEquals(-1L, (-1L).zeroAsNull())
+        assertNull(0L.zeroAsNull())
+        assertEquals(1L, 1L.zeroAsNull())
+        assertEquals(-1L, (-1L).zeroAsNull())
     }
 
     @Test
     fun nullAsZero() {
         val nullValue: Long? = null
-        Assert.assertEquals(0L, nullValue.nullAsZero())
-        Assert.assertEquals(0L, 0L.nullAsZero())
-        Assert.assertEquals(1L, 1L.nullAsZero())
-        Assert.assertEquals(-1L, (-1L).nullAsZero())
+        assertEquals(0L, nullValue.nullAsZero())
+        assertEquals(0L, 0L.nullAsZero())
+        assertEquals(1L, 1L.nullAsZero())
+        assertEquals(-1L, (-1L).nullAsZero())
     }
 
     @Test
     fun negativeAsNull() {
-        Assert.assertEquals(0L, 0L.negativeAsNull())
-        Assert.assertEquals(1L, 1L.negativeAsNull())
-        Assert.assertNull((-1L).negativeAsNull())
+        assertEquals(0L, 0L.negativeAsNull())
+        assertEquals(1L, 1L.negativeAsNull())
+        assertNull((-1L).negativeAsNull())
     }
 
     @Test
     fun negativeAsZero() {
-        Assert.assertEquals(0L, 0L.negativeAsZero())
-        Assert.assertEquals(1L, 1L.negativeAsZero())
-        Assert.assertEquals(0L, (-1L).negativeAsZero())
+        assertEquals(0L, 0L.negativeAsZero())
+        assertEquals(1L, 1L.negativeAsZero())
+        assertEquals(0L, (-1L).negativeAsZero())
     }
 
     @Test
     fun positiveAsNull() {
-        Assert.assertEquals(0L, 0L.positiveAsNull())
-        Assert.assertNull(1L.positiveAsNull())
-        Assert.assertEquals(-1L, (-1L).positiveAsNull())
+        assertEquals(0L, 0L.positiveAsNull())
+        assertNull(1L.positiveAsNull())
+        assertEquals(-1L, (-1L).positiveAsNull())
     }
 
     @Test
     fun positiveAsZero() {
-        Assert.assertEquals(0L, 0L.positiveAsZero())
-        Assert.assertEquals(0L, 1L.positiveAsZero())
-        Assert.assertEquals(-1L, (-1L).positiveAsZero())
+        assertEquals(0L, 0L.positiveAsZero())
+        assertEquals(0L, 1L.positiveAsZero())
+        assertEquals(-1L, (-1L).positiveAsZero())
     }
 
     @Test
     fun isNegative() {
-        Assert.assertFalse(0L.isNegative())
-        Assert.assertFalse(1L.isNegative())
-        Assert.assertTrue((-1L).isNegative())
+        assertFalse(0L.isNegative())
+        assertFalse(1L.isNegative())
+        assertTrue((-1L).isNegative())
     }
 
     @Test
     fun isPositive() {
-        Assert.assertFalse(0L.isPositive())
-        Assert.assertTrue(1L.isPositive())
-        Assert.assertFalse((-1L).isPositive())
+        assertFalse(0L.isPositive())
+        assertTrue(1L.isPositive())
+        assertFalse((-1L).isPositive())
     }
 
     @Test
     fun isZero() {
-        Assert.assertTrue(0L.isZero())
-        Assert.assertFalse(1L.isZero())
-        Assert.assertFalse((-1L).isZero())
+        assertTrue(0L.isZero())
+        assertFalse(1L.isZero())
+        assertFalse((-1L).isZero())
     }
 
     @Test
     fun isNotNegative() {
-        Assert.assertTrue(0L.isNotNegative())
-        Assert.assertTrue(1L.isNotNegative())
-        Assert.assertFalse((-1L).isNotNegative())
+        assertTrue(0L.isNotNegative())
+        assertTrue(1L.isNotNegative())
+        assertFalse((-1L).isNotNegative())
     }
 
     @Test
     fun isNotPositive() {
-        Assert.assertTrue(0L.isNotPositive())
-        Assert.assertFalse(1L.isNotPositive())
-        Assert.assertTrue((-1L).isNotPositive())
+        assertTrue(0L.isNotPositive())
+        assertFalse(1L.isNotPositive())
+        assertTrue((-1L).isNotPositive())
     }
 
     @Test
     fun isNotZero() {
-        Assert.assertFalse(0L.isNotZero())
-        Assert.assertTrue(1L.isNotZero())
-        Assert.assertTrue((-1L).isNotZero())
+        assertFalse(0L.isNotZero())
+        assertTrue(1L.isNotZero())
+        assertTrue((-1L).isNotZero())
     }
 
     @Test
     fun isNullOrNegative() {
         val nullValue: Long? = null
-        Assert.assertTrue(nullValue.isNullOrNegative())
-        Assert.assertFalse(0L.isNullOrNegative())
-        Assert.assertFalse(1L.isNullOrNegative())
-        Assert.assertTrue((-1L).isNullOrNegative())
+        assertTrue(nullValue.isNullOrNegative())
+        assertFalse(0L.isNullOrNegative())
+        assertFalse(1L.isNullOrNegative())
+        assertTrue((-1L).isNullOrNegative())
     }
 
     @Test
     fun isNullOrPositive() {
         val nullValue: Long? = null
-        Assert.assertTrue(nullValue.isNullOrPositive())
-        Assert.assertFalse(0L.isNullOrPositive())
-        Assert.assertTrue(1L.isNullOrPositive())
-        Assert.assertFalse((-1L).isNullOrPositive())
+        assertTrue(nullValue.isNullOrPositive())
+        assertFalse(0L.isNullOrPositive())
+        assertTrue(1L.isNullOrPositive())
+        assertFalse((-1L).isNullOrPositive())
     }
 
     @Test
     fun isNullOrZero() {
         val nullValue: Long? = null
-        Assert.assertTrue(nullValue.isNullOrZero())
-        Assert.assertTrue(0L.isNullOrZero())
-        Assert.assertFalse(1L.isNullOrZero())
-        Assert.assertFalse((-1L).isNullOrZero())
+        assertTrue(nullValue.isNullOrZero())
+        assertTrue(0L.isNullOrZero())
+        assertFalse(1L.isNullOrZero())
+        assertFalse((-1L).isNullOrZero())
     }
 }

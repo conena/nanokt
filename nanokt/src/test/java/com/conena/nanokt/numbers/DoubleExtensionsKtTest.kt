@@ -17,122 +17,125 @@
 
 package com.conena.nanokt.numbers
 
-import org.junit.Assert
-import org.junit.Test
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertFalse
+import kotlin.test.assertNull
+import kotlin.test.assertTrue
 
 class DoubleExtensionsKtTest {
 
     @Test
     fun zeroAsNull() {
-        Assert.assertNull(0.0.zeroAsNull())
-        Assert.assertEquals(0.1, 0.1.zeroAsNull())
-        Assert.assertEquals(-0.1, (-0.1).zeroAsNull())
+        assertNull(0.0.zeroAsNull())
+        assertEquals(0.1, 0.1.zeroAsNull())
+        assertEquals(-0.1, (-0.1).zeroAsNull())
     }
 
     @Test
     fun nullAsZero() {
         val nullValue: Double? = null
-        Assert.assertEquals(0.0, nullValue.nullAsZero(), 0.0)
-        Assert.assertEquals(0.0, 0.0.nullAsZero(), 0.0)
-        Assert.assertEquals(0.1, 0.1.nullAsZero(), 0.0)
-        Assert.assertEquals(-0.1, (-0.1).nullAsZero(), 0.0)
+        assertEquals(0.0, nullValue.nullAsZero(), 0.0)
+        assertEquals(0.0, 0.0.nullAsZero(), 0.0)
+        assertEquals(0.1, 0.1.nullAsZero(), 0.0)
+        assertEquals(-0.1, (-0.1).nullAsZero(), 0.0)
     }
 
     @Test
     fun negativeAsNull() {
-        Assert.assertEquals(0.0, 0.0.negativeAsNull())
-        Assert.assertEquals(0.1, 0.1.negativeAsNull())
-        Assert.assertNull((-0.1).negativeAsNull())
+        assertEquals(0.0, 0.0.negativeAsNull())
+        assertEquals(0.1, 0.1.negativeAsNull())
+        assertNull((-0.1).negativeAsNull())
     }
 
     @Test
     fun negativeAsZero() {
-        Assert.assertEquals(0.0, 0.0.negativeAsZero(), 0.0)
-        Assert.assertEquals(0.1, 0.1.negativeAsZero(), 0.0)
-        Assert.assertEquals(0.0, (-0.1).negativeAsZero(), 0.0)
+        assertEquals(0.0, 0.0.negativeAsZero(), 0.0)
+        assertEquals(0.1, 0.1.negativeAsZero(), 0.0)
+        assertEquals(0.0, (-0.1).negativeAsZero(), 0.0)
     }
 
     @Test
     fun positiveAsNull() {
-        Assert.assertEquals(0.0, 0.0.positiveAsNull())
-        Assert.assertNull(0.1.positiveAsNull())
-        Assert.assertEquals(-0.1, (-0.1).positiveAsNull())
+        assertEquals(0.0, 0.0.positiveAsNull())
+        assertNull(0.1.positiveAsNull())
+        assertEquals(-0.1, (-0.1).positiveAsNull())
     }
 
     @Test
     fun positiveAsZero() {
-        Assert.assertEquals(0.0, 0.0.positiveAsZero(), 0.0)
-        Assert.assertEquals(0.0, 0.1.positiveAsZero(), 0.0)
-        Assert.assertEquals(-0.1, (-0.1).positiveAsZero(), 0.0)
+        assertEquals(0.0, 0.0.positiveAsZero(), 0.0)
+        assertEquals(0.0, 0.1.positiveAsZero(), 0.0)
+        assertEquals(-0.1, (-0.1).positiveAsZero(), 0.0)
     }
 
     @Test
     fun isNegative() {
-        Assert.assertFalse(0.0.isNegative())
-        Assert.assertFalse(0.1.isNegative())
-        Assert.assertTrue((-0.1).isNegative())
+        assertFalse(0.0.isNegative())
+        assertFalse(0.1.isNegative())
+        assertTrue((-0.1).isNegative())
     }
 
     @Test
     fun isPositive() {
-        Assert.assertFalse(0.0.isPositive())
-        Assert.assertTrue(0.1.isPositive())
-        Assert.assertFalse((-0.1).isPositive())
+        assertFalse(0.0.isPositive())
+        assertTrue(0.1.isPositive())
+        assertFalse((-0.1).isPositive())
     }
 
     @Test
     fun isZero() {
-        Assert.assertTrue(0.0.isZero())
-        Assert.assertFalse(0.1.isZero())
-        Assert.assertFalse((-0.1).isZero())
+        assertTrue(0.0.isZero())
+        assertFalse(0.1.isZero())
+        assertFalse((-0.1).isZero())
     }
 
     @Test
     fun isNotNegative() {
-        Assert.assertTrue(0.0.isNotNegative())
-        Assert.assertTrue(0.1.isNotNegative())
-        Assert.assertFalse((-0.1).isNotNegative())
+        assertTrue(0.0.isNotNegative())
+        assertTrue(0.1.isNotNegative())
+        assertFalse((-0.1).isNotNegative())
     }
 
     @Test
     fun isNotPositive() {
-        Assert.assertTrue(0.0.isNotPositive())
-        Assert.assertFalse(0.1.isNotPositive())
-        Assert.assertTrue((-0.1).isNotPositive())
+        assertTrue(0.0.isNotPositive())
+        assertFalse(0.1.isNotPositive())
+        assertTrue((-0.1).isNotPositive())
     }
 
     @Test
     fun isNotZero() {
-        Assert.assertFalse(0.0.isNotZero())
-        Assert.assertTrue(0.1.isNotZero())
-        Assert.assertTrue((-0.1).isNotZero())
+        assertFalse(0.0.isNotZero())
+        assertTrue(0.1.isNotZero())
+        assertTrue((-0.1).isNotZero())
     }
 
     @Test
     fun isNullOrNegative() {
         val nullValue: Double? = null
-        Assert.assertTrue(nullValue.isNullOrNegative())
-        Assert.assertFalse(0.0.isNullOrNegative())
-        Assert.assertFalse(0.1.isNullOrNegative())
-        Assert.assertTrue((-0.1).isNullOrNegative())
+        assertTrue(nullValue.isNullOrNegative())
+        assertFalse(0.0.isNullOrNegative())
+        assertFalse(0.1.isNullOrNegative())
+        assertTrue((-0.1).isNullOrNegative())
     }
 
     @Test
     fun isNullOrPositive() {
         val nullValue: Double? = null
-        Assert.assertTrue(nullValue.isNullOrPositive())
-        Assert.assertFalse(0.0.isNullOrPositive())
-        Assert.assertTrue(0.1.isNullOrPositive())
-        Assert.assertFalse((-0.1).isNullOrPositive())
+        assertTrue(nullValue.isNullOrPositive())
+        assertFalse(0.0.isNullOrPositive())
+        assertTrue(0.1.isNullOrPositive())
+        assertFalse((-0.1).isNullOrPositive())
     }
 
     @Test
     fun isNullOrZero() {
         val nullValue: Double? = null
-        Assert.assertTrue(nullValue.isNullOrZero())
-        Assert.assertTrue(0.0.isNullOrZero())
-        Assert.assertFalse(0.1.isNullOrZero())
-        Assert.assertFalse((-0.1).isNullOrZero())
+        assertTrue(nullValue.isNullOrZero())
+        assertTrue(0.0.isNullOrZero())
+        assertFalse(0.1.isNullOrZero())
+        assertFalse((-0.1).isNullOrZero())
     }
 
 }

@@ -17,9 +17,12 @@
 
 package com.conena.nanokt.numbers
 
-import org.junit.Assert.*
-
-import org.junit.Test
+import kotlin.test.Test
+import kotlin.test.assertContentEquals
+import kotlin.test.assertEquals
+import kotlin.test.assertFalse
+import kotlin.test.assertNull
+import kotlin.test.assertTrue
 
 private const val FLAG_1 = 1
 private const val FLAG_2 = 2
@@ -104,7 +107,7 @@ class IntExtensionsKtTest {
         val exceptedFlags = arrayOf(0b10, 0b100, 0b10000, 0b100000)
         val resolvedFlags = 0b110110.getBitFlags()
         assertEquals(exceptedFlags.size, resolvedFlags.size)
-        assertArrayEquals(exceptedFlags, resolvedFlags)
+        assertContentEquals(exceptedFlags, resolvedFlags)
     }
 
     @Test
