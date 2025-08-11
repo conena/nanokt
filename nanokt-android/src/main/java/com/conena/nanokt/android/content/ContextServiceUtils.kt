@@ -1,3 +1,20 @@
+/*
+ * Copyright (C) 2025 Fabian Andera
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
 @file:JvmName(name = "ContextServiceUtils")
 @file:Suppress("NOTHING_TO_INLINE", "unused")
 
@@ -66,11 +83,15 @@ import android.os.BatteryManager
 import android.os.Build
 import android.os.HardwarePropertiesManager
 import android.os.PowerManager
+import android.os.ProfilingManager
+import android.os.SecurityStateManager
 import android.os.UserManager
 import android.os.VibratorManager
 import android.os.health.SystemHealthManager
 import android.os.storage.StorageManager
 import android.print.PrintManager
+import android.provider.E2eeContactKeysManager
+import android.service.persistentdata.PersistentDataBlockManager
 import android.telecom.TelecomManager
 import android.telephony.CarrierConfigManager
 import android.telephony.SubscriptionManager
@@ -190,6 +211,10 @@ value class ServiceProvider @PublishedApi internal constructor(val context: Cont
     inline val downloadManager get() = context.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
 
     @get:CheckResult
+    @get:RequiresApi(Build.VERSION_CODES.VANILLA_ICE_CREAM)
+    inline val e2eeContactKeysManager get() = context.getSystemService(Context.CONTACT_KEYS_SERVICE) as? E2eeContactKeysManager
+
+    @get:CheckResult
     @get:RequiresApi(Build.VERSION_CODES.P)
     inline val euiccManager get() = context.getSystemService(Context.EUICC_SERVICE) as EuiccManager
 
@@ -278,11 +303,19 @@ value class ServiceProvider @PublishedApi internal constructor(val context: Cont
     inline val overlayManager get() = context.getSystemService(Context.OVERLAY_SERVICE) as OverlayManager
 
     @get:CheckResult
+    @get:RequiresApi(Build.VERSION_CODES.VANILLA_ICE_CREAM)
+    inline val persistentDataBlockManager get() = context.getSystemService(Context.PERSISTENT_DATA_BLOCK_SERVICE) as? PersistentDataBlockManager
+
+    @get:CheckResult
     inline val powerManager get() = context.getSystemService(Context.POWER_SERVICE) as PowerManager
 
     @get:CheckResult
     @get:RequiresApi(Build.VERSION_CODES.KITKAT)
     inline val printManager get() = context.getSystemService(Context.PRINT_SERVICE) as PrintManager
+
+    @get:CheckResult
+    @get:RequiresApi(Build.VERSION_CODES.VANILLA_ICE_CREAM)
+    inline val profilingManager get() = context.getSystemService(Context.PROFILING_SERVICE) as? ProfilingManager
 
     @get:CheckResult
     @get:RequiresApi(Build.VERSION_CODES.LOLLIPOP)
@@ -294,6 +327,10 @@ value class ServiceProvider @PublishedApi internal constructor(val context: Cont
 
     @get:CheckResult
     inline val searchManager get() = context.getSystemService(Context.SEARCH_SERVICE) as SearchManager
+
+    @get:CheckResult
+    @get:RequiresApi(Build.VERSION_CODES.VANILLA_ICE_CREAM)
+    inline val securityStateManager get() = context.getSystemService(Context.SECURITY_STATE_SERVICE) as? SecurityStateManager
 
     @get:CheckResult
     inline val sensorManager get() = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
