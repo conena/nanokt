@@ -26,4 +26,5 @@ java {
 dependencies {
     api libs.nanokt.annotations
     testImplementation libs.junit
+    testImplementation libs.kotlin.test
 }

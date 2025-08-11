@@ -17,11 +17,11 @@
 
 package com.conena.nanokt.collections
 
-import org.junit.Assert.assertArrayEquals
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertFalse
-import org.junit.Assert.assertTrue
-import org.junit.Test
+import kotlin.test.Test
+import kotlin.test.assertContentEquals
+import kotlin.test.assertEquals
+import kotlin.test.assertFalse
+import kotlin.test.assertTrue
 
 class IterableExtensionsKtTest {
 
@@ -66,33 +66,33 @@ class IterableExtensionsKtTest {
         val list = mutableListOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
         val expectedRemovedList = listOf(6, 7, 8, 9, 10)
         val expectedList = listOf(1, 2, 3, 4, 5)
-        assertArrayEquals(expectedRemovedList.toTypedArray(), list.removeAllAndGet { it > 5 }.toTypedArray())
-        assertArrayEquals(expectedList.toTypedArray(), list.toTypedArray())
+        assertContentEquals(expectedRemovedList, list.removeAllAndGet { it > 5 })
+        assertContentEquals(expectedList, list)
 
         // Remove from set
         val set = mutableSetOf("ABC", "BCD", "CDE", "DEF", "EFG", "FGH")
         val expectedRemovedSet = mutableSetOf("CDE", "DEF", "EFG")
         val expectedSet = mutableSetOf("ABC", "BCD", "FGH")
-        assertArrayEquals(expectedRemovedSet.toTypedArray(), set.removeAllAndGet { it.contains('E') }.toTypedArray())
-        assertArrayEquals(expectedSet.toTypedArray(), set.toTypedArray())
+        assertContentEquals(expectedRemovedSet, set.removeAllAndGet { it.contains('E') })
+        assertContentEquals(expectedSet.asIterable(), set.asIterable())
 
         // Do not remove from list
         val list2 = mutableListOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
         val expectedList2 = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
         assertTrue(list2.removeAllAndGet { it > 10 }.isEmpty())
-        assertArrayEquals(expectedList2.toTypedArray(), list2.toTypedArray())
+        assertContentEquals(expectedList2, list2)
 
         // Do not remove from set
         val set2 = mutableSetOf("ABC", "BCD", "CDE", "DEF", "EFG", "FGH")
         val expectedSet2 = mutableSetOf("ABC", "BCD", "CDE", "DEF", "EFG", "FGH")
         assertTrue(set2.removeAllAndGet { it.contains('I') }.isEmpty())
-        assertArrayEquals(expectedSet2.toTypedArray(), set2.toTypedArray())
+        assertContentEquals(expectedSet2.asIterable(), set2.asIterable())
     }
 
     @Test
     fun toArrayList() {
         val arrayList = testList.toArrayList()
-        assertArrayEquals(testList.toTypedArray(), arrayList.toTypedArray())
+        assertContentEquals(testList, arrayList)
         // Do not modify original list
         arrayList.clear()
         assertTrue(arrayList.isEmpty())

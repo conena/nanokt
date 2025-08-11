@@ -17,10 +17,10 @@
 
 package com.conena.nanokt.collections
 
-import org.junit.Assert.assertArrayEquals
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNull
-import org.junit.Test
+import kotlin.test.Test
+import kotlin.test.assertContentEquals
+import kotlin.test.assertEquals
+import kotlin.test.assertNull
 
 class IteratorExtensionsKtTest {
 
@@ -30,7 +30,7 @@ class IteratorExtensionsKtTest {
         val expectedList = listOf(1, 3, 5, 7, 9)
         val iterator = list.iterator()
         while (iterator.hasNext()) iterator.removeIf(condition = iterator.next() % 2 == 0)
-        assertArrayEquals(expectedList.toTypedArray(), list.toTypedArray())
+        assertContentEquals(expectedList, list)
     }
 
     @Test
