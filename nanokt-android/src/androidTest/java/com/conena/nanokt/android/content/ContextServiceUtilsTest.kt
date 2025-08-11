@@ -306,12 +306,6 @@ class ContextServiceUtilsTest {
         assertThat(context.systemServices.nsdManager).isNotNull()
     }
 
-    @SdkSuppress(minSdkVersion = Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
-    @Test
-    fun overlayManager() {
-        assertThat(context.systemServices.overlayManager).isNotNull()
-    }
-
     @Test
     fun powerManager() {
         assertThat(context.systemServices.powerManager).isNotNull()

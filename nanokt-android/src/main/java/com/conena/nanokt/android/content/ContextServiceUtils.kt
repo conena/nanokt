@@ -300,7 +300,7 @@ value class ServiceProvider @PublishedApi internal constructor(val context: Cont
 
     @get:CheckResult
     @get:RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
-    inline val overlayManager get() = context.getSystemService(Context.OVERLAY_SERVICE) as OverlayManager
+    inline val overlayManager get() = context.getSystemService(Context.OVERLAY_SERVICE) as? OverlayManager
 
     @get:CheckResult
     @get:RequiresApi(Build.VERSION_CODES.VANILLA_ICE_CREAM)
